@@ -69,6 +69,7 @@ struct ContentView: View {
         )
       }
     }
+    .ignoresSafeArea()
     .persistentSystemOverlays(.hidden)
     .onAppear {
       // Keep screen awake
