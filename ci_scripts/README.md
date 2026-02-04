@@ -24,7 +24,7 @@ This folder contains custom scripts for Xcode Cloud CI/CD integration.
    - macOS: Latest Release
 5. **Actions**: 
    - Add **Test** action
-   - Scheme: `Baby Light`
+   - Scheme: `Baby Night Light`
    - Destination: `Any iOS Simulator`
 
 #### UI Tests Workflow
@@ -33,7 +33,7 @@ This folder contains custom scripts for Xcode Cloud CI/CD integration.
 3. **Start Conditions**: Same as Unit Tests
 4. **Actions**:
    - Add **Test** action
-   - Scheme: `Baby Light`
+   - Scheme: `Baby Night Light`
    - Destination: `iPhone 15 Pro Simulator` (or preferred device)
 
 #### Release Build Workflow
@@ -72,8 +72,8 @@ Xcode Cloud provides these built-in environment variables:
 
 The project includes:
 
-- **Baby LightTests** - Unit tests using Swift Testing framework
-- **Baby LightUITests** - UI tests using XCTest
+- **Baby Night LightTests** - Unit tests using Swift Testing framework
+- **Baby Night LightUITests** - UI tests using XCTest
 
 ### 6. Troubleshooting
 

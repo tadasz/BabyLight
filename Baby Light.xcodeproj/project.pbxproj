@@ -30,17 +30,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		69CA4D582F26895E00629FBF /* Baby Light */ = {
+		69CA4D582F26895E00629FBF /* Baby Night Light */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Baby Light";
 			sourceTree = "<group>";
 		};
-		69CA4D662F26896000629FBF /* Baby LightTests */ = {
+		69CA4D662F26896000629FBF /* Baby Night LightTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Baby LightTests";
 			sourceTree = "<group>";
 		};
-		69CA4D702F26896000629FBF /* Baby LightUITests */ = {
+		69CA4D702F26896000629FBF /* Baby Night LightUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Baby LightUITests";
 			sourceTree = "<group>";
@@ -75,9 +75,9 @@
 		69CA4D4D2F26895E00629FBF = {
 			isa = PBXGroup;
 			children = (
-				69CA4D582F26895E00629FBF /* Baby Light */,
-				69CA4D662F26896000629FBF /* Baby LightTests */,
-				69CA4D702F26896000629FBF /* Baby LightUITests */,
+				69CA4D582F26895E00629FBF /* Baby Night Light */,
+				69CA4D662F26896000629FBF /* Baby Night LightTests */,
+				69CA4D702F26896000629FBF /* Baby Night LightUITests */,
 				69CA4D572F26895E00629FBF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		69CA4D552F26895E00629FBF /* Baby Light */ = {
+		69CA4D552F26895E00629FBF /* Baby Night Light */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69CA4D772F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night Light" */;
 			buildPhases = (
@@ -108,7 +108,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				69CA4D582F26895E00629FBF /* Baby Light */,
+				69CA4D582F26895E00629FBF /* Baby Night Light */,
 			);
 			name = "Baby Night Light";
 			packageProductDependencies = (
@@ -117,9 +117,9 @@
 			productReference = 69CA4D562F26895E00629FBF /* Baby Light.app */;
 			productType = "com.apple.product-type.application";
 		};
-		69CA4D622F26896000629FBF /* Baby LightTests */ = {
+		69CA4D622F26896000629FBF /* Baby Night LightTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69CA4D7A2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby LightTests" */;
+			buildConfigurationList = 69CA4D7A2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night LightTests" */;
 			buildPhases = (
 				69CA4D5F2F26896000629FBF /* Sources */,
 				69CA4D602F26896000629FBF /* Frameworks */,
@@ -131,18 +131,18 @@
 				69CA4D652F26896000629FBF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				69CA4D662F26896000629FBF /* Baby LightTests */,
+				69CA4D662F26896000629FBF /* Baby Night LightTests */,
 			);
-			name = "Baby LightTests";
+			name = "Baby Night LightTests";
 			packageProductDependencies = (
 			);
-			productName = "Baby LightTests";
+			productName = "Baby Night LightTests";
 			productReference = 69CA4D632F26896000629FBF /* Baby LightTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		69CA4D6C2F26896000629FBF /* Baby LightUITests */ = {
+		69CA4D6C2F26896000629FBF /* Baby Night LightUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69CA4D7D2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby LightUITests" */;
+			buildConfigurationList = 69CA4D7D2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night LightUITests" */;
 			buildPhases = (
 				69CA4D692F26896000629FBF /* Sources */,
 				69CA4D6A2F26896000629FBF /* Frameworks */,
@@ -154,12 +154,12 @@
 				69CA4D6F2F26896000629FBF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				69CA4D702F26896000629FBF /* Baby LightUITests */,
+				69CA4D702F26896000629FBF /* Baby Night LightUITests */,
 			);
-			name = "Baby LightUITests";
+			name = "Baby Night LightUITests";
 			packageProductDependencies = (
 			);
-			productName = "Baby LightUITests";
+			productName = "Baby Night LightUITests";
 			productReference = 69CA4D6D2F26896000629FBF /* Baby LightUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				69CA4D552F26895E00629FBF /* Baby Light */,
-				69CA4D622F26896000629FBF /* Baby LightTests */,
-				69CA4D6C2F26896000629FBF /* Baby LightUITests */,
+				69CA4D552F26895E00629FBF /* Baby Night Light */,
+				69CA4D622F26896000629FBF /* Baby Night LightTests */,
+				69CA4D6C2F26896000629FBF /* Baby Night LightUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -565,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69CA4D7A2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby LightTests" */ = {
+		69CA4D7A2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night LightTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69CA4D7B2F26896000629FBF /* Debug */,
@@ -574,7 +574,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69CA4D7D2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby LightUITests" */ = {
+		69CA4D7D2F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night LightUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69CA4D7E2F26896000629FBF /* Debug */,
