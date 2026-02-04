@@ -1,6 +1,6 @@
 //
 //  ControlsOverlay.swift
-//  Baby Light
+//  Baby Night Light
 //
 
 import SwiftUI

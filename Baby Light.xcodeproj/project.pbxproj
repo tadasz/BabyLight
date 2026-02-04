@@ -12,14 +12,14 @@
 			containerPortal = 69CA4D4E2F26895E00629FBF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 69CA4D552F26895E00629FBF;
-			remoteInfo = "Baby Light";
+			remoteInfo = "Baby Night Light";
 		};
 		69CA4D6E2F26896000629FBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 69CA4D4E2F26895E00629FBF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 69CA4D552F26895E00629FBF;
-			remoteInfo = "Baby Light";
+			remoteInfo = "Baby Night Light";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -97,7 +97,7 @@
 /* Begin PBXNativeTarget section */
 		69CA4D552F26895E00629FBF /* Baby Light */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69CA4D772F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Light" */;
+			buildConfigurationList = 69CA4D772F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night Light" */;
 			buildPhases = (
 				69CA4D522F26895E00629FBF /* Sources */,
 				69CA4D532F26895E00629FBF /* Frameworks */,
@@ -110,10 +110,10 @@
 			fileSystemSynchronizedGroups = (
 				69CA4D582F26895E00629FBF /* Baby Light */,
 			);
-			name = "Baby Light";
+			name = "Baby Night Light";
 			packageProductDependencies = (
 			);
-			productName = "Baby Light";
+			productName = "Baby Night Light";
 			productReference = 69CA4D562F26895E00629FBF /* Baby Light.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 69CA4D512F26895E00629FBF /* Build configuration list for PBXProject "Baby Light" */;
+			buildConfigurationList = 69CA4D512F26895E00629FBF /* Build configuration list for PBXProject "Baby Night Light" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		69CA4D652F26896000629FBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 69CA4D552F26895E00629FBF /* Baby Light */;
+			target = 69CA4D552F26895E00629FBF /* Baby Night Light */;
 			targetProxy = 69CA4D642F26896000629FBF /* PBXContainerItemProxy */;
 		};
 		69CA4D6F2F26896000629FBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 69CA4D552F26895E00629FBF /* Baby Light */;
+			target = 69CA4D552F26895E00629FBF /* Baby Night Light */;
 			targetProxy = 69CA4D6E2F26896000629FBF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -397,10 +397,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M9YYU2BH36;
+				DEVELOPMENT_TEAM = R69X77ZTQS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Baby Light";
+				INFOPLIST_KEY_CFBundleDisplayName = "Baby Night Light";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -432,10 +432,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M9YYU2BH36;
+				DEVELOPMENT_TEAM = R69X77ZTQS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Baby Light";
+				INFOPLIST_KEY_CFBundleDisplayName = "Baby Night Light";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -520,7 +520,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Baby Light";
+				TEST_TARGET_NAME = "Baby Night Light";
 			};
 			name = Debug;
 		};
@@ -540,14 +540,14 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Baby Light";
+				TEST_TARGET_NAME = "Baby Night Light";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		69CA4D512F26895E00629FBF /* Build configuration list for PBXProject "Baby Light" */ = {
+		69CA4D512F26895E00629FBF /* Build configuration list for PBXProject "Baby Night Light" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69CA4D752F26896000629FBF /* Debug */,
@@ -556,7 +556,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69CA4D772F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Light" */ = {
+		69CA4D772F26896000629FBF /* Build configuration list for PBXNativeTarget "Baby Night Light" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69CA4D782F26896000629FBF /* Debug */,

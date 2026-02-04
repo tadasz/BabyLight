@@ -1,6 +1,6 @@
 //
 //  TimerOption.swift
-//  Baby Light
+//  Baby Night Light
 //
 
 import Foundation

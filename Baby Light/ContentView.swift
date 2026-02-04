@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Baby Light
+//  Baby Night Light
 //
 
 import SwiftUI
@@ -23,7 +23,6 @@ struct ContentView: View {
         ZStack {
           // Full-screen colored background
           viewModel.currentColor.color
-            .ignoresSafeArea()
             .accessibilityIdentifier("lightBackground")
             .accessibilityLabel("Light background color: \(viewModel.currentColor.name)")
 
@@ -34,6 +33,7 @@ struct ContentView: View {
               .accessibilityIdentifier("controlsOverlay")
           }
         }
+        .ignoresSafeArea()
         .accessibilityIdentifier("mainLightView")
         .animation(.easeInOut(duration: 0.2), value: viewModel.controlsVisible)
         .gesture(

@@ -1,11 +1,12 @@
 //
 //  Baby_LightTests.swift
-//  Baby LightTests
+//  Baby Night LightTests
 //
 //  Created by Tadas Ziemys on 1/25/26.
 //
 
 import Testing
+import Foundation
 @testable import Baby_Light
 
 struct Baby_LightTests {

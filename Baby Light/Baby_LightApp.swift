@@ -1,6 +1,6 @@
 //
 //  Baby_LightApp.swift
-//  Baby Light
+//  Baby Night Light
 //
 //  Created by Tadas Ziemys on 1/25/26.
 //

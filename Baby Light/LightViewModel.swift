@@ -1,6 +1,6 @@
 //
 //  LightViewModel.swift
-//  Baby Light
+//  Baby Night Light
 //
 
 import Observation
