@@ -68,6 +68,29 @@ struct ControlsOverlay: View {
         }
       }
 
+      // Auto Brightness Settings
+      VStack(spacing: 12) {
+        Text("AUTO BRIGHTNESS")
+          .font(.system(size: 14, weight: .semibold))
+          .foregroundColor(Color(white: 0.85))
+          .tracking(1)
+          .frame(maxWidth: .infinity, alignment: .leading)
+
+        Toggle(isOn: $viewModel.brightenOnOpen) {
+          Text("Max brightness when opened")
+            .font(.system(size: 15))
+            .foregroundColor(.white)
+        }
+        .tint(.white)
+
+        Toggle(isOn: $viewModel.dimOnClose) {
+          Text("Dim to minimum when closed")
+            .font(.system(size: 15))
+            .foregroundColor(.white)
+        }
+        .tint(.white)
+      }
+
       // Hint
       Text("Double-tap to hide • Swipe to adjust brightness")
         .font(.system(size: 13))

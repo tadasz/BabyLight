@@ -15,6 +15,22 @@ class LightViewModel {
   var timeRemaining: Int? = nil
   var brightness: CGFloat = 1.0
 
+  /// Elapsed time (in seconds) since the app was last opened. Counts up and
+  /// resets every time the app becomes active.
+  var elapsedSeconds: Int = 0
+
+  // MARK: - Auto Brightness Settings (persisted)
+
+  /// When enabled, the screen dims to minimal brightness when the app closes.
+  var dimOnClose: Bool = true {
+    didSet { UserDefaults.standard.set(dimOnClose, forKey: "dimOnClose") }
+  }
+
+  /// When enabled, the screen brightens to maximum when the app opens.
+  var brightenOnOpen: Bool = true {
+    didSet { UserDefaults.standard.set(brightenOnOpen, forKey: "brightenOnOpen") }
+  }
+
   /// Controls visibility - persisted across launches
   var controlsVisible: Bool {
     get { !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") || _controlsVisible }
@@ -34,12 +50,54 @@ class LightViewModel {
   }
 
   private var timer: Timer?
+  private var elapsedTimer: Timer?
 
   init() {
     // Initialize brightness from current screen brightness
     brightness = UIScreen.main.brightness
     // Show controls on first launch only
     _controlsVisible = !UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+
+    // Load persisted auto-brightness settings (default to enabled)
+    if UserDefaults.standard.object(forKey: "dimOnClose") != nil {
+      dimOnClose = UserDefaults.standard.bool(forKey: "dimOnClose")
+    }
+    if UserDefaults.standard.object(forKey: "brightenOnOpen") != nil {
+      brightenOnOpen = UserDefaults.standard.bool(forKey: "brightenOnOpen")
+    }
+
+    startElapsedTimer()
+  }
+
+  // MARK: - Elapsed Timer (counts up from open)
+
+  /// Reset the elapsed counter to zero and start counting up.
+  func startElapsedTimer() {
+    elapsedTimer?.invalidate()
+    elapsedSeconds = 0
+    elapsedTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+      self?.elapsedSeconds += 1
+    }
+  }
+
+  // MARK: - App Lifecycle
+
+  /// Called when the app becomes active (opened). Resets the elapsed timer and,
+  /// if enabled, brightens the screen to maximum.
+  func handleAppDidBecomeActive() {
+    startElapsedTimer()
+    if brightenOnOpen {
+      brightness = 1.0
+      UIScreen.main.brightness = 1.0
+    }
+  }
+
+  /// Called when the app moves to the background (closed). If enabled, dims the
+  /// screen to minimal brightness.
+  func handleAppDidEnterBackground() {
+    if dimOnClose {
+      UIScreen.main.brightness = 0.0
+    }
   }
 
   // MARK: - Timer Logic

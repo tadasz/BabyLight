@@ -8,6 +8,7 @@ import SwiftUI
 struct ContentView: View {
   @State private var viewModel = LightViewModel()
   @State private var dragStartY: CGFloat = 0
+  @Environment(\.scenePhase) private var scenePhase
 
   var body: some View {
     Group {
@@ -25,6 +26,15 @@ struct ContentView: View {
           viewModel.currentColor.color
             .accessibilityIdentifier("lightBackground")
             .accessibilityLabel("Light background color: \(viewModel.currentColor.name)")
+
+          // Elapsed timer - same hue as the background, slightly lighter so
+          // it stays visible without changing the overall lighting.
+          Text(viewModel.formatTime(viewModel.elapsedSeconds))
+            .font(.system(size: 64, weight: .light, design: .rounded))
+            .monospacedDigit()
+            .foregroundColor(viewModel.currentColor.color.lightened(by: 0.12))
+            .accessibilityIdentifier("elapsedTimer")
+            .accessibilityLabel("Elapsed time")
 
           // Controls overlay (when visible)
           if viewModel.controlsVisible {
@@ -78,6 +88,18 @@ struct ContentView: View {
     .onDisappear {
       // Allow screen to sleep when app closes
       UIApplication.shared.isIdleTimerDisabled = false
+    }
+    .onChange(of: scenePhase) { _, newPhase in
+      switch newPhase {
+      case .active:
+        // App opened: reset elapsed timer and brighten to max (if enabled)
+        viewModel.handleAppDidBecomeActive()
+      case .background:
+        // App closed: dim to minimal (if enabled)
+        viewModel.handleAppDidEnterBackground()
+      default:
+        break
+      }
     }
   }
 }

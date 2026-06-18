@@ -32,6 +32,21 @@ struct LightColor: Identifiable, Equatable {
 
 // MARK: - Color Extension for Hex Support
 extension Color {
+    /// Returns a slightly lighter version of the color by nudging each
+    /// RGB channel toward white. Used for subtle on-screen text (e.g. the
+    /// elapsed timer) that stays visible without changing the overall lighting.
+    func lightened(by amount: CGFloat) -> Color {
+        let ui = UIColor(self)
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        ui.getRed(&r, green: &g, blue: &b, alpha: &a)
+        return Color(
+            red: Double(min(1, r + amount)),
+            green: Double(min(1, g + amount)),
+            blue: Double(min(1, b + amount)),
+            opacity: Double(a)
+        )
+    }
+
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
