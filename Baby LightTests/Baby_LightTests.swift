@@ -7,7 +7,7 @@
 
 import Testing
 import Foundation
-@testable import Baby_Light
+@testable import Baby_Night_Light
 
 struct Baby_LightTests {
     
@@ -43,7 +43,9 @@ struct Baby_LightTests {
     
     @Test func viewModelSetTimerUpdatesTimeRemaining() async throws {
         let viewModel = LightViewModel()
-        let thirtyMinOption = TimerOption.options[1] // 30 min
+        // options are: ∞, 15m, 30m, 1h, 2h — index 2 is the 30 minute preset
+        let thirtyMinOption = TimerOption.options[2]
+        #expect(thirtyMinOption.minutes == 30)
         viewModel.setTimer(thirtyMinOption)
         #expect(viewModel.timeRemaining == 30 * 60)
     }
@@ -126,7 +128,7 @@ struct Baby_LightTests {
         let viewModel = LightViewModel()
         viewModel.brightness = 0.1
         viewModel.adjustBrightness(delta: -1.0)
-        #expect(viewModel.brightness == 0.01)
+        #expect(viewModel.brightness == 0.0)
     }
     
     @Test func adjustBrightnessClampsToMaximum() async throws {
@@ -162,8 +164,8 @@ struct LightColorTests {
 
 struct TimerOptionTests {
     
-    @Test func optionsContainFourTimers() async throws {
-        #expect(TimerOption.options.count == 4)
+    @Test func optionsContainFiveTimers() async throws {
+        #expect(TimerOption.options.count == 5)
     }
     
     @Test func firstOptionIsInfinite() async throws {
