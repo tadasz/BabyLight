@@ -12,7 +12,7 @@ struct ControlsOverlay: View {
   var body: some View {
     VStack(spacing: 24) {
       // Title
-      Text("Baby Safe Light")
+      Text("Baby Light")
         .font(.system(size: 28, weight: .bold))
         .foregroundColor(.white)
         .padding(.top, 10)
