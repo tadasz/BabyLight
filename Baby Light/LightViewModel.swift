@@ -117,8 +117,24 @@ class LightViewModel {
     }
   }
 
-  /// Called when the app moves to the background (closed). If enabled, dims the
-  /// screen to minimal brightness.
+  /// Called when the app is about to leave the foreground — home screen, app
+  /// switcher, device lock, or a transient interruption (Control Center, an
+  /// incoming call). If enabled, dims the screen to minimal brightness.
+  ///
+  /// The dim happens here, at resign-active, rather than in
+  /// `handleAppDidEnterBackground()` below, because iOS only honors
+  /// `UIScreen.brightness` writes while the app is still frontmost. By the time
+  /// the scene reaches the `.background` phase the window is no longer key and
+  /// the write is silently dropped — which is why the previous
+  /// background-only implementation never actually dimmed.
+  func handleAppWillResignActive() {
+    if dimOnClose {
+      activeScreen?.brightness = 0.0
+    }
+  }
+
+  /// Called when the app has fully moved to the background. Re-applies the dim
+  /// as a fallback in case the resign-active write didn't take effect.
   func handleAppDidEnterBackground() {
     if dimOnClose {
       activeScreen?.brightness = 0.0

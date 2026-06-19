@@ -101,13 +101,19 @@ struct ContentView: View {
       // Allow screen to sleep when app closes
       UIApplication.shared.isIdleTimerDisabled = false
     }
-    .onChange(of: scenePhase) { _, newPhase in
+    .onChange(of: scenePhase) { oldPhase, newPhase in
       switch newPhase {
       case .active:
-        // App opened: reset elapsed timer and brighten to max (if enabled)
+        // App opened/returned: reset elapsed timer and brighten to max (if enabled)
         viewModel.handleAppDidBecomeActive()
+      case .inactive where oldPhase == .active:
+        // Leaving the foreground (home, app switcher, lock, interruption). Dim
+        // now, while we're still frontmost — brightness writes are ignored once
+        // we reach .background. Guarding on `oldPhase == .active` avoids dimming
+        // on the .background → .inactive → .active path when returning.
+        viewModel.handleAppWillResignActive()
       case .background:
-        // App closed: dim to minimal (if enabled)
+        // Fallback dim in case the resign-active write didn't take effect.
         viewModel.handleAppDidEnterBackground()
       default:
         break
