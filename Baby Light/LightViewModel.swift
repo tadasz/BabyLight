@@ -31,9 +31,14 @@ class LightViewModel {
     didSet { UserDefaults.standard.set(brightenOnOpen, forKey: "brightenOnOpen") }
   }
 
-  /// Controls visibility - persisted across launches
+  /// Controls visibility - persisted across launches.
+  /// `_controlsVisible` is seeded from `hasLaunchedBefore` in `init()` (shown on
+  /// first launch, hidden thereafter); the getter just reflects that state.
+  /// (Previously the getter OR'd in `!hasLaunchedBefore`, which permanently
+  /// forced controls visible whenever that flag was false — so they could never
+  /// be hidden, e.g. when a UI test launches with `-hasLaunchedBefore NO`.)
   var controlsVisible: Bool {
-    get { !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") || _controlsVisible }
+    get { _controlsVisible }
     set {
       _controlsVisible = newValue
       // Mark that app has launched before (so controls hidden on future launches)

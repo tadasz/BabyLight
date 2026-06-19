@@ -40,10 +40,19 @@ struct ContentView: View {
           if viewModel.controlsVisible {
             ControlsOverlay(viewModel: viewModel)
               .transition(.opacity.combined(with: .scale(scale: 0.95)))
+              // Expose the overlay as a single accessibility container so
+              // otherElements["controlsOverlay"] resolves to it (otherwise the
+              // identifier only lands on the inner controls, not a container).
+              .accessibilityElement(children: .contain)
               .accessibilityIdentifier("controlsOverlay")
           }
         }
         .ignoresSafeArea()
+        // Mark the ZStack as an accessibility container so the identifier
+        // below applies only to it; without this, .accessibilityIdentifier on
+        // the container propagates to every child and clobbers their own
+        // identifiers (lightBackground, elapsedTimer, controlsOverlay).
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("mainLightView")
         .animation(.easeInOut(duration: 0.2), value: viewModel.controlsVisible)
         .gesture(
