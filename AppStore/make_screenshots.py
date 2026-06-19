@@ -544,15 +544,17 @@ def watch_creative(color, timer, caption):
     return sc
 
 # =================== run all device sets ====================================
-def build_iphone():
+def build_iphone(w=1320, h=2868, subdir=""):
     global W, H
-    W, H = 1320, 2868
+    W, H = w, h
+    d = os.path.join(OUT, subdir) if subdir else OUT
+    os.makedirs(d, exist_ok=True)
     sets = [(s1,"01_hero_red"),(s2,"02_science"),(s3,"03_colors"),
             (s4,"04_timer"),(s5,"05_brightness"),(s6,"06_closing")]
     for fn, nm in sets:
         out = fn()
         if out.size != (W,H): out = out.resize((W,H), Image.LANCZOS)
-        out.save(os.path.join(OUT, nm + ".png")); print("iphone:", nm, out.size)
+        out.save(os.path.join(d, nm + ".png")); print("iphone:", subdir or "6.9", nm, out.size)
 
 def build_ipad():
     global W, H
@@ -577,7 +579,8 @@ def build_watch():
         if out.size != (W,H): out = out.resize((W,H), Image.LANCZOS)
         out.save(os.path.join(d, nm + ".png")); print("watch:", nm, out.size)
 
-build_iphone()
+build_iphone()                              # 6.9" (1320x2868)
+build_iphone(1284, 2778, "iphone_6_5")      # 6.5"/6.7" (1284x2778) — matches this app's slot
 build_ipad()
 build_watch()
 print("done")
