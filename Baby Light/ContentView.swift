@@ -32,7 +32,7 @@ struct ContentView: View {
           Text(viewModel.formatTime(viewModel.elapsedSeconds))
             .font(.system(size: 64, weight: .light, design: .rounded))
             .monospacedDigit()
-            .foregroundColor(viewModel.currentColor.color.lightened(by: 0.12))
+            .foregroundColor(viewModel.currentColor.color.lightened(by: viewModel.timerLightness))
             .accessibilityIdentifier("elapsedTimer")
             .accessibilityLabel("Elapsed time")
 

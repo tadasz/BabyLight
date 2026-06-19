@@ -31,6 +31,13 @@ class LightViewModel {
     didSet { UserDefaults.standard.set(brightenOnOpen, forKey: "brightenOnOpen") }
   }
 
+  /// How much lighter than the background the elapsed-timer text appears.
+  /// 0 = same hue as the background (invisible); higher = lighter / more
+  /// visible. Adjustable from the controls menu and persisted.
+  var timerLightness: CGFloat = 0.2 {
+    didSet { UserDefaults.standard.set(Double(timerLightness), forKey: "timerLightness") }
+  }
+
   /// Controls visibility - persisted across launches.
   /// `_controlsVisible` is seeded from `hasLaunchedBefore` in `init()` (shown on
   /// first launch, hidden thereafter); the getter just reflects that state.
@@ -69,6 +76,9 @@ class LightViewModel {
     }
     if UserDefaults.standard.object(forKey: "brightenOnOpen") != nil {
       brightenOnOpen = UserDefaults.standard.bool(forKey: "brightenOnOpen")
+    }
+    if UserDefaults.standard.object(forKey: "timerLightness") != nil {
+      timerLightness = CGFloat(UserDefaults.standard.double(forKey: "timerLightness"))
     }
 
     startElapsedTimer()

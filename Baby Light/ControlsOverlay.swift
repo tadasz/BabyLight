@@ -91,6 +91,32 @@ struct ControlsOverlay: View {
         .tint(.white)
       }
 
+      // Elapsed Timer Settings
+      VStack(spacing: 12) {
+        Text("ELAPSED TIMER")
+          .font(.system(size: 14, weight: .semibold))
+          .foregroundColor(Color(white: 0.85))
+          .tracking(1)
+          .frame(maxWidth: .infinity, alignment: .leading)
+
+        HStack(spacing: 12) {
+          Text("Brightness")
+            .font(.system(size: 15))
+            .foregroundColor(.white)
+
+          Slider(value: $viewModel.timerLightness, in: 0.05...0.45)
+            .tint(.white)
+            .accessibilityIdentifier("timerBrightnessSlider")
+            .accessibilityLabel("Elapsed timer brightness")
+
+          // Live preview of how the timer text will look against the light.
+          Text("0:00")
+            .font(.system(size: 17, weight: .light, design: .rounded))
+            .monospacedDigit()
+            .foregroundColor(viewModel.currentColor.color.lightened(by: viewModel.timerLightness))
+        }
+      }
+
       // Hint
       Text("Double-tap to hide • Swipe to adjust brightness")
         .font(.system(size: 13))
