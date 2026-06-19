@@ -161,7 +161,7 @@ class LightViewModel {
   // MARK: - Brightness Control
 
   /// Adjust brightness by delta (positive = brighter, negative = dimmer)
-  /// Allow true minimum (0.01) for darkest possible screen
+  /// Allow true minimum (0.0) for darkest possible screen
   func adjustBrightness(delta: CGFloat) {
     brightness = max(0.0, min(1.0, brightness + delta))
     UIScreen.main.brightness = brightness
