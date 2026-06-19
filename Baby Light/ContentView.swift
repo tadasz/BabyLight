@@ -22,8 +22,11 @@ struct ContentView: View {
       } else {
         // Main light view
         ZStack {
-          // Full-screen colored background
+          // Full-screen colored background. `ignoresSafeArea` here guarantees the
+          // color bleeds to every edge (notch, Dynamic Island, home indicator)
+          // independently of how the content stack above sizes itself.
           viewModel.currentColor.color
+            .ignoresSafeArea()
             .accessibilityIdentifier("lightBackground")
             .accessibilityLabel("Light background color: \(viewModel.currentColor.name)")
 

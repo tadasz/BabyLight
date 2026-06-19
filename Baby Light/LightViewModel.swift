@@ -64,9 +64,19 @@ class LightViewModel {
   private var timer: Timer?
   private var elapsedTimer: Timer?
 
+  /// The screen backing the app's active window scene. Replaces the deprecated
+  /// `UIScreen.main` (deprecated in iOS 26) by resolving the screen through the
+  /// connected-scene hierarchy instead. Prefers the foreground-active scene,
+  /// falling back to any connected window scene (e.g. while backgrounding).
+  private var activeScreen: UIScreen? {
+    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+    let scene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+    return scene?.screen
+  }
+
   init() {
     // Initialize brightness from current screen brightness
-    brightness = UIScreen.main.brightness
+    brightness = activeScreen?.brightness ?? 1.0
     // Show controls on first launch only
     _controlsVisible = !UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
 
@@ -103,7 +113,7 @@ class LightViewModel {
     startElapsedTimer()
     if brightenOnOpen {
       brightness = 1.0
-      UIScreen.main.brightness = 1.0
+      activeScreen?.brightness = 1.0
     }
   }
 
@@ -111,7 +121,7 @@ class LightViewModel {
   /// screen to minimal brightness.
   func handleAppDidEnterBackground() {
     if dimOnClose {
-      UIScreen.main.brightness = 0.0
+      activeScreen?.brightness = 0.0
     }
   }
 
@@ -179,6 +189,6 @@ class LightViewModel {
   /// Allow true minimum (0.0) for darkest possible screen
   func adjustBrightness(delta: CGFloat) {
     brightness = max(0.0, min(1.0, brightness + delta))
-    UIScreen.main.brightness = brightness
+    activeScreen?.brightness = brightness
   }
 }
