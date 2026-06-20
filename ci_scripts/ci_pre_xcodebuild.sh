@@ -22,4 +22,10 @@ if [ "$CI_XCODEBUILD_ACTION" = "test" ] || [ "$CI_XCODEBUILD_ACTION" = "build-fo
     echo "🧪 Preparing for test run..."
 fi
 
+# Build number: Xcode Cloud stamps CFBundleVersion = the run number automatically
+# (it overrides CURRENT_PROJECT_VERSION at archive time, so editing the project here
+# has no effect). Run numbers only increase, so as long as no build is uploaded
+# OUT of band with a higher number, CI build numbers stay monotonic. (A one-off
+# local build 1.1(14) was uploaded earlier; run numbers are already past 14.)
+
 echo "✅ Pre-xcodebuild script completed"

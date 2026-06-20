@@ -1,0 +1,59 @@
+{
+  "store": {
+    "name": "Baby Light : veilleuse rouge",
+    "subtitle": "Lueur douce pour les nuits",
+    "promotionalText": "La veilleuse rouge la plus simple pour bébé. Sans pub, sans inscription, sans bruit — juste une lueur chaude et réglable pour les tétées de nuit. Gratuit.",
+    "keywords": "veilleuse,nouveauné,bambin,nourrisson,chambre,tétée,coucher,melatonine,lampe,tamisé,ambre,berceau",
+    "whatsNew": "• Désormais disponible en 15 langues\n• La même veilleuse rouge plein écran, douce, pour bébé — et pour les parents fatigués à 2 h du matin\n• Modes rouge profond, ambre, bougie et blanc chaud\n• Minuteur d'extinction, glisser pour tamiser et un minuteur de tétée discret\n• App Apple Watch incluse\n\nSans pub. Sans inscription. Aucune donnée collectée. Beaux rêves.",
+    "description": "Transformez votre téléphone ou tablette en une veilleuse rouge chaleureuse conçue pour les bébés — et pour les parents éveillés avec eux à 2 h du matin.\n\nLa lumière blanche et bleue dit au cerveau « c'est le jour ». Baby Light inonde plutôt votre écran de lumière rouge profond et ambrée, pour que vous puissiez voir pendant les tétées de nuit, les changes et les petits coups d'œil, sans l'éclat agressif qui vous réveille tout à fait — vous et votre bébé.\n\nSans pub. Sans inscription. Aucun son que vous n'avez pas demandé. Ouvrez-la, et la pièce s'illumine.\n\n— LA SCIENCE, EN SIMPLE —\nLa lumière est le signal le plus fort que votre corps utilise pour distinguer le jour de la nuit. Des récepteurs particuliers de l'œil sont surtout sensibles à la lumière bleue (autour de 480 nm) — celle des écrans blancs et des plafonniers. Le soir, cette lumière bleue peut supprimer la mélatonine, l'hormone qui nous aide à nous sentir somnolents.\n\nLa lumière rouge et ambrée se situe à l'extrémité du spectre (environ 600 à 700 nm). Des recherches chez l'adulte montrent que ces longueurs d'onde plus longues agissent bien moins sur ces récepteurs et sur la mélatonine que la lumière bleue ou blanche. C'est pourquoi les sous-marins, les cockpits d'avion, les observatoires et de nombreux services hospitaliers passent au rouge la nuit — et pourquoi une lueur rouge est un choix plus doux qu'allumer la lampe pour une tétée nocturne.\n\nBaby Light ne peut pas promettre que votre bébé fera ses nuits (aucune app ne le peut !). Ce qu'elle fait, c'est vous donner juste assez de lumière pour faire ce que vous avez à faire — sans inonder la pièce du type de lumière le plus stimulant au pire moment.\n\n— CE QUE VOUS OBTENEZ —\n🔴 Quatre modes de lumière propices au sommeil\n   Rouge profond (idéal la nuit), ambre chaleureux, bougie douce et un blanc chaud léger pour quand vous devez vraiment voir.\n\n🌙 Un vrai éclairage plein écran\n   D'un bord à l'autre, barre d'état masquée, écran qui reste allumé. Rien que de la lumière.\n\n⏱️ Minuteur d'extinction\n   Réglez-le sur 15 min, 30 min, 1 h, 2 h — ou laissez-le allumé toute la nuit. L'écran s'éteint de lui-même pour ne plus éclairer la chambre une fois tout le monde endormi.\n\n👆 Glisser pour tamiser\n   Pas de minuscules curseurs à chercher dans le noir. Glissez vers le haut pour éclaircir, vers le bas pour tamiser, jusqu'à presque le noir.\n\n🔆 Luminosité intelligente\n   Au maximum à l'ouverture pour vous repérer, puis au minimum à la fermeture — pour ne pas être ébloui en reposant le téléphone.\n\n🕒 Minuteur de tétée discret\n   Un compteur tout doux, à peine visible, indique depuis combien de temps vous êtes debout, dans la même teinte apaisante que la lumière. Réglez sa visibilité, ou masquez-le complètement.\n\n⌚ App Apple Watch incluse\n   La même lueur rouge à votre poignet. Touchez pour changer de couleur, tournez la Digital Crown pour tamiser et jetez un œil au minuteur de tétée — le tout sans toucher votre téléphone.\n\n😴 Pensée pour l'obscurité\n   Calme, minimaliste, à une main. Rien à lire, rien à toucher deux fois.\n\n— PARFAIT POUR —\n• Les tétées de nuit et la préparation des biberons\n• Les changes sans le plafonnier\n• Veiller sur un bébé qui dort\n• Rendormir doucement un nouveau-né\n• Les voyages et les chambres d'hôtel sans veilleuse\n• Les tout-petits qui ont peur du noir\n• Tous ceux qui veulent une lumière sans éblouissement au lit\n\n— PRIVÉ PAR CONCEPTION —\nAucun compte. Aucune pub. Aucun suivi. Aucune donnée ne quitte votre appareil — vos réglages sont enregistrés uniquement sur votre téléphone. Fonctionne entièrement hors ligne.\n\nGratuit. Téléchargez Baby Light et rendez la prochaine nuit à 2 h un peu plus douce.\n\nAstuce : touchez deux fois l'écran pour afficher ou masquer les commandes."
+  },
+  "captions": [
+    [
+      "Une veilleuse rouge pensée pour bébé",
+      "Voir dans le noir sans réveiller personne"
+    ],
+    [
+      "Une lumière qui ménage la mélatonine",
+      "Rouge & ambre, à l'extrémité calme du spectre"
+    ],
+    [
+      "Quatre couleurs propices au sommeil",
+      "Rouge profond, ambre, bougie & blanc chaud"
+    ],
+    [
+      "Réglez-la et laissez-la s'éteindre",
+      "Extinction après 15, 30, 60 ou 120 min"
+    ],
+    [
+      "Glissez pour tamiser. S'éteint en noir.",
+      "Vive à l'ouverture, sombre au repos"
+    ],
+    [
+      "Sans pub. Sans inscription. Sans bruit.",
+      "Juste une lueur chaude pour la nuit — gratuit"
+    ]
+  ],
+  "ui": {
+    "light_color": "COULEUR DE LA LUMIÈRE",
+    "auto_off_timer": "MINUTEUR D'EXTINCTION",
+    "auto_brightness": "LUMINOSITÉ AUTO",
+    "max_bright_open": "Luminosité max à l'ouverture",
+    "dim_close": "Minimum à la fermeture",
+    "elapsed_timer": "MINUTEUR ÉCOULÉ",
+    "brightness": "Luminosité",
+    "hint": "Touchez deux fois pour masquer • Glissez pour la luminosité",
+    "hint_short": "Touchez deux fois pour masquer • Glissez pour régler",
+    "color_deep_red": "Rouge profond",
+    "color_amber": "Ambre",
+    "color_candle": "Bougie",
+    "color_wheat": "Blé",
+    "desc_best_sleep": "Idéal pour dormir",
+    "desc_warm_soothing": "Chaud & apaisant",
+    "desc_soft_orange": "Orange doux",
+    "desc_more_light": "Si vous avez besoin de plus de lumière",
+    "ax_elapsed_time": "Temps écoulé",
+    "ax_light_bg": "Couleur de fond de la lumière : %@",
+    "ax_timer_brightness": "Luminosité du minuteur écoulé",
+    "color_warm_white": "Blanc chaud"
+  }
+}

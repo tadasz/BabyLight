@@ -1,0 +1,101 @@
+{
+  "_comment": "Single source of truth for Baby Light localization. To ADD A LANGUAGE: add an entry here, create i18n/translations/<asc>.json (see ADD_A_LANGUAGE.md), then run `make -C AppStore all`. 'script' selects screenshot fonts (see i18n/screenshots.py FONT_SETS); add a new script entry there only if you introduce a writing system not already listed.",
+  "base": {
+    "asc": "en-US",
+    "xcode": "en",
+    "script": "latin",
+    "name": "English (U.S.)"
+  },
+  "locales": [
+    {
+      "asc": "zh-Hans",
+      "xcode": "zh-Hans",
+      "script": "cjk_sc",
+      "name": "Chinese (Simplified)"
+    },
+    {
+      "asc": "zh-Hant",
+      "xcode": "zh-Hant",
+      "script": "cjk_tc",
+      "name": "Chinese (Traditional)"
+    },
+    {
+      "asc": "ja",
+      "xcode": "ja",
+      "script": "ja",
+      "name": "Japanese"
+    },
+    {
+      "asc": "ko",
+      "xcode": "ko",
+      "script": "ko",
+      "name": "Korean"
+    },
+    {
+      "asc": "ru",
+      "xcode": "ru",
+      "script": "cyrillic",
+      "name": "Russian"
+    },
+    {
+      "asc": "de-DE",
+      "xcode": "de",
+      "script": "latin",
+      "name": "German"
+    },
+    {
+      "asc": "fr-FR",
+      "xcode": "fr",
+      "script": "latin",
+      "name": "French"
+    },
+    {
+      "asc": "es-ES",
+      "xcode": "es",
+      "script": "latin",
+      "name": "Spanish (Spain)"
+    },
+    {
+      "asc": "es-MX",
+      "xcode": "es-MX",
+      "script": "latin",
+      "name": "Spanish (Mexico)"
+    },
+    {
+      "asc": "it",
+      "xcode": "it",
+      "script": "latin",
+      "name": "Italian"
+    },
+    {
+      "asc": "pt-BR",
+      "xcode": "pt-BR",
+      "script": "latin",
+      "name": "Portuguese (Brazil)"
+    },
+    {
+      "asc": "nl-NL",
+      "xcode": "nl",
+      "script": "latin",
+      "name": "Dutch"
+    },
+    {
+      "asc": "tr",
+      "xcode": "tr",
+      "script": "latin",
+      "name": "Turkish"
+    },
+    {
+      "asc": "pl",
+      "xcode": "pl",
+      "script": "latin",
+      "name": "Polish"
+    },
+    {
+      "asc": "ar-SA",
+      "xcode": "ar",
+      "script": "ar",
+      "name": "Arabic"
+    }
+  ]
+}

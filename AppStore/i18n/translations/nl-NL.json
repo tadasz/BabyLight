@@ -1,0 +1,59 @@
+{
+  "store": {
+    "name": "Baby Light: Rood Nachtlampje",
+    "subtitle": "Zachte gloed voor babyslaap",
+    "promotionalText": "Het simpelste rode nachtlampje voor baby's. Geen advertenties, geen account, geen geluid — alleen een warme, dimbare gloed voor nachtvoedingen. Gratis.",
+    "keywords": "nachtlampje,pasgeboren,kinderkamer,voeding,bedtijd,melatonine,lamp,dimmen,amber,wiegje,nacht",
+    "description": "Maak van je telefoon of tablet een warm, rood nachtlampje gemaakt voor baby's — en voor de ouders die om 2 uur 's nachts met ze wakker zijn.\n\nFel wit en blauw licht vertelt de hersenen \"het is dag\". Baby Light vult je scherm in plaats daarvan met diep rood en amberkleurig licht, zodat je tijdens nachtvoedingen, het verschonen en korte controles kunt zien zonder de felle gloed die jou — en je baby — klaarwakker maakt.\n\nGeen advertenties. Geen account. Geen geluiden waar je niet om vroeg. Open het en de kamer gloeit.\n\n— DE WETENSCHAP, EENVOUDIG —\nLicht is het sterkste signaal waarmee je lichaam dag van nacht onderscheidt. Speciale receptoren in het oog zijn het gevoeligst voor blauw licht (rond 480 nm) — het soort in witte telefoonschermen en plafondlampen. 's Avonds kan dat blauwe licht melatonine onderdrukken, het hormoon dat ons slaperig maakt.\n\nRood en amberkleurig licht zit aan het uiterste eind van het spectrum (ongeveer 600–700 nm). Onderzoek bij volwassenen laat zien dat deze langere golflengtes veel minder effect hebben op die receptoren en op melatonine dan blauw of wit licht. Daarom schakelen onderzeeërs, cockpits, observatoria en veel ziekenhuisafdelingen 's nachts over op rood licht — en daarom is een rode gloed een zachtere keuze voor een voeding midden in de nacht dan de lamp aandoen.\n\nBaby Light kan niet beloven dat je baby de hele nacht doorslaapt (geen enkele app kan dat!). Wat het wél doet, is je net genoeg licht geven om te doen wat nodig is — zonder de kamer te overspoelen met het meest alarmerende soort licht op het slechtst denkbare moment.\n\n— WAT JE KRIJGT —\n🔴 Vier slaapvriendelijke lichtstanden\n   Diep Rood (het best voor de nacht), warm Amber, zacht Kaarslicht en een mild Warmwit voor wanneer je echt iets moet zien.\n\n🌙 Echt schermvullende gloed\n   Van rand tot rand, statusbalk verborgen, scherm blijft aan. Alleen licht.\n\n⏱️ Automatische uitschakeltimer\n   Stel hem in op 15min, 30min, 1u, 2u — of laat hem de hele nacht aan. Het scherm vervaagt vanzelf naar zwart, zodat de kamer niet oplicht als iedereen slaapt.\n\n👆 Veeg om te dimmen\n   Geen kleine schuifjes om in het donker naar te zoeken. Veeg omhoog om feller te maken, omlaag om te dimmen, tot bijna zwart.\n\n🔆 Slimme helderheid\n   Gaat naar vol wanneer je het opent zodat je je weg vindt, en dimt je scherm naar minimum wanneer je het sluit — zodat je niet verblind raakt als je de telefoon neerlegt.\n\n🕒 Zachte voedingstimer\n   Een zachte, nauwelijks zichtbare teller laat zien hoelang je al op bent, in dezelfde rustige tint als het licht. Pas aan hoe zichtbaar hij is, of verberg hem helemaal.\n\n⌚ Apple Watch-app inbegrepen\n   Dezelfde rode gloed om je pols. Tik om de kleur te wijzigen, draai aan de Digital Crown om te dimmen en werp een blik op de voedingstimer — allemaal zonder naar je telefoon te grijpen.\n\n😴 Gemaakt voor het donker\n   Rustig, minimaal, met één hand te bedienen. Niets om te lezen, niets om twee keer aan te tikken.\n\n— PERFECT VOOR —\n• Nachtvoedingen en flesjes klaarmaken\n• Verschonen zonder het plafondlicht\n• Even kijken bij een slapende baby\n• Een pasgeborene weer in slaap sussen\n• Reizen en hotelkamers zonder nachtlampje\n• Peuters die bang zijn in het donker\n• Iedereen die een verblindingsvrij lampje naast het bed wil\n\n— PRIVÉ VAN NATURE —\nGeen account. Geen advertenties. Geen tracking. Geen data verlaat je apparaat — je instellingen worden alleen op je telefoon bewaard. Werkt volledig offline.\n\nGratis. Download Baby Light en maak de volgende 2 uur 's nachts een stukje makkelijker.\n\nTip: tik twee keer op het scherm om de bediening te tonen of te verbergen.",
+    "whatsNew": "• Nu beschikbaar in 15 talen\n• Hetzelfde zachte, schermvullende rode nachtlampje voor baby's — en voor vermoeide ouders om 2 uur 's nachts\n• Standen diep rood, amber, kaarslicht en warmwit\n• Uitschakeltimer, veeg-om-te-dimmen en een zachte voedingstimer\n• Apple Watch-app inbegrepen\n\nGeen advertenties. Geen account. Geen data verzameld. Welterusten."
+  },
+  "captions": [
+    [
+      "Een rood nachtlampje voor baby's",
+      "Zie in het donker zonder iemand te wekken"
+    ],
+    [
+      "Licht dat melatonine niet tegenwerkt",
+      "Rood en amber zitten aan de rustige kant"
+    ],
+    [
+      "Vier slaapvriendelijke kleuren",
+      "Diep rood, amber, kaarslicht en warmwit"
+    ],
+    [
+      "Stel in en laat het vervagen",
+      "Uit na 15min, 30min, 1u of 2u"
+    ],
+    [
+      "Veeg om te dimmen. Sluit naar zwart.",
+      "Fel als je opent, donker als je weggaat"
+    ],
+    [
+      "Geen ads. Geen account. Geen geluid.",
+      "Alleen een warme gloed voor de 2-uur-dienst — gratis"
+    ]
+  ],
+  "ui": {
+    "light_color": "LICHTKLEUR",
+    "auto_off_timer": "UITSCHAKELTIMER",
+    "auto_brightness": "AUTO-HELDERHEID",
+    "max_bright_open": "Max helderheid bij openen",
+    "dim_close": "Dim naar minimum bij sluiten",
+    "elapsed_timer": "VERSTREKEN TIJD",
+    "brightness": "Helderheid",
+    "hint": "Dubbeltik om te verbergen • Veeg om helderheid aan te passen",
+    "hint_short": "Dubbeltik om te verbergen • Veeg om aan te passen",
+    "color_deep_red": "Diep rood",
+    "color_amber": "Amber",
+    "color_candle": "Kaarslicht",
+    "color_wheat": "Tarwe",
+    "desc_best_sleep": "Beste voor slaap",
+    "desc_warm_soothing": "Warm en rustgevend",
+    "desc_soft_orange": "Zacht oranje",
+    "desc_more_light": "Als je meer licht nodig hebt",
+    "ax_elapsed_time": "Verstreken tijd",
+    "ax_light_bg": "Achtergrondkleur van licht: %@",
+    "ax_timer_brightness": "Helderheid van timer",
+    "color_warm_white": "Warm wit"
+  }
+}

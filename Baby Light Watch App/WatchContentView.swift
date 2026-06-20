@@ -55,8 +55,9 @@ struct WatchContentView: View {
           .foregroundStyle(preset.color.watchLightened(by: 0.22).opacity(brightness))
 
         if showName {
-          Text(preset.name.uppercased())
+          Text(LocalizedStringKey(preset.name))
             .font(.system(size: 13, weight: .semibold))
+            .textCase(.uppercase)
             .tracking(1)
             .foregroundStyle(.white.opacity(0.55))
             .transition(.opacity)
