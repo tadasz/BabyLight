@@ -4,7 +4,7 @@
 Run this AFTER version 1.0 has been approved/released (Apple blocks creating a
 new version while the first one is unreleased). It:
   1. creates appStoreVersion 1.1 (IOS)             [idempotent: reuses if present]
-  2. pushes 16-locale metadata  (push_metadata.py)
+  2. pushes metadata for every registered locale  (push_metadata.py)
   3. uploads localized screenshots (upload_screenshots.py)
   4. attaches the processed 1.1 build
   5. sets App Review contact + notes

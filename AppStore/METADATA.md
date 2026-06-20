@@ -328,7 +328,9 @@ screenshots 1–3, so the hook goes first):
 
 The **iPad** set mirrors creatives 1–5 in an iPad frame; the **Watch** set is three
 full‑bleed glow shots ("on your wrist", "tap to change color", "turn the Crown to dim").
-Re‑run `python3 make_screenshots.py` to regenerate all three sets.
+Re‑run `python3 make_screenshots.py` to regenerate these English iPhone/iPad/Watch sets.
+For the **localized** iPhone sets (15 languages) run `make screenshots` — see
+[`LOCALIZATION.md`](LOCALIZATION.md).
 
 ---
 
