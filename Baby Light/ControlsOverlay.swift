@@ -35,7 +35,7 @@ struct ControlsOverlay: View {
           }
         }
 
-        Text(viewModel.currentColor.description)
+        Text(LocalizedStringKey(viewModel.currentColor.description))
           .font(.system(size: 14))
           .foregroundColor(Color(white: 0.65))
           .italic()

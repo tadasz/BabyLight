@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""Upload localized iPhone 6.5" screenshots to App Store Connect.
+
+For each locale's appStoreVersionLocalization it creates an APP_IPHONE_65
+screenshot set (if absent) and uploads the 6 PNGs from
+AppStore/screenshots/loc/<asc-locale>/, then commits each asset and sets order.
+
+Usage:
+  python3 upload_screenshots.py --version-id <appStoreVersionId> [--only de-DE,fr-FR] [--replace]
+"""
+import argparse, hashlib, json, os, sys, time
+import requests
+from asc import ASC
+
+HERE = os.path.dirname(__file__)
+SHOTS = os.path.join(HERE, "..", "screenshots", "loc")
+DISPLAY_TYPE = "APP_IPHONE_65"
+ORDER = ["01_hero_red.png", "02_science.png", "03_colors.png",
+         "04_timer.png", "05_brightness.png", "06_closing.png"]
+TARGET = ["zh-Hans", "zh-Hant", "ja", "ko", "ru", "de-DE", "fr-FR", "es-ES",
+          "es-MX", "it", "pt-BR", "nl-NL", "tr", "pl", "ar-SA"]
+
+
+def upload_one(c, set_id, path):
+    data = open(path, "rb").read()
+    fn = os.path.basename(path)
+    body = {"data": {"type": "appScreenshots",
+                     "attributes": {"fileName": fn, "fileSize": len(data)},
+                     "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": set_id}}}}}
+    r = c.post("/v1/appScreenshots", body)
+    sid = r["data"]["id"]
+    ops = r["data"]["attributes"]["uploadOperations"]
+    for op in ops:
+        headers = {h["name"]: h["value"] for h in (op.get("requestHeaders") or [])}
+        chunk = data[op["offset"]:op["offset"] + op["length"]]
+        resp = requests.request(op["method"], op["url"], headers=headers, data=chunk, timeout=120)
+        resp.raise_for_status()
+    md5 = hashlib.md5(data).hexdigest()
+    c.patch(f"/v1/appScreenshots/{sid}",
+            {"data": {"type": "appScreenshots", "id": sid,
+                      "attributes": {"uploaded": True, "sourceFileChecksum": md5}}})
+    return sid
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--version-id", required=True)
+    ap.add_argument("--only", default="")
+    ap.add_argument("--replace", action="store_true", help="delete existing iPhone6.5 set first")
+    args = ap.parse_args()
+    c = ASC()
+    only = set(x for x in args.only.split(",") if x)
+    locales = [l for l in TARGET if (not only or l in only)]
+
+    ver_locs = {x["attributes"]["locale"]: x["id"] for x in
+                c.get_all(f"/v1/appStoreVersions/{args.version_id}/appStoreVersionLocalizations")}
+
+    for loc in locales:
+        if loc not in ver_locs:
+            print(f"  !! {loc}: no version localization yet (run push_metadata first)"); continue
+        locdir = os.path.join(SHOTS, loc)
+        if not os.path.isdir(locdir):
+            print(f"  !! {loc}: no screenshots dir"); continue
+        vl = ver_locs[loc]
+        sets = c.get_all(f"/v1/appStoreVersionLocalizations/{vl}/appScreenshotSets")
+        existing = [s for s in sets if s["attributes"]["screenshotDisplayType"] == DISPLAY_TYPE]
+        if existing and args.replace:
+            for s in existing:
+                c.delete(f"/v1/appScreenshotSets/{s['id']}")
+            existing = []
+        if existing:
+            # count screenshots; skip if already populated
+            sc = c.get_all(f"/v1/appScreenshotSets/{existing[0]['id']}/appScreenshots")
+            if len(sc) >= 6:
+                print(f"  -- {loc}: already has {len(sc)} screenshots, skipping"); continue
+            set_id = existing[0]["id"]
+        else:
+            r = c.post("/v1/appScreenshotSets",
+                       {"data": {"type": "appScreenshotSets",
+                                 "attributes": {"screenshotDisplayType": DISPLAY_TYPE},
+                                 "relationships": {"appStoreVersionLocalization":
+                                     {"data": {"type": "appStoreVersionLocalizations", "id": vl}}}}})
+            set_id = r["data"]["id"]
+        ids = []
+        for fn in ORDER:
+            p = os.path.join(locdir, fn)
+            sid = upload_one(c, set_id, p)
+            ids.append(sid)
+            print(f"  [shot ] {loc} {fn} -> {sid}")
+        # set explicit order
+        c.patch(f"/v1/appScreenshotSets/{set_id}/relationships/appScreenshots",
+                {"data": [{"type": "appScreenshots", "id": i} for i in ids]})
+        print(f"  == {loc}: 6 uploaded + ordered")
+    print("\nDone.")
+
+
+if __name__ == "__main__":
+    main()
