@@ -8,12 +8,30 @@
     "description": "Turn your phone or tablet into a warm red night light made for babies — and for the parents who are awake at 2 AM with them.\n\nBright white and blue light tells the brain \"it's daytime.\" Baby Light floods your screen with deep red and amber light instead, so you can see during night feeds, diaper changes and quick check-ins without the harsh glare that snaps you — and your baby — wide awake.\n\nNo ads. No sign-up. No sounds you didn't ask for. Open it, and the room glows.\n\n— THE SCIENCE, SIMPLY —\nLight is the strongest signal your body uses to tell day from night. Special receptors in the eye are most sensitive to blue light (around 480 nm) — the kind in white phone screens and ceiling lights. In the evening, that blue light can suppress melatonin, the hormone that helps us feel sleepy.\n\nRed and amber light sit at the far end of the spectrum (roughly 600–700 nm). Research in adults shows these longer wavelengths have far less effect on those receptors and on melatonin than blue or white light does. It's why submarines, aircraft cockpits, observatories and many hospital units switch to red light at night — and why a red glow is a gentler choice for a midnight feed than flipping on the lamp.\n\nBaby Light can't promise your baby will sleep through the night (no app can!). What it does is give you just enough light to do what you need to do — without blasting the room with the most alerting kind of light at the worst possible time.\n\n— WHAT YOU GET —\n🔴 Four sleep-friendly light modes\n   Deep Red (best for night), warm Amber, soft Candle, and a gentle Warm White for when you need to actually see.\n\n🌙 True full-screen glow\n   Edge to edge, status bar hidden, screen stays awake. Just light.\n\n⏱️ Auto-off timer\n   Set it for 15m, 30m, 1h, 2h — or leave it on all night. The screen fades to black on its own so it won't light up the nursery once everyone's asleep.\n\n👆 Swipe to dim\n   No tiny sliders to fumble for in the dark. Swipe up to brighten, down to dim, all the way to nearly black.\n\n🔆 Smart brightness\n   Brightens to full when you open it so you can find your way, and dims your screen to minimum when you close it — so you're not blinded putting the phone down.\n\n🕒 Gentle feed timer\n   A soft, barely-there counter shows how long you've been up, in the same calm hue as the light. Adjust how visible it is, or hide it completely.\n\n⌚ Apple Watch app included\n   The same red glow on your wrist. Tap to change color, turn the Digital Crown to dim, and glance at the feed timer — all without reaching for your phone.\n\n😴 Designed for the dark\n   Calm, minimal, one-handed. Nothing to read, nothing to tap twice.\n\n— PERFECT FOR —\n• Night feeds and bottle prep\n• Diaper changes without the overhead light\n• Checking on a sleeping baby\n• Soothing a newborn back to sleep\n• Travel and hotel rooms with no nightlight\n• Toddlers who are scared of the dark\n• Anyone who wants a glare-free light by the bed\n\n— PRIVATE BY DESIGN —\nNo account. No ads. No tracking. No data leaves your device — your settings are saved only on your phone. Works completely offline.\n\nFree. Download Baby Light and make the next 2 AM a little easier.\n\nTip: double-tap the screen to show or hide the controls."
   },
   "captions": [
-    ["A red night light made for babies", "See in the dark without waking anyone"],
-    ["Light that won't fight melatonin", "Red & amber sit at the calm end of the spectrum"],
-    ["Four sleep-friendly colors", "Deep red, amber, candle & warm white"],
-    ["Set it and let it fade", "Auto-off after 15m, 30m, 1h or 2h"],
-    ["Swipe to dim. Closes to black.", "Bright when you open, dark when you don't"],
-    ["No ads. No sign-up. No noise.", "Just a warm glow for the 2 AM shift — free"]
+    [
+      "A red night light made for babies",
+      "See in the dark without waking anyone"
+    ],
+    [
+      "Light that won't fight melatonin",
+      "Red & amber sit at the calm end of the spectrum"
+    ],
+    [
+      "Four sleep-friendly colors",
+      "Deep red, amber, candle & warm white"
+    ],
+    [
+      "Set it and let it fade",
+      "Auto-off after 15m, 30m, 1h or 2h"
+    ],
+    [
+      "Swipe to dim. Closes to black.",
+      "Bright when you open, dark when you don't"
+    ],
+    [
+      "No ads. No sign-up. No noise.",
+      "Just a warm glow for the 2 AM shift — free"
+    ]
   ],
   "ui": {
     "light_color": "LIGHT COLOR",
@@ -35,6 +53,7 @@
     "desc_more_light": "If you need more light",
     "ax_elapsed_time": "Elapsed time",
     "ax_light_bg": "Light background color: %@",
-    "ax_timer_brightness": "Elapsed timer brightness"
+    "ax_timer_brightness": "Elapsed timer brightness",
+    "color_warm_white": "Warm White"
   }
 }

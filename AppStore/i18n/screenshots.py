@@ -2,23 +2,23 @@
 """Localized App Store screenshots for Baby Light — iPhone 6.5" (1284x2778).
 
 Renders the 6-creative set per locale with translated captions and translated
-in-app control-panel labels, choosing a font that covers each locale's script
-(Latin/Cyrillic -> Avenir Next, CJK -> Hiragino/Songti, KO -> Apple SD Gothic,
-AR -> Geeza Pro with reshaping + bidi).
+in-app control-panel labels. Fonts are chosen by the locale's "script" (from
+i18n/locales.json) via FONT_SETS below — so adding a language that uses an
+existing script needs NO change here; only a brand-new writing system does.
 
 Output: AppStore/screenshots/loc/<asc-locale>/01..06.png
+Usage:  python3 screenshots.py [asc-locale ...]   (default: all target locales)
 """
-import json, os, sys
+import os
+import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import numpy as np
 import arabic_reshaper
 from bidi.algorithm import get_display
+import lib
 
-HERE = os.path.dirname(__file__)
-REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
-TR = json.load(open(os.path.join(HERE, "translations.json"), encoding="utf-8"))
-OUTROOT = os.path.join(REPO, "AppStore", "screenshots", "loc")
-ICON = os.path.join(REPO, "Baby Light", "Assets.xcassets", "AppIcon.appiconset", "AppIcon.png")
+OUTROOT = os.path.join(lib.REPO, "AppStore", "screenshots", "loc")
+ICON = os.path.join(lib.REPO, "Baby Light", "Assets.xcassets", "AppIcon.appiconset", "AppIcon.png")
 
 W, H = 1284, 2778
 
@@ -38,8 +38,9 @@ SONGTI = "/System/Library/Fonts/Supplemental/Songti.ttc"
 SDGOTH = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
 GEEZA  = "/System/Library/Fonts/GeezaPro.ttc"
 
-# script -> (file, idx) for roles: head, sub, body, label(bold-ish), title
-FONTS = {
+# script (from locales.json) -> font file + TTC face indices per role + flags.
+# Add an entry here ONLY when introducing a writing system not already covered.
+FONT_SETS = {
     "latin":    {"file": AVENIR, "head": 8, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
     "cyrillic": {"file": AVENIR, "head": 8, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
     "cjk_sc":   {"file": HIRA,   "head": 2, "sub": 0, "body": 0, "label": 2, "title": 2, "cjk": True,  "rtl": False},
@@ -47,11 +48,6 @@ FONTS = {
     "cjk_tc":   {"file": SONGTI, "head": 2, "sub": 5, "body": 7, "label": 2, "title": 2, "cjk": True,  "rtl": False},
     "ko":       {"file": SDGOTH, "head": 6, "sub": 2, "body": 2, "label": 4, "title": 6, "cjk": True,  "rtl": False},
     "ar":       {"file": GEEZA,  "head": 1, "sub": 0, "body": 0, "label": 1, "title": 1, "cjk": False, "rtl": True},
-}
-LOCALE_SCRIPT = {
-    "zh-Hans": "cjk_sc", "zh-Hant": "cjk_tc", "ja": "ja", "ko": "ko", "ru": "cyrillic",
-    "de-DE": "latin", "fr-FR": "latin", "es-ES": "latin", "es-MX": "latin", "it": "latin",
-    "pt-BR": "latin", "nl-NL": "latin", "tr": "latin", "pl": "latin", "ar-SA": "ar",
 }
 
 _cache = {}
@@ -62,11 +58,8 @@ def font(spec, role, size):
     return _cache[key]
 
 def shape(s, rtl):
-    if not rtl:
-        return s
-    return get_display(arabic_reshaper.reshape(s))
+    return get_display(arabic_reshaper.reshape(s)) if rtl else s
 
-# ---------- drawing helpers ----------
 def vgradient(top, bottom):
     base = Image.new("RGB", (W, H), bottom)
     top_img = Image.new("RGB", (W, H), top)
@@ -130,7 +123,6 @@ def center_lines(d, cx, y, text, fnt, fill, max_w, rtl, cjk, gap=14):
 def rounded(d, box, r, **kw):
     d.rounded_rectangle(box, radius=r, **kw)
 
-# ---------- phone mock ----------
 def phone(screen_img):
     sw, sh = screen_img.size
     bez, radius = 24, 130
@@ -150,22 +142,21 @@ def place(img, dev, cx, cy):
     img.alpha_composite(dev,(int(cx-pw/2),int(cy-ph/2)))
     return img.convert("RGB")
 
-SW, SH = 720, 1556  # phone screen content size
+SW, SH = 720, 1556
 
 def screen_fullscreen(color, timer):
     sc = Image.new("RGB",(SW,SH),color); d = ImageDraw.Draw(sc)
     ft = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf", 140)
-    tcol = lightened(color, 0.20)
     tw = d.textlength(timer, font=ft)
-    d.text((SW/2-tw/2, SH*0.45), timer, font=ft, fill=tcol)
+    d.text((SW/2-tw/2, SH*0.45), timer, font=ft, fill=lightened(color, 0.20))
     return sc
 
 def screen_controls(spec, ui, bg, highlight):
     rtl = spec["rtl"]
     sc = Image.new("RGBA",(SW,SH),bg+(255,)); d = ImageDraw.Draw(sc)
     ftimer = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf", 120)
-    tcol = lightened(bg,0.10); tw = d.textlength("0:42",font=ftimer)
-    d.text((SW/2-tw/2, SH*0.36), "0:42", font=ftimer, fill=tcol)
+    tw = d.textlength("0:42",font=ftimer)
+    d.text((SW/2-tw/2, SH*0.36), "0:42", font=ftimer, fill=lightened(bg,0.10))
     pw, ph = int(SW*0.90), int(SH*0.80)
     px, py = (SW-pw)//2, int(SH*0.085)
     panel = Image.new("RGBA",(SW,SH),(0,0,0,0))
@@ -176,7 +167,7 @@ def screen_controls(spec, ui, bg, highlight):
     F_BODY = font(spec,"body",28); F_PILL = font(spec,"body",30); F_TINY = font(spec,"body",24)
     def ctext(s, yy, fnt, fill):
         ss = shape(s, rtl); w = d.textlength(ss,font=fnt)
-        d.text((cx-w/2, yy), ss, font=fnt, fill=fill);
+        d.text((cx-w/2, yy), ss, font=fnt, fill=fill)
     def hl(name): return CORAL if highlight==name else (214,210,224)
     ctext("Baby Light", y, F_TITLE, WHITE); y += 92
     ctext(ui["light_color"], y, F_LABEL, hl("color")); y += 60
@@ -198,12 +189,10 @@ def screen_controls(spec, ui, bg, highlight):
         pw2=d.textlength(p,font=F_PILL); d.text((xx+w/2-pw2/2,y+13),p,font=F_PILL,fill=(0,0,0) if on else WHITE)
         xx+=w+16
     y+=62+58
-    # toggles
     def toggle(label_s, yy, on=True):
         s = shape(label_s, rtl); tw_=92; th=50
         if rtl:
-            d.text((rx-d.textlength(s,font=F_BODY), yy), s, font=F_BODY, fill=WHITE)
-            tx=lx
+            d.text((rx-d.textlength(s,font=F_BODY), yy), s, font=F_BODY, fill=WHITE); tx=lx
         else:
             d.text((lx, yy), s, font=F_BODY, fill=WHITE); tx=rx-tw_
         d.rounded_rectangle([tx,yy-2,tx+tw_,yy-2+th],radius=th//2,fill=CORAL if on else (90,90,100))
@@ -213,8 +202,7 @@ def screen_controls(spec, ui, bg, highlight):
     toggle(ui["max_bright_open"], y); y+=78
     toggle(ui["dim_close"], y); y+=92
     ctext(ui["elapsed_timer"], y, F_LABEL, (214,210,224)); y+=54
-    hint = ui.get("hint_short") or ui.get("hint")
-    ctext(hint, y, F_TINY, (160,160,172))
+    ctext(ui.get("hint_short") or ui.get("hint"), y, F_TINY, (160,160,172))
     return sc.convert("RGB")
 
 def page_dots(img, idx, total=6):
@@ -230,8 +218,7 @@ def header(img, spec, headline, sub):
     hsz = 96 if cjk else (100 if spec["file"] in (SDGOTH,GEEZA) else 104)
     fh = font(spec,"head",hsz); fs = font(spec,"sub",46)
     y = center_lines(d, W/2, 150, headline, fh, WHITE, W-150, rtl, cjk, gap=8)
-    y += 30
-    center_lines(d, W/2, y, sub, fs, MUTE, W-200, rtl, cjk, gap=12)
+    center_lines(d, W/2, y+30, sub, fs, MUTE, W-200, rtl, cjk, gap=12)
 
 def tagline_icon(img, spec, tagline):
     cy = int(H*0.55); sz = 430
@@ -262,48 +249,35 @@ def spectrum(img, spec, line):
     img.paste(grad,(bx0,by),gm)
     return img
 
-# ---------- compose 6 creatives ----------
 def build_locale(asc):
-    spec = FONTS[LOCALE_SCRIPT[asc]]
-    data = TR[asc]; caps = data["captions"]; ui = data["ui"]
+    spec = FONT_SETS[lib.script_for(asc)]
+    data = lib.load_translation(asc); caps = data["captions"]; ui = data["ui"]
     outdir = os.path.join(OUTROOT, asc); os.makedirs(outdir, exist_ok=True)
 
     def hero(color, timer, cap_i, glow):
         img = base_bg(glow, (W/2, H*0.66), 1050)
         header(img, spec, caps[cap_i][0], caps[cap_i][1])
-        img = place(img, phone(screen_fullscreen(color, timer)), W/2, H*0.66)
-        return img
+        return place(img, phone(screen_fullscreen(color, timer)), W/2, H*0.66)
 
-    # 1 hero red
-    s1 = page_dots(hero(RED, "0:42", 0, (150,20,20)), 0)
-    s1.save(os.path.join(outdir,"01_hero_red.png"))
-    # 2 science / spectrum
+    page_dots(hero(RED, "0:42", 0, (150,20,20)), 0).save(os.path.join(outdir,"01_hero_red.png"))
     img = base_bg((120,30,20),(W/2,H*0.66),900)
-    header(img, spec, caps[1][0], caps[1][1])
-    img = spectrum(img, spec, caps[1][1])
-    s2 = page_dots(img, 1); s2.save(os.path.join(outdir,"02_science.png"))
-    # 3 colors (controls)
+    header(img, spec, caps[1][0], caps[1][1]); img = spectrum(img, spec, caps[1][1])
+    page_dots(img, 1).save(os.path.join(outdir,"02_science.png"))
     img = base_bg((120,30,20),(W/2,H*0.66),950)
     header(img, spec, caps[2][0], caps[2][1])
     img = place(img, phone(screen_controls(spec, ui, RED, "color")), W/2, H*0.665)
-    s3 = page_dots(img, 2); s3.save(os.path.join(outdir,"03_colors.png"))
-    # 4 timer (controls)
+    page_dots(img, 2).save(os.path.join(outdir,"03_colors.png"))
     img = base_bg((150,80,10),(W/2,H*0.66),950)
     header(img, spec, caps[3][0], caps[3][1])
     img = place(img, phone(screen_controls(spec, ui, CANDLE, "timer")), W/2, H*0.665)
-    s4 = page_dots(img, 3); s4.save(os.path.join(outdir,"04_timer.png"))
-    # 5 hero amber
-    s5 = page_dots(hero(AMBER, "1:07", 4, (120,60,10)), 4)
-    s5.save(os.path.join(outdir,"05_brightness.png"))
-    # 6 closing icon
+    page_dots(img, 3).save(os.path.join(outdir,"04_timer.png"))
+    page_dots(hero(AMBER, "1:07", 4, (120,60,10)), 4).save(os.path.join(outdir,"05_brightness.png"))
     img = base_bg((120,30,20),(W/2,H*0.56),1000)
-    header(img, spec, caps[5][0], caps[5][1])
-    img = tagline_icon(img, spec, ui.get("desc_best_sleep") and caps[5][1] or caps[5][1])
-    s6 = page_dots(img, 5); s6.save(os.path.join(outdir,"06_closing.png"))
-    print("built", asc, "->", outdir)
+    header(img, spec, caps[5][0], caps[5][1]); img = tagline_icon(img, spec, caps[5][1])
+    page_dots(img, 5).save(os.path.join(outdir,"06_closing.png"))
+    print("built", asc, "->", os.path.relpath(outdir, lib.REPO))
 
 if __name__ == "__main__":
-    locs = sys.argv[1:] or list(LOCALE_SCRIPT.keys())
-    for a in locs:
+    for a in (sys.argv[1:] or lib.target_locales()):
         build_locale(a)
     print("done")

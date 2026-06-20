@@ -1,44 +1,44 @@
 #!/usr/bin/env python3
-"""Upload localized iPhone 6.5" screenshots to App Store Connect.
+"""Upload localized iPhone 6.5" screenshots to App Store Connect (registry-driven).
 
-For each locale's appStoreVersionLocalization it creates an APP_IPHONE_65
-screenshot set (if absent) and uploads the 6 PNGs from
-AppStore/screenshots/loc/<asc-locale>/, then commits each asset and sets order.
+For each target locale (i18n/locales.json) it creates an APP_IPHONE_65 screenshot
+set (if absent) and uploads the 6 PNGs from AppStore/screenshots/loc/<asc>/, then
+commits each asset and sets the display order.
 
 Usage:
-  python3 upload_screenshots.py --version-id <appStoreVersionId> [--only de-DE,fr-FR] [--replace]
+  python3 upload_screenshots.py --version-id <id> [--only de-DE,fr-FR] [--replace]
 """
-import argparse, hashlib, json, os, sys, time
-import requests
-from asc import ASC
+import argparse
+import hashlib
+import os
+import sys
 
-HERE = os.path.dirname(__file__)
-SHOTS = os.path.join(HERE, "..", "screenshots", "loc")
+import requests
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "i18n"))
+import lib  # noqa: E402
+from asc import ASC  # noqa: E402
+
+SHOTS = os.path.join(lib.REPO, "AppStore", "screenshots", "loc")
 DISPLAY_TYPE = "APP_IPHONE_65"
 ORDER = ["01_hero_red.png", "02_science.png", "03_colors.png",
          "04_timer.png", "05_brightness.png", "06_closing.png"]
-TARGET = ["zh-Hans", "zh-Hant", "ja", "ko", "ru", "de-DE", "fr-FR", "es-ES",
-          "es-MX", "it", "pt-BR", "nl-NL", "tr", "pl", "ar-SA"]
 
 
 def upload_one(c, set_id, path):
     data = open(path, "rb").read()
-    fn = os.path.basename(path)
-    body = {"data": {"type": "appScreenshots",
-                     "attributes": {"fileName": fn, "fileSize": len(data)},
-                     "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": set_id}}}}}
-    r = c.post("/v1/appScreenshots", body)
+    r = c.post("/v1/appScreenshots",
+               {"data": {"type": "appScreenshots",
+                         "attributes": {"fileName": os.path.basename(path), "fileSize": len(data)},
+                         "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": set_id}}}}})
     sid = r["data"]["id"]
-    ops = r["data"]["attributes"]["uploadOperations"]
-    for op in ops:
+    for op in r["data"]["attributes"]["uploadOperations"]:
         headers = {h["name"]: h["value"] for h in (op.get("requestHeaders") or [])}
         chunk = data[op["offset"]:op["offset"] + op["length"]]
-        resp = requests.request(op["method"], op["url"], headers=headers, data=chunk, timeout=120)
-        resp.raise_for_status()
-    md5 = hashlib.md5(data).hexdigest()
+        requests.request(op["method"], op["url"], headers=headers, data=chunk, timeout=120).raise_for_status()
     c.patch(f"/v1/appScreenshots/{sid}",
             {"data": {"type": "appScreenshots", "id": sid,
-                      "attributes": {"uploaded": True, "sourceFileChecksum": md5}}})
+                      "attributes": {"uploaded": True, "sourceFileChecksum": hashlib.md5(data).hexdigest()}}})
     return sid
 
 
@@ -50,7 +50,7 @@ def main():
     args = ap.parse_args()
     c = ASC()
     only = set(x for x in args.only.split(",") if x)
-    locales = [l for l in TARGET if (not only or l in only)]
+    locales = [l for l in lib.target_locales() if (not only or l in only)]
 
     ver_locs = {x["attributes"]["locale"]: x["id"] for x in
                 c.get_all(f"/v1/appStoreVersions/{args.version_id}/appStoreVersionLocalizations")}
@@ -69,7 +69,6 @@ def main():
                 c.delete(f"/v1/appScreenshotSets/{s['id']}")
             existing = []
         if existing:
-            # count screenshots; skip if already populated
             sc = c.get_all(f"/v1/appScreenshotSets/{existing[0]['id']}/appScreenshots")
             if len(sc) >= 6:
                 print(f"  -- {loc}: already has {len(sc)} screenshots, skipping"); continue
@@ -81,13 +80,7 @@ def main():
                                  "relationships": {"appStoreVersionLocalization":
                                      {"data": {"type": "appStoreVersionLocalizations", "id": vl}}}}})
             set_id = r["data"]["id"]
-        ids = []
-        for fn in ORDER:
-            p = os.path.join(locdir, fn)
-            sid = upload_one(c, set_id, p)
-            ids.append(sid)
-            print(f"  [shot ] {loc} {fn} -> {sid}")
-        # set explicit order
+        ids = [upload_one(c, set_id, os.path.join(locdir, fn)) for fn in ORDER]
         c.patch(f"/v1/appScreenshotSets/{set_id}/relationships/appScreenshots",
                 {"data": [{"type": "appScreenshots", "id": i} for i in ids]})
         print(f"  == {loc}: 6 uploaded + ordered")

@@ -289,6 +289,36 @@
     "Warm White": {
       "extractionState": "manual",
       "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暖白"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暖白"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暖かい白"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "따뜻한 화이트"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тёплый белый"
+          }
+        },
         "de": {
           "stringUnit": {
             "state": "translated",
@@ -319,22 +349,10 @@
             "value": "Bianco caldo"
           }
         },
-        "ja": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "暖かい白"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "따뜻한 화이트"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тёплый белый"
+            "value": "Branco quente"
           }
         },
         "nl": {
@@ -343,40 +361,22 @@
             "value": "Warm wit"
           }
         },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ciepła biel"
-          }
-        },
         "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "Sıcak beyaz"
           }
         },
-        "pt-BR": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Branco quente"
+            "value": "Ciepła biel"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "translated",
             "value": "أبيض دافئ"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暖白"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暖白"
           }
         }
       }
