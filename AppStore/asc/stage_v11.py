@@ -69,20 +69,25 @@ def main():
     print("\n== metadata ==");    run("push_metadata.py", "--version-id", vid, "--appinfo-id", appinfo)
     print("\n== screenshots =="); run("upload_screenshots.py", "--version-id", vid)
 
-    # 4. attach build 1.1
+    # 4. attach the highest-numbered VALID build on the 1.1 train (the Xcode Cloud
+    #    build, e.g. 1.1(15), over the earlier local stopgap 1.1(14)).
     builds = [b for b in c.get_all(f"/v1/apps/{APP_ID}/builds",
               {"filter[preReleaseVersion.version]": VERSION})
               if b["attributes"]["processingState"] == "VALID"]
-    if not builds:
-        builds = [b for b in c.get_all(f"/v1/apps/{APP_ID}/builds")
-                  if b["attributes"].get("version") and b["attributes"]["processingState"] == "VALID"]
+
+    def buildnum(b):
+        try:
+            return int(b["attributes"].get("version") or 0)
+        except ValueError:
+            return 0
+
     if builds:
-        bid = builds[-1]["id"]
+        best = max(builds, key=buildnum)
         c.patch(f"/v1/appStoreVersions/{vid}/relationships/build",
-                {"data": {"type": "builds", "id": bid}})
-        print(f"\nattached build {builds[-1]['attributes'].get('version')} ({bid})")
+                {"data": {"type": "builds", "id": best["id"]}})
+        print(f"\nattached build {VERSION}({best['attributes'].get('version')}) ({best['id']})")
     else:
-        print("\n!! no VALID 1.1 build yet — upload/processing pending; attach later.")
+        print(f"\n!! no VALID {VERSION} build yet — Xcode Cloud run pending; attach later.")
 
     # 5. review detail
     try:

@@ -36,10 +36,27 @@ Spanish variants). Arabic (`ar-SA`) is right-to-left.
 - iPad (12.9") and Apple Watch sets stay English; App Store falls back to the
   primary-language screenshots for those device families per locale.
 
-### 4. The build
-- Version **1.1**, build **14**, archived + App Store-signed (Dogo App GmbH) and
-  uploaded via the App Store Connect API (`xcrun altool --apiKey`). App Store
-  provisioning profiles were created through the API (`asc/create_profiles.py`).
+### 4. The build (Xcode Cloud)
+- The localized **v1.1** build is produced by **Xcode Cloud** (Apple-managed cloud
+  signing — no local certificates needed), using the existing **"AppStore"** workflow
+  (`8c13de8a-…`, APP_STORE_ELIGIBLE archive). Because that workflow is pinned to
+  `main`, on-demand builds of a feature branch are started with `asc/xcode_cloud.py`,
+  which temporarily adds the branch to the workflow's start condition, starts a manual
+  `ciBuildRun`, then restores the workflow. Trigger + watch + report:
+  ```bash
+  cd AppStore/asc
+  python3 xcode_cloud.py build-for claude/happy-yalow-d38b66          # App Store build
+  # python3 xcode_cloud.py build-for <branch> --testflight           # internal TestFlight build
+  ```
+- **Build numbering:** Xcode Cloud stamps `CFBundleVersion` = the run number at
+  archive time (it overrides `CURRENT_PROJECT_VERSION`, so editing the project in a CI
+  script has no effect — verified). Run numbers only increase and are already past the
+  one-off local stopgap build **1.1(14)**, so the Xcode Cloud build comes out at
+  **1.1(15)**, which App Store Connect accepts (higher than any prior build).
+- **Fallback (local):** a local archive can still be made and uploaded with
+  `asc/ExportOptions.plist` (manual signing) + `xcrun altool --apiKey`; App Store
+  provisioning profiles for that path are created by `asc/create_profiles.py`. This is
+  only a fallback — prefer Xcode Cloud.
 
 ## Why it isn't submitted yet
 
@@ -66,7 +83,8 @@ clear message and exits without changes.
 | file | purpose |
 |---|---|
 | `asc.py` | tiny App Store Connect API client (JWT via `AuthKey_DX75UNTZ4U.p8`) |
-| `create_profiles.py` | create/install IOS_APP_STORE provisioning profiles via API |
+| `xcode_cloud.py` | start/poll Xcode Cloud build runs (primary build path) |
+| `create_profiles.py` | create/install IOS_APP_STORE provisioning profiles via API (local-build fallback) |
 | `push_metadata.py` | create/update appInfo + version localizations for all 16 locales |
 | `upload_screenshots.py` | upload the localized iPhone 6.5" screenshot sets |
 | `stage_v11.py` | orchestrates the whole 1.1 staging (the command above) |
