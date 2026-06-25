@@ -1,0 +1,82 @@
+# Releasing Baby Light
+
+End-to-end runbook for shipping a new App Store version. Read this first.
+Related: [`ADD_A_LANGUAGE.md`](ADD_A_LANGUAGE.md), [`LOCALIZATION.md`](LOCALIZATION.md),
+[`README.md`](README.md).
+
+## TL;DR
+
+```bash
+# 0. one-time per machine: create the Python venv (see Prerequisites)
+# 1. make your app/metadata changes on a branch, open a PR, merge to main
+# 2. merging to main auto-triggers the Xcode Cloud "AppStore" build (a new build number)
+# 3. once that build is VALID in App Store Connect:
+cd AppStore
+.venv/bin/python asc/stage_v11.py            # stage: create version, push listings + screenshots, attach build
+# 4. review the listings in App Store Connect, then:
+.venv/bin/python asc/stage_v11.py --submit   # submit for review
+```
+
+> Use `.venv/bin/python`, **not** `make stage`. The Makefile calls bare `python3`
+> (Xcode's 3.9), which lacks the dependencies and will fail. The scripts'
+> subprocesses inherit the venv automatically via `sys.executable`.
+
+## Prerequisites
+
+- **ASC API key** at `~/.appstoreconnect/private_keys/AuthKey_DX75UNTZ4U.p8`
+  (key id `DX75UNTZ4U`, issuer `c6b880a6-2c8f-4304-ab18-8e05935d0cfe`). Never in the repo.
+- **Python venv** (gitignored, create once):
+  ```bash
+  cd AppStore
+  python3 -m venv .venv
+  .venv/bin/pip install PyJWT requests cryptography Pillow arabic_reshaper python-bidi
+  ```
+
+## App facts
+
+- App id `6758722102`, account "Dogo App GmbH", bundle `com.tadas.Baby-Light`.
+- Xcode scheme **"Baby Night Light"**; deployment target iOS 26.2 (sim must be ≥ 26.2).
+- Build = **Xcode Cloud**, Apple cloud-signing (no local certs). A push to `main`
+  builds via the **AppStore** workflow (`8c13de8a-…`). Xcode Cloud stamps
+  `CFBundleVersion` = the build-run number, so build numbers just increment.
+- 16 in-app languages (English + 15). Adding a language: see `ADD_A_LANGUAGE.md`.
+
+## App Review contact  (used by `stage_v11.py` → review detail)
+
+- **Name:** Tadas Ziemys
+- **Email:** tadas@dogo.app   *(note: differs from the ASC account email team@dogo.app)*
+- **Phone:** +37065668005
+
+## What `stage_v11.py` does (idempotent — safe to re-run)
+
+1. Creates the next App Store version (`VERSION` constant — bump it per release).
+2. Pushes localized metadata for every locale (`push_metadata.py`): name + subtitle
+   (app-info level) and description/keywords/promo/whatsNew (version level).
+3. Uploads the localized iPhone 6.5" screenshot sets (`upload_screenshots.py`),
+   skipping any locale that already has ≥ 6.
+4. Attaches the highest VALID build on the version's train.
+5. Sets the App Review contact + notes.
+6. Leaves the version in **"Prepare for Submission"** (add `--submit` to submit).
+
+## App Store Connect API gotchas (already handled in the scripts — don't re-introduce)
+
+1. **Two appInfos once a version is live.** The `READY_FOR_SALE` one is locked
+   (name/subtitle can't be edited); use the editable `PREPARE_FOR_SUBMISSION` one.
+2. **Localizations auto-mirror.** Adding an `appInfoLocalization` for a language makes
+   ASC auto-create the matching `appStoreVersionLocalization` (and vice-versa).
+   Re-fetch the maps each iteration or POSTs 409 as duplicates.
+3. **Build filters are rejected.** The app→builds and app→preReleaseVersions
+   relationships reject `filter[preReleaseVersion.version]` / `filter[version]` /
+   `filter[platform]` with 400. List `preReleaseVersions` unfiltered and match the
+   train (`version`/`platform`) client-side. (Top-level `/v1/builds?filter[app]=…`
+   does accept `sort`/`include`.)
+4. **Review-detail field names** are `contactFirstName` / `contactLastName` /
+   `contactEmail` / `contactPhone` — NOT first/last/email/phone.
+5. **No emoji in store metadata.** ASC rejects emoji in description/etc. Keep the
+   source + translations emoji-free (em-dashes and `•` bullets are fine).
+
+## Release history
+
+- **1.0 (build 13)** — first release, **English only**. `READY_FOR_SALE` (live).
+- **1.1 (build 18)** — first localized release: 16 languages + a much larger
+  on-screen feed timer. Staged 2026-06-25; submit when ready.
