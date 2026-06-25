@@ -79,6 +79,10 @@ cd AppStore
    `contactEmail` / `contactPhone` — NOT first/last/email/phone.
 5. **No emoji in store metadata.** ASC rejects emoji in description/etc. Keep the
    source + translations emoji-free (em-dashes and `•` bullets are fine).
+6. **Privacy policy URL is per-locale and required for review.** Every
+   `appInfoLocalization` must carry `privacyPolicyUrl` or the review submission is
+   rejected with a `STATE_ERROR` on the version. `push_metadata.py` sets it
+   (`PRIVACY_POLICY_URL`); don't drop it when adding locales.
 
 ## TestFlight (testing a build before submitting)
 

@@ -20,6 +20,9 @@ from asc import ASC  # noqa: E402
 
 MARKETING_URL = "https://dogo.app"
 SUPPORT_URL = "https://dogo.app"
+# Required for App Review: each appInfoLocalization must carry the privacy policy
+# URL, or the review submission is rejected (STATE_ERROR on the appStoreVersion).
+PRIVACY_POLICY_URL = "https://dogo.app/privacy-policy/"
 
 
 def main():
@@ -42,7 +45,8 @@ def main():
         # cached once at the start goes stale and POSTs would 409 as duplicates.
         info_locs = {x["attributes"]["locale"]: x["id"] for x in
                      c.get_all(f"/v1/appInfos/{args.appinfo_id}/appInfoLocalizations")}
-        info_attrs = {"name": store["name"], "subtitle": store["subtitle"]}
+        info_attrs = {"name": store["name"], "subtitle": store["subtitle"],
+                      "privacyPolicyUrl": PRIVACY_POLICY_URL}
         if loc in info_locs:
             c.patch(f"/v1/appInfoLocalizations/{info_locs[loc]}",
                     {"data": {"type": "appInfoLocalizations", "id": info_locs[loc], "attributes": info_attrs}})
