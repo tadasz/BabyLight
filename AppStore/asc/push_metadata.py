@@ -34,13 +34,14 @@ def main():
     only = set(x for x in args.only.split(",") if x)
     locales = [l for l in lib.all_locales() if lib.has_translation(l) and (not only or l in only)]
 
-    info_locs = {x["attributes"]["locale"]: x["id"] for x in
-                 c.get_all(f"/v1/appInfos/{args.appinfo_id}/appInfoLocalizations")}
-    ver_locs = {x["attributes"]["locale"]: x["id"] for x in
-                c.get_all(f"/v1/appStoreVersions/{args.version_id}/appStoreVersionLocalizations")}
-
     for loc in locales:
         store = lib.load_translation(loc)["store"]
+        # Re-fetch the localization maps each iteration: adding an
+        # appInfoLocalization for a new language makes ASC auto-create the
+        # matching appStoreVersionLocalization (and vice-versa), so a map
+        # cached once at the start goes stale and POSTs would 409 as duplicates.
+        info_locs = {x["attributes"]["locale"]: x["id"] for x in
+                     c.get_all(f"/v1/appInfos/{args.appinfo_id}/appInfoLocalizations")}
         info_attrs = {"name": store["name"], "subtitle": store["subtitle"]}
         if loc in info_locs:
             c.patch(f"/v1/appInfoLocalizations/{info_locs[loc]}",
@@ -53,6 +54,11 @@ def main():
             info_locs[loc] = r["data"]["id"]
             print(f"  [info ] POST  {loc}")
 
+        # Fetch version localizations *after* the appInfo upsert above: adding
+        # an appInfoLocalization makes ASC auto-create the matching version
+        # localization, so this must be read fresh here to PATCH (not POST) it.
+        ver_locs = {x["attributes"]["locale"]: x["id"] for x in
+                    c.get_all(f"/v1/appStoreVersions/{args.version_id}/appStoreVersionLocalizations")}
         ver_attrs = {"description": store["description"], "keywords": store["keywords"],
                      "promotionalText": store["promotionalText"],
                      "marketingUrl": MARKETING_URL, "supportUrl": SUPPORT_URL}

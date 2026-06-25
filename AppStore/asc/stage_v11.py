@@ -20,8 +20,8 @@ from asc import ASC
 HERE = os.path.dirname(os.path.abspath(__file__))
 APP_ID = "6758722102"
 VERSION = "1.1"
-REVIEW_CONTACT = {"firstName": "Tadas", "lastName": "Ziemys",
-                  "email": "team@dogo.app", "phone": "+37060000000"}
+REVIEW_CONTACT = {"contactFirstName": "Tadas", "contactLastName": "Ziemys",
+                  "contactEmail": "team@dogo.app", "contactPhone": "+37060000000"}
 REVIEW_NOTES = ("Baby Light is a full-screen colored night-light utility for iPhone, iPad and "
                 "Apple Watch. DOUBLE-TAP the screen to reveal controls (color, auto-off timer, "
                 "auto-brightness). Swipe up/down to change brightness. Apple Watch: tap to cycle "
@@ -62,8 +62,14 @@ def main():
             print(e)
             raise SystemExit(2)
 
-    # appInfo (editable)
-    appinfo = c.get_all(f"/v1/apps/{APP_ID}/appInfos")[0]["id"]
+    # appInfo (editable). Once a version is live there are two appInfo records:
+    # the READY_FOR_SALE one is locked (name/subtitle can't be edited), and a
+    # separate PREPARE_FOR_SUBMISSION one is editable. Pick the editable one.
+    infos = c.get_all(f"/v1/apps/{APP_ID}/appInfos")
+    editable = [i for i in infos
+                if i["attributes"].get("appStoreState") not in ("READY_FOR_SALE", "REPLACED_WITH_NEW_INFO")]
+    appinfo = (editable or infos)[0]["id"]
+    print(f"using appInfo {appinfo} (editable)" if editable else f"using appInfo {appinfo} (no editable found)")
 
     # 2. metadata + 3. screenshots
     print("\n== metadata ==");    run("push_metadata.py", "--version-id", vid, "--appinfo-id", appinfo)
@@ -71,9 +77,16 @@ def main():
 
     # 4. attach the highest-numbered VALID build on the 1.1 train (the Xcode Cloud
     #    build, e.g. 1.1(15), over the earlier local stopgap 1.1(14)).
-    builds = [b for b in c.get_all(f"/v1/apps/{APP_ID}/builds",
-              {"filter[preReleaseVersion.version]": VERSION})
-              if b["attributes"]["processingState"] == "VALID"]
+    # The app->builds relationship rejects filter[preReleaseVersion.version], and
+    # the app->preReleaseVersions relationship rejects filter[version]/[platform];
+    # so list the build trains unfiltered and match the 1.1/IOS one client-side.
+    prv = [p for p in c.get_all(f"/v1/apps/{APP_ID}/preReleaseVersions")
+           if p["attributes"].get("version") == VERSION
+           and p["attributes"].get("platform") == "IOS"]
+    builds = []
+    if prv:
+        builds = [b for b in c.get_all(f"/v1/preReleaseVersions/{prv[0]['id']}/builds")
+                  if b["attributes"]["processingState"] == "VALID"]
 
     def buildnum(b):
         try:
