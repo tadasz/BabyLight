@@ -52,8 +52,13 @@ cd AppStore
 1. Creates the next App Store version (`VERSION` constant — bump it per release).
 2. Pushes localized metadata for every locale (`push_metadata.py`): name + subtitle
    (app-info level) and description/keywords/promo/whatsNew (version level).
-3. Uploads the localized iPhone 6.5" screenshot sets (`upload_screenshots.py`),
-   skipping any locale that already has ≥ 6.
+3. Uploads the localized screenshot sets for all three device families
+   (`upload_screenshots.py`): iPhone 6.5" `APP_IPHONE_65` (6), iPad 12.9"
+   `APP_IPAD_PRO_3GEN_129` (5), Apple Watch Ultra `APP_WATCH_ULTRA` (3), reading
+   `screenshots/loc/<asc>/`, `…/ipad/`, `…/watch/`. Idempotent: skips a device set
+   that already has its full count. To refresh changed shots, re-run with
+   `--replace` (deletes + re-uploads the set first); narrow with
+   `--only <locales>` and/or `--device <DISPLAY_TYPE,…>`.
 4. Attaches the highest VALID build on the version's train.
 5. Sets the App Review contact + notes.
 6. Leaves the version in **"Prepare for Submission"** (add `--submit` to submit).
@@ -75,8 +80,26 @@ cd AppStore
 5. **No emoji in store metadata.** ASC rejects emoji in description/etc. Keep the
    source + translations emoji-free (em-dashes and `•` bullets are fine).
 
+## TestFlight (testing a build before submitting)
+
+Xcode Cloud's **AppStore** workflow uploads App-Store-eligible builds to ASC, but
+does **not** auto-add them to a TestFlight tester group — so a freshly built
+number shows as "Ready to Submit" yet testers still see the last build that *was*
+added. To put the latest build in front of internal testers, add it to the
+internal group **"Baby Light Testers"** (`bfcd3d94-…`):
+
+```bash
+# find the latest build id, then link it to the group
+.venv/bin/python asc/asc.py POST '/v1/betaGroups/bfcd3d94-4715-49d3-bce8-496c4ac11f03/relationships/builds' \
+  @<(echo '{"data":[{"type":"builds","id":"<BUILD_ID>"}]}')
+```
+
+(Internal testing needs no Beta App Review.)
+
 ## Release history
 
 - **1.0 (build 13)** — first release, **English only**. `READY_FOR_SALE` (live).
 - **1.1 (build 18)** — first localized release: 16 languages + a much larger
-  on-screen feed timer. Staged 2026-06-25; submit when ready.
+  on-screen feed timer. Staged 2026-06-25; submit when ready. Builds 18 & 19 are
+  interchangeable here (19 adds a per-language translation-QA polish pass:
+  "Digital Crown" wording in Watch captions + minor grammar fixes).
