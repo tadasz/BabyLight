@@ -31,13 +31,24 @@ struct ContentView: View {
             .accessibilityLabel("Light background color: \(viewModel.currentColor.name)")
 
           // Elapsed timer - same hue as the background, slightly lighter so
-          // it stays visible without changing the overall lighting.
-          Text(viewModel.formatTime(viewModel.elapsedSeconds))
-            .font(.system(size: 64, weight: .light, design: .rounded))
-            .monospacedDigit()
-            .foregroundColor(viewModel.currentColor.color.lightened(by: viewModel.timerLightness))
-            .accessibilityIdentifier("elapsedTimer")
-            .accessibilityLabel("Elapsed time")
+          // it stays visible without changing the overall lighting. The font
+          // scales with the screen (~30% of the smaller dimension) so it reads
+          // clearly from across a dark nursery; `minimumScaleFactor` keeps the
+          // longer H:MM:SS form on one line on narrow devices.
+          GeometryReader { geo in
+            Text(viewModel.formatTime(viewModel.elapsedSeconds))
+              .font(.system(size: min(geo.size.width, geo.size.height) * 0.30,
+                            weight: .light, design: .rounded))
+              .monospacedDigit()
+              .lineLimit(1)
+              .minimumScaleFactor(0.4)
+              .foregroundColor(viewModel.currentColor.color.lightened(by: viewModel.timerLightness))
+              .frame(width: geo.size.width, height: geo.size.height)
+              .accessibilityIdentifier("elapsedTimer")
+              .accessibilityLabel("Elapsed time")
+          }
+          .allowsHitTesting(false)
+          .ignoresSafeArea()
 
           // Controls overlay (when visible)
           if viewModel.controlsVisible {
