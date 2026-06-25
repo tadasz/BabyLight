@@ -55,5 +55,10 @@
     "ax_light_bg": "Light background color: %@",
     "ax_timer_brightness": "Elapsed timer brightness",
     "color_warm_white": "Warm White"
-  }
+  },
+  "watch_captions": [
+    "A night light on your wrist",
+    "Tap to change the color",
+    "Turn the Crown to dim"
+  ]
 }

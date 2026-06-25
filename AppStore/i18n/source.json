@@ -55,5 +55,10 @@
     "ax_elapsed_time": "Elapsed time",
     "ax_light_bg": "Light background color: %@",
     "ax_timer_brightness": "Elapsed timer brightness"
-  }
+  },
+  "watch_captions": [
+    "A night light on your wrist",
+    "Tap to change the color",
+    "Turn the Crown to dim"
+  ]
 }

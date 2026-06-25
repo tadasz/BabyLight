@@ -55,5 +55,10 @@
     "ax_light_bg": "Color de fondo de la luz: %@",
     "ax_timer_brightness": "Brillo del temporizador transcurrido",
     "color_warm_white": "Blanco cálido"
-  }
+  },
+  "watch_captions": [
+    "Una luz nocturna en tu muñeca",
+    "Toca para cambiar de color",
+    "Gira la corona para atenuar"
+  ]
 }

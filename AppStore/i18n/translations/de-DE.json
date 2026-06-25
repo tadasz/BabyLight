@@ -1,7 +1,7 @@
 {
   "store": {
     "name": "Baby Light: Rotes Nachtlicht",
-    "subtitle": "Sanftes Licht fürs Stillen",
+    "subtitle": "Sanftes Nachtlicht fürs Baby",
     "promotionalText": "Das einfachste rote Nachtlicht für Babys. Keine Werbung, keine Anmeldung, kein Lärm – nur ein warmes, dimmbares Licht fürs nächtliche Stillen. Gratis.",
     "keywords": "nachtlicht,neugeboren,kleinkind,baby,kinderzimmer,stillen,einschlafen,melatonin,lampe,dimmbar",
     "whatsNew": "• Jetzt in 15 Sprachen verfügbar\n• Größerer, besser lesbarer Still-Timer\n• Dasselbe sanfte, bildschirmfüllende rote Nachtlicht für Babys – und für müde Eltern um 2 Uhr nachts\n• Modi: Tiefrot, Bernstein, Kerze und Warmweiß\n• Abschalt-Timer, Wischen zum Dimmen und ein dezenter Still-Timer\n• Apple Watch App inklusive\n\nKeine Werbung. Keine Anmeldung. Keine Datenerfassung. Süße Träume.",
@@ -55,5 +55,10 @@
     "ax_light_bg": "Hintergrundfarbe des Lichts: %@",
     "ax_timer_brightness": "Helligkeit des Verlaufs-Timers",
     "color_warm_white": "Warmweiß"
-  }
+  },
+  "watch_captions": [
+    "Ein Nachtlicht am Handgelenk",
+    "Tippen, um die Farbe zu wechseln",
+    "An der Krone drehen zum Dimmen"
+  ]
 }

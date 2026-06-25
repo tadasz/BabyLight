@@ -54,6 +54,11 @@
     "ax_elapsed_time": "経過時間",
     "ax_light_bg": "灯りの背景色：%@",
     "ax_timer_brightness": "タイマーの明るさ",
-    "color_warm_white": "暖かい白"
-  }
+    "color_warm_white": "暖色ホワイト"
+  },
+  "watch_captions": [
+    "手首にナイトライト",
+    "タップで色を変更",
+    "Crownを回して調光"
+  ]
 }

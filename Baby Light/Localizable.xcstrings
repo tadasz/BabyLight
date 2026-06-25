@@ -518,7 +518,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "MINUTEUR ÉCOULÉ"
+            "value": "CHRONO"
           }
         },
         "es": {
@@ -560,7 +560,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "UPŁYNĘŁO"
+            "value": "LICZNIK CZASU"
           }
         },
         "ar": {
@@ -1070,7 +1070,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "위트"
+            "value": "밀색"
           }
         },
         "ru": {
@@ -1415,7 +1415,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Miękki pomarańcz"
+            "value": "Łagodny pomarańcz"
           }
         },
         "ar": {
@@ -1753,7 +1753,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Luminosité du minuteur écoulé"
+            "value": "Luminosité du chrono"
           }
         },
         "es": {

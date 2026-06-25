@@ -55,5 +55,10 @@
     "ax_light_bg": "燈光背景顏色：%@",
     "ax_timer_brightness": "計時亮度",
     "color_warm_white": "暖白"
-  }
+  },
+  "watch_captions": [
+    "手腕上的夜燈",
+    "輕點切換顏色",
+    "轉動錶冠調暗"
+  ]
 }

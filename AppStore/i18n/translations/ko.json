@@ -46,7 +46,7 @@
     "color_deep_red": "딥 레드",
     "color_amber": "앰버",
     "color_candle": "캔들",
-    "color_wheat": "위트",
+    "color_wheat": "밀색",
     "desc_best_sleep": "수면에 가장 좋음",
     "desc_warm_soothing": "따뜻하고 편안함",
     "desc_soft_orange": "부드러운 오렌지",
@@ -55,5 +55,10 @@
     "ax_light_bg": "불빛 배경색: %@",
     "ax_timer_brightness": "타이머 밝기",
     "color_warm_white": "따뜻한 화이트"
-  }
+  },
+  "watch_captions": [
+    "손목 위 수유등",
+    "탭하여 색상 변경",
+    "크라운을 돌려 밝기 조절"
+  ]
 }

@@ -14,7 +14,7 @@
     ],
     [
       "Światło, które nie walczy z melatoniną",
-      "Czerwień i bursztyn są po spokojnej stronie"
+      "Czerwień i bursztyn są po spokojnej stronie spektrum"
     ],
     [
       "Cztery kolory przyjazne snu",
@@ -39,7 +39,7 @@
     "auto_brightness": "AUTO JASNOŚĆ",
     "max_bright_open": "Maks. jasność po otwarciu",
     "dim_close": "Min. jasność po zamknięciu",
-    "elapsed_timer": "UPŁYNĘŁO",
+    "elapsed_timer": "LICZNIK CZASU",
     "brightness": "Jasność",
     "hint": "Stuknij dwa razy, by ukryć • Przesuń, by zmienić jasność",
     "hint_short": "Stuknij dwa razy, by ukryć • Przesuń, by zmienić",
@@ -49,11 +49,16 @@
     "color_wheat": "Pszenica",
     "desc_best_sleep": "Najlepsze do snu",
     "desc_warm_soothing": "Ciepłe i kojące",
-    "desc_soft_orange": "Miękki pomarańcz",
+    "desc_soft_orange": "Łagodny pomarańcz",
     "desc_more_light": "Gdy potrzebujesz więcej światła",
     "ax_elapsed_time": "Upłynął czas",
     "ax_light_bg": "Kolor tła światła: %@",
     "ax_timer_brightness": "Jasność licznika",
     "color_warm_white": "Ciepła biel"
-  }
+  },
+  "watch_captions": [
+    "Lampka nocna na nadgarstku",
+    "Dotknij, aby zmienić kolor",
+    "Obróć Crown, aby przyciemnić"
+  ]
 }

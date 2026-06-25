@@ -55,5 +55,10 @@
     "ax_light_bg": "Colore di sfondo della luce: %@",
     "ax_timer_brightness": "Luminosità del timer trascorso",
     "color_warm_white": "Bianco caldo"
-  }
+  },
+  "watch_captions": [
+    "Una luce notturna al polso",
+    "Tocca per cambiare colore",
+    "Ruota la corona per attenuare"
+  ]
 }
