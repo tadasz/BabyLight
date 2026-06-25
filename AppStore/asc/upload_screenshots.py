@@ -20,9 +20,19 @@ import lib  # noqa: E402
 from asc import ASC  # noqa: E402
 
 SHOTS = os.path.join(lib.REPO, "AppStore", "screenshots", "loc")
-DISPLAY_TYPE = "APP_IPHONE_65"
-ORDER = ["01_hero_red.png", "02_science.png", "03_colors.png",
-         "04_timer.png", "05_brightness.png", "06_closing.png"]
+
+# Each device set: ASC display type, the subdir under screenshots/loc/<asc>/, and
+# the ordered filenames. iPhone lives at the locale root; iPad/Watch in subdirs.
+DEVICES = [
+    {"type": "APP_IPHONE_65", "subdir": "",
+     "order": ["01_hero_red.png", "02_science.png", "03_colors.png",
+               "04_timer.png", "05_brightness.png", "06_closing.png"]},
+    {"type": "APP_IPAD_PRO_3GEN_129", "subdir": "ipad",
+     "order": ["01_hero_red.png", "02_colors.png", "03_timer.png",
+               "04_brightness.png", "05_closing.png"]},
+    {"type": "APP_WATCH_ULTRA", "subdir": "watch",
+     "order": ["01_red.png", "02_amber.png", "03_candle.png"]},
+]
 
 
 def upload_one(c, set_id, path):
@@ -63,27 +73,32 @@ def main():
             print(f"  !! {loc}: no screenshots dir"); continue
         vl = ver_locs[loc]
         sets = c.get_all(f"/v1/appStoreVersionLocalizations/{vl}/appScreenshotSets")
-        existing = [s for s in sets if s["attributes"]["screenshotDisplayType"] == DISPLAY_TYPE]
-        if existing and args.replace:
-            for s in existing:
-                c.delete(f"/v1/appScreenshotSets/{s['id']}")
-            existing = []
-        if existing:
-            sc = c.get_all(f"/v1/appScreenshotSets/{existing[0]['id']}/appScreenshots")
-            if len(sc) >= 6:
-                print(f"  -- {loc}: already has {len(sc)} screenshots, skipping"); continue
-            set_id = existing[0]["id"]
-        else:
-            r = c.post("/v1/appScreenshotSets",
-                       {"data": {"type": "appScreenshotSets",
-                                 "attributes": {"screenshotDisplayType": DISPLAY_TYPE},
-                                 "relationships": {"appStoreVersionLocalization":
-                                     {"data": {"type": "appStoreVersionLocalizations", "id": vl}}}}})
-            set_id = r["data"]["id"]
-        ids = [upload_one(c, set_id, os.path.join(locdir, fn)) for fn in ORDER]
-        c.patch(f"/v1/appScreenshotSets/{set_id}/relationships/appScreenshots",
-                {"data": [{"type": "appScreenshots", "id": i} for i in ids]})
-        print(f"  == {loc}: 6 uploaded + ordered")
+        for dev in DEVICES:
+            srcdir = os.path.join(locdir, dev["subdir"]) if dev["subdir"] else locdir
+            order = dev["order"]
+            if not all(os.path.isfile(os.path.join(srcdir, fn)) for fn in order):
+                print(f"  !! {loc}/{dev['type']}: missing images, skipping"); continue
+            existing = [s for s in sets if s["attributes"]["screenshotDisplayType"] == dev["type"]]
+            if existing and args.replace:
+                for s in existing:
+                    c.delete(f"/v1/appScreenshotSets/{s['id']}")
+                existing = []
+            if existing:
+                sc = c.get_all(f"/v1/appScreenshotSets/{existing[0]['id']}/appScreenshots")
+                if len(sc) >= len(order):
+                    print(f"  -- {loc}/{dev['type']}: already has {len(sc)}, skipping"); continue
+                set_id = existing[0]["id"]
+            else:
+                r = c.post("/v1/appScreenshotSets",
+                           {"data": {"type": "appScreenshotSets",
+                                     "attributes": {"screenshotDisplayType": dev["type"]},
+                                     "relationships": {"appStoreVersionLocalization":
+                                         {"data": {"type": "appStoreVersionLocalizations", "id": vl}}}}})
+                set_id = r["data"]["id"]
+            ids = [upload_one(c, set_id, os.path.join(srcdir, fn)) for fn in order]
+            c.patch(f"/v1/appScreenshotSets/{set_id}/relationships/appScreenshots",
+                    {"data": [{"type": "appScreenshots", "id": i} for i in ids]})
+            print(f"  == {loc}/{dev['type']}: {len(ids)} uploaded + ordered")
     print("\nDone.")
 
 
