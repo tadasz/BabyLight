@@ -249,11 +249,95 @@ def spectrum(img, spec, line):
     img.paste(grad,(bx0,by),gm)
     return img
 
+ROUND = "/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf"
+
+# ====================== iPad 12.9"/13" (2064 x 2752) =======================
+IPAD_W, IPAD_H = 2064, 2752
+IPAD_SW, IPAD_SH = 1320, 1760
+
+def ipad_mock(screen):
+    sw, sh = screen.size; bez, radius = 40, 88
+    dw, dh = sw+bez*2, sh+bez*2
+    dev = Image.new("RGBA",(dw,dh),(0,0,0,0)); dd = ImageDraw.Draw(dev)
+    rounded(dd,[0,0,dw,dh],radius+bez,fill=(20,20,24,255))
+    rounded(dd,[3,3,dw-3,dh-3],radius+bez-3,outline=(72,72,82,255),width=3)
+    m = Image.new("L",(sw,sh),0); ImageDraw.Draw(m).rounded_rectangle([0,0,sw,sh],radius=radius,fill=255)
+    dev.paste(screen.convert("RGB"),(bez,bez),m)
+    dd.ellipse([dw/2-7,bez/2-7,dw/2+7,bez/2+7],fill=(58,58,68,255))  # camera
+    return dev
+
+def ipad_fullscreen(color, timer):
+    sc = Image.new("RGB",(IPAD_SW,IPAD_SH),color); d = ImageDraw.Draw(sc)
+    ft = ImageFont.truetype(ROUND, 190); tw = d.textlength(timer, font=ft)
+    d.text((IPAD_SW/2-tw/2, IPAD_SH*0.45), timer, font=ft, fill=lightened(color,0.20))
+    return sc
+
+def ipad_controls(spec, ui, bg, highlight):
+    # Reuse the phone-proportioned control card and float it centered on the
+    # iPad's full-colour screen (same bg colour → seamless), matching how the
+    # app shows a max-width control card on iPad.
+    sc = Image.new("RGB",(IPAD_SW,IPAD_SH),bg)
+    card = screen_controls(spec, ui, bg, highlight)   # SW x SH RGB on same bg
+    sc.paste(card, ((IPAD_SW-SW)//2, (IPAD_SH-SH)//2))
+    return sc
+
+def ipad_header(img, spec, headline, sub):
+    d = ImageDraw.Draw(img); cjk = spec["cjk"]; rtl = spec["rtl"]
+    hsz = 130 if cjk else 140; ssz = 64
+    y = center_lines(d, IPAD_W/2, 210, headline, font(spec,"head",hsz), WHITE, IPAD_W-300, rtl, cjk, gap=12)
+    center_lines(d, IPAD_W/2, y+34, sub, font(spec,"sub",ssz), MUTE, IPAD_W-440, rtl, cjk, gap=16)
+
+def build_ipad(asc, spec, ui, caps, outdir):
+    global W, H
+    W, H = IPAD_W, IPAD_H
+    d = os.path.join(outdir, "ipad"); os.makedirs(d, exist_ok=True)
+    def shot(glow, gy, cap_i, dev):
+        img = base_bg(glow, (W/2, H*0.62), 1500)
+        ipad_header(img, spec, caps[cap_i][0], caps[cap_i][1])
+        return place(img, dev, W/2, H*0.62)
+    shot((150,20,20), 0.62, 0, ipad_mock(ipad_fullscreen(RED, "0:42"))).save(os.path.join(d,"01_hero_red.png"))
+    shot((120,30,20), 0.62, 2, ipad_mock(ipad_controls(spec, ui, RED, "color"))).save(os.path.join(d,"02_colors.png"))
+    shot((150,80,10), 0.62, 3, ipad_mock(ipad_controls(spec, ui, CANDLE, "timer"))).save(os.path.join(d,"03_timer.png"))
+    shot((120,60,10), 0.62, 4, ipad_mock(ipad_fullscreen(AMBER, "1:07"))).save(os.path.join(d,"04_brightness.png"))
+    img = base_bg((120,30,20), (W/2, H*0.55), 1500)
+    ipad_header(img, spec, caps[5][0], caps[5][1])
+    tagline_icon(img, spec, caps[5][1]).save(os.path.join(d,"05_closing.png"))
+
+# ====================== Apple Watch Ultra (422 x 514) ======================
+WATCH_W, WATCH_H = 422, 514
+
+def watch_creative(spec, color, timer, caption):
+    sc = Image.new("RGB",(WATCH_W,WATCH_H),color); d = ImageDraw.Draw(sc)
+    ft = ImageFont.truetype(ROUND, 92); tw = d.textlength(timer, font=ft)
+    d.text((WATCH_W/2-tw/2, WATCH_H*0.30), timer, font=ft, fill=lightened(color,0.22))
+    scrim = Image.new("RGBA",(WATCH_W,WATCH_H),(0,0,0,0)); sd = ImageDraw.Draw(scrim)
+    for i in range(170):
+        a = int(155 * (i/170))
+        sd.line([(0, WATCH_H-170+i),(WATCH_W, WATCH_H-170+i)], fill=(0,0,0,a))
+    sc = Image.alpha_composite(sc.convert("RGBA"), scrim).convert("RGB")
+    d = ImageDraw.Draw(sc)
+    fnt = font(spec, "title", 34)
+    lines = wrap(d, caption, fnt, WATCH_W-40, spec["cjk"])
+    y0 = WATCH_H - 24 - len(lines)*(34+6)
+    center_lines(d, WATCH_W/2, y0, caption, fnt, WHITE, WATCH_W-40, spec["rtl"], spec["cjk"], gap=6)
+    return sc
+
+def build_watch(asc, spec, wcaps, outdir):
+    d = os.path.join(outdir, "watch"); os.makedirs(d, exist_ok=True)
+    sets = [(RED,"0:42",wcaps[0],"01_red"), (AMBER,"1:07",wcaps[1],"02_amber"),
+            (CANDLE,"2:18",wcaps[2],"03_candle")]
+    for color, timer, cap, nm in sets:
+        watch_creative(spec, color, timer, cap).save(os.path.join(d, nm+".png"))
+
 def build_locale(asc):
+    global W, H
     spec = FONT_SETS[lib.script_for(asc)]
     data = lib.load_translation(asc); caps = data["captions"]; ui = data["ui"]
+    wcaps = data.get("watch_captions") or []
     outdir = os.path.join(OUTROOT, asc); os.makedirs(outdir, exist_ok=True)
 
+    # ---- iPhone 6.5" (1284 x 2778) ----
+    W, H = 1284, 2778
     def hero(color, timer, cap_i, glow):
         img = base_bg(glow, (W/2, H*0.66), 1050)
         header(img, spec, caps[cap_i][0], caps[cap_i][1])
@@ -275,7 +359,11 @@ def build_locale(asc):
     img = base_bg((120,30,20),(W/2,H*0.56),1000)
     header(img, spec, caps[5][0], caps[5][1]); img = tagline_icon(img, spec, caps[5][1])
     page_dots(img, 5).save(os.path.join(outdir,"06_closing.png"))
-    print("built", asc, "->", os.path.relpath(outdir, lib.REPO))
+
+    # ---- iPad + Apple Watch ----
+    build_ipad(asc, spec, ui, caps, outdir)
+    build_watch(asc, spec, wcaps, outdir)
+    print("built", asc, "-> iphone(6) + ipad(5) + watch(3)")
 
 if __name__ == "__main__":
     for a in (sys.argv[1:] or lib.target_locales()):
