@@ -39,7 +39,7 @@
     "auto_brightness": "AUTO-HELLIGKEIT",
     "max_bright_open": "Volle Helligkeit beim Öffnen",
     "dim_close": "Beim Schließen aufs Minimum dimmen",
-    "elapsed_timer": "VERLAUFS-TIMER",
+    "elapsed_timer": "VERSTRICHENE ZEIT",
     "brightness": "Helligkeit",
     "hint": "Doppeltippen zum Ausblenden • Wischen für Helligkeit",
     "hint_short": "Doppeltippen zum Ausblenden • Wischen zum Anpassen",
@@ -53,7 +53,7 @@
     "desc_more_light": "Wenn du mehr Licht brauchst",
     "ax_elapsed_time": "Verstrichene Zeit",
     "ax_light_bg": "Hintergrundfarbe des Lichts: %@",
-    "ax_timer_brightness": "Helligkeit des Verlaufs-Timers",
+    "ax_timer_brightness": "Helligkeit der verstrichenen Zeit",
     "color_warm_white": "Warmweiß"
   },
   "watch_captions": [

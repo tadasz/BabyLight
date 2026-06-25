@@ -56,10 +56,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version-id", required=True)
     ap.add_argument("--only", default="")
-    ap.add_argument("--replace", action="store_true", help="delete existing iPhone6.5 set first")
+    ap.add_argument("--device", default="", help="comma list of display types to limit to (default: all)")
+    ap.add_argument("--replace", action="store_true", help="delete existing set first")
     args = ap.parse_args()
     c = ASC()
     only = set(x for x in args.only.split(",") if x)
+    devs = set(x for x in args.device.split(",") if x)
     locales = [l for l in lib.target_locales() if (not only or l in only)]
 
     ver_locs = {x["attributes"]["locale"]: x["id"] for x in
@@ -74,6 +76,8 @@ def main():
         vl = ver_locs[loc]
         sets = c.get_all(f"/v1/appStoreVersionLocalizations/{vl}/appScreenshotSets")
         for dev in DEVICES:
+            if devs and dev["type"] not in devs:
+                continue
             srcdir = os.path.join(locdir, dev["subdir"]) if dev["subdir"] else locdir
             order = dev["order"]
             if not all(os.path.isfile(os.path.join(srcdir, fn)) for fn in order):

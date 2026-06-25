@@ -512,7 +512,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "VERLAUFS-TIMER"
+            "value": "VERSTRICHENE ZEIT"
           }
         },
         "fr": {
@@ -1605,7 +1605,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Upłynął czas"
+            "value": "Miniony czas"
           }
         },
         "ar": {
@@ -1747,7 +1747,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Helligkeit des Verlaufs-Timers"
+            "value": "Helligkeit der verstrichenen Zeit"
           }
         },
         "fr": {
