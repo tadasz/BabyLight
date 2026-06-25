@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 APP_ID = "6758722102"
 VERSION = "1.1"
 REVIEW_CONTACT = {"contactFirstName": "Tadas", "contactLastName": "Ziemys",
-                  "contactEmail": "team@dogo.app", "contactPhone": "+37065668005"}
+                  "contactEmail": "tadas@dogo.app", "contactPhone": "+37065668005"}
 REVIEW_NOTES = ("Baby Light is a full-screen colored night-light utility for iPhone, iPad and "
                 "Apple Watch. DOUBLE-TAP the screen to reveal controls (color, auto-off timer, "
                 "auto-brightness). Swipe up/down to change brightness. Apple Watch: tap to cycle "
