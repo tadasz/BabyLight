@@ -116,13 +116,6 @@ struct ContentView: View {
     .onAppear {
       // Keep screen awake
       UIApplication.shared.isIdleTimerDisabled = true
-      // Seed the tutorial tooltip's state with the current controls visibility.
-      ControlsTip.controlsHidden = !viewModel.controlsVisible
-    }
-    .onChange(of: viewModel.controlsVisible) { _, isVisible in
-      // Drive the TipKit rule: the gesture tooltip is only eligible while the
-      // controls are hidden (the bare light screen with no visible chrome).
-      ControlsTip.controlsHidden = !isVisible
     }
     .onChange(of: viewModel.shouldRequestReview) { _, shouldRequest in
       // The view model only raises this while the controls are open, so the
