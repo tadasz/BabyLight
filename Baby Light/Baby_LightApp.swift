@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import TipKit
 import UIKit  // Added for UIViewControllerRepresentable and UIHostingController
 
 @main
 struct Baby_LightApp: App {
+  init() {
+    // Initialize TipKit so the tutorial tooltip can track its display state.
+    try? Tips.configure([
+      .displayFrequency(.immediate),
+      .datastoreLocation(.applicationDefault),
+    ])
+  }
+
   var body: some Scene {
     WindowGroup {
       StatusBarHiddenView {

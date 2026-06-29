@@ -1805,6 +1805,46 @@
           }
         }
       }
+    },
+    "Tap to show controls": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "点按以显示控制项" } },
+        "zh-Hant": { "stringUnit": { "state": "translated", "value": "點按以顯示控制項" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "タップして操作パネルを表示" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "탭하여 컨트롤 표시" } },
+        "ru": { "stringUnit": { "state": "translated", "value": "Коснитесь, чтобы показать управление" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Tippen, um die Steuerung anzuzeigen" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Touchez pour afficher les commandes" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Toca para mostrar los controles" } },
+        "es-MX": { "stringUnit": { "state": "translated", "value": "Toca para mostrar los controles" } },
+        "it": { "stringUnit": { "state": "translated", "value": "Tocca per mostrare i controlli" } },
+        "pt-BR": { "stringUnit": { "state": "translated", "value": "Toque para mostrar os controles" } },
+        "nl": { "stringUnit": { "state": "translated", "value": "Tik om de bediening te tonen" } },
+        "tr": { "stringUnit": { "state": "translated", "value": "Kontrolleri göstermek için dokunun" } },
+        "pl": { "stringUnit": { "state": "translated", "value": "Dotknij, aby pokazać elementy sterujące" } },
+        "ar": { "stringUnit": { "state": "translated", "value": "انقر لإظهار عناصر التحكم" } }
+      }
+    },
+    "Double-tap anywhere to show or hide the controls. Swipe up or down to adjust the brightness.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "双击屏幕任意处可显示或隐藏控制项。上下滑动可调节亮度。" } },
+        "zh-Hant": { "stringUnit": { "state": "translated", "value": "雙擊螢幕任一處可顯示或隱藏控制項。上下滑動可調節亮度。" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "画面のどこでもダブルタップで操作パネルを表示／非表示。上下にスワイプで明るさを調整できます。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "화면 아무 곳이나 두 번 탭하면 컨트롤이 표시되거나 숨겨집니다. 위아래로 스와이프하여 밝기를 조절하세요." } },
+        "ru": { "stringUnit": { "state": "translated", "value": "Дважды коснитесь в любом месте, чтобы показать или скрыть управление. Свайп вверх или вниз меняет яркость." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Doppeltippe irgendwo, um die Steuerung ein- oder auszublenden. Wische nach oben oder unten, um die Helligkeit anzupassen." } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Touchez deux fois n'importe où pour afficher ou masquer les commandes. Glissez vers le haut ou le bas pour régler la luminosité." } },
+        "es": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para mostrar u ocultar los controles. Desliza hacia arriba o abajo para ajustar el brillo." } },
+        "es-MX": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para mostrar u ocultar los controles. Desliza hacia arriba o abajo para ajustar el brillo." } },
+        "it": { "stringUnit": { "state": "translated", "value": "Tocca due volte un punto qualsiasi per mostrare o nascondere i controlli. Scorri verso l'alto o il basso per regolare la luminosità." } },
+        "pt-BR": { "stringUnit": { "state": "translated", "value": "Toque duas vezes em qualquer lugar para mostrar ou ocultar os controles. Deslize para cima ou para baixo para ajustar o brilho." } },
+        "nl": { "stringUnit": { "state": "translated", "value": "Dubbeltik ergens om de bediening te tonen of te verbergen. Veeg omhoog of omlaag om de helderheid aan te passen." } },
+        "tr": { "stringUnit": { "state": "translated", "value": "Kontrolleri göstermek veya gizlemek için herhangi bir yere çift dokunun. Parlaklığı ayarlamak için yukarı veya aşağı kaydırın." } },
+        "pl": { "stringUnit": { "state": "translated", "value": "Stuknij dwukrotnie w dowolnym miejscu, aby pokazać lub ukryć elementy sterujące. Przesuń w górę lub w dół, aby dostosować jasność." } },
+        "ar": { "stringUnit": { "state": "translated", "value": "انقر نقرتين في أي مكان لإظهار عناصر التحكم أو إخفائها. اسحب لأعلى أو لأسفل لضبط السطوع." } }
+      }
     }
   },
   "version": "1.0"

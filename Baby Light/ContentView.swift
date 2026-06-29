@@ -4,11 +4,17 @@
 //
 
 import SwiftUI
+import StoreKit
+import TipKit
 
 struct ContentView: View {
   @State private var viewModel = LightViewModel()
   @State private var dragStartY: CGFloat = 0
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.requestReview) private var requestReview
+
+  /// The one-time tutorial tooltip teaching the double-tap / swipe gestures.
+  private let controlsTip = ControlsTip()
 
   var body: some View {
     Group {
@@ -46,6 +52,9 @@ struct ContentView: View {
               .frame(width: geo.size.width, height: geo.size.height)
               .accessibilityIdentifier("elapsedTimer")
               .accessibilityLabel("Elapsed time")
+              // Anchor the tutorial tooltip to the screen center. It surfaces
+              // only once the controls are hidden (see ControlsTip.rules).
+              .popoverTip(controlsTip)
           }
           .allowsHitTesting(false)
           .ignoresSafeArea()
@@ -107,6 +116,21 @@ struct ContentView: View {
     .onAppear {
       // Keep screen awake
       UIApplication.shared.isIdleTimerDisabled = true
+      // Seed the tutorial tooltip's state with the current controls visibility.
+      ControlsTip.controlsHidden = !viewModel.controlsVisible
+    }
+    .onChange(of: viewModel.controlsVisible) { _, isVisible in
+      // Drive the TipKit rule: the gesture tooltip is only eligible while the
+      // controls are hidden (the bare light screen with no visible chrome).
+      ControlsTip.controlsHidden = !isVisible
+    }
+    .onChange(of: viewModel.shouldRequestReview) { _, shouldRequest in
+      // The view model only raises this while the controls are open, so the
+      // native rating prompt never appears over the dim light at bedtime.
+      if shouldRequest {
+        requestReview()
+        viewModel.didRequestReview()
+      }
     }
     .onDisappear {
       // Allow screen to sleep when app closes
