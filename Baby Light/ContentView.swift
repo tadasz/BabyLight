@@ -4,11 +4,19 @@
 //
 
 import SwiftUI
+import StoreKit
+import TipKit
 
 struct ContentView: View {
   @State private var viewModel = LightViewModel()
   @State private var dragStartY: CGFloat = 0
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.requestReview) private var requestReview
+
+  /// First-run tutorial tooltips. Step 1 (hide) is anchored to the controls
+  /// panel; step 2 (show + swipe) appears on the bare light once it's hidden.
+  private let hideControlsTip = HideControlsTip()
+  private let showControlsTip = ShowControlsTip()
 
   var body: some View {
     Group {
@@ -46,6 +54,9 @@ struct ContentView: View {
               .frame(width: geo.size.width, height: geo.size.height)
               .accessibilityIdentifier("elapsedTimer")
               .accessibilityLabel("Elapsed time")
+              // Step 2 of the tutorial, anchored at screen center. It surfaces
+              // only once the controls are hidden (see ShowControlsTip.rules).
+              .popoverTip(showControlsTip)
           }
           .allowsHitTesting(false)
           .ignoresSafeArea()
@@ -53,6 +64,10 @@ struct ContentView: View {
           // Controls overlay (when visible)
           if viewModel.controlsVisible {
             ControlsOverlay(viewModel: viewModel)
+              // Step 1 of the tutorial, anchored to the controls panel. It's
+              // only in the hierarchy while the controls are visible, so it
+              // naturally shows on first launch and never on the bare screen.
+              .popoverTip(hideControlsTip)
               .transition(.opacity.combined(with: .scale(scale: 0.95)))
               // Expose the overlay as a single accessibility container so
               // otherElements["controlsOverlay"] resolves to it (otherwise the
@@ -107,6 +122,21 @@ struct ContentView: View {
     .onAppear {
       // Keep screen awake
       UIApplication.shared.isIdleTimerDisabled = true
+      // Seed the step-2 tooltip's rule with the current controls visibility.
+      ShowControlsTip.controlsVisible = viewModel.controlsVisible
+    }
+    .onChange(of: viewModel.controlsVisible) { _, isVisible in
+      // Drive the tutorial: step 2 (show + swipe) is only eligible once the
+      // controls are hidden, following step 1 (hide) shown over the panel.
+      ShowControlsTip.controlsVisible = isVisible
+    }
+    .onChange(of: viewModel.shouldRequestReview) { _, shouldRequest in
+      // The view model only raises this while the controls are open, so the
+      // native rating prompt never appears over the dim light at bedtime.
+      if shouldRequest {
+        requestReview()
+        viewModel.didRequestReview()
+      }
     }
     .onDisappear {
       // Allow screen to sleep when app closes

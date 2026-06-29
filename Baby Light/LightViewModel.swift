@@ -61,6 +61,25 @@ class LightViewModel {
     timeRemaining == 0
   }
 
+  // MARK: - App Usage & Rating
+
+  /// Number of distinct app launches ("uses"), incremented once per cold
+  /// start in `init()` and persisted. Used to gate the App Store rating
+  /// prompt so we only ask returning users (second use or later).
+  private(set) var useCount: Int = 0
+
+  /// Whether we've already shown the native rating prompt. We only ever ask
+  /// once, so this stays `true` forever after the first request.
+  private var hasRequestedReview: Bool = false
+
+  /// Signals ContentView to present the native StoreKit rating prompt. It is
+  /// only raised while the controls overlay is open — a moment when the user
+  /// is actively looking at the phone with the screen bright — so the prompt
+  /// never appears over the dark light and risks waking a sleeping baby.
+  /// ContentView observes this, fires the request, and calls
+  /// `didRequestReview()` to clear it.
+  var shouldRequestReview: Bool = false
+
   private var timer: Timer?
   private var elapsedTimer: Timer?
 
@@ -90,6 +109,12 @@ class LightViewModel {
     if UserDefaults.standard.object(forKey: "timerLightness") != nil {
       timerLightness = CGFloat(UserDefaults.standard.double(forKey: "timerLightness"))
     }
+
+    // Count this launch as a "use" and remember whether we've already asked
+    // for a rating, so the prompt is gated to returning users and shown once.
+    useCount = UserDefaults.standard.integer(forKey: "appUseCount") + 1
+    UserDefaults.standard.set(useCount, forKey: "appUseCount")
+    hasRequestedReview = UserDefaults.standard.bool(forKey: "hasRequestedReview")
 
     startElapsedTimer()
   }
@@ -192,11 +217,43 @@ class LightViewModel {
     selectedTimer = TimerOption.options[0]  // Reset to infinite
     timeRemaining = nil
     _controlsVisible = true
+    maybeRequestReview()
   }
 
   /// Toggle controls visibility
   func toggleControls() {
-    controlsVisible = !controlsVisible
+    controlsVisible.toggle()
+    if controlsVisible {
+      maybeRequestReview()
+    }
+  }
+
+  // MARK: - Rating
+
+  /// Pure gating rule for the rating prompt: ask only from the second use
+  /// onward, and only if we've never asked before. Kept static and
+  /// side-effect-free so it can be unit-tested without touching UserDefaults.
+  static func shouldPromptForReview(useCount: Int, hasRequestedReview: Bool) -> Bool {
+    !hasRequestedReview && useCount >= 2
+  }
+
+  /// Flag the native rating prompt for display if the gating rule is met.
+  /// Called only when the controls overlay becomes visible — an intentional,
+  /// screen-on interaction — so the prompt won't surface over the dim light
+  /// while a baby is being settled.
+  private func maybeRequestReview() {
+    guard Self.shouldPromptForReview(useCount: useCount, hasRequestedReview: hasRequestedReview) else {
+      return
+    }
+    shouldRequestReview = true
+  }
+
+  /// Record that the rating prompt has been requested, so it's never shown
+  /// again. Called by the view after it presents the StoreKit prompt.
+  func didRequestReview() {
+    shouldRequestReview = false
+    hasRequestedReview = true
+    UserDefaults.standard.set(true, forKey: "hasRequestedReview")
   }
 
   // MARK: - Brightness Control

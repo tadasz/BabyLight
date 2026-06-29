@@ -139,10 +139,38 @@ struct Baby_LightTests {
     }
 }
 
+// MARK: - Rating Prompt Tests
+
+struct ReviewPromptTests {
+
+    @Test func doesNotPromptOnFirstUse() async throws {
+        #expect(LightViewModel.shouldPromptForReview(useCount: 1, hasRequestedReview: false) == false)
+    }
+
+    @Test func promptsOnSecondUse() async throws {
+        #expect(LightViewModel.shouldPromptForReview(useCount: 2, hasRequestedReview: false) == true)
+    }
+
+    @Test func promptsOnLaterUses() async throws {
+        #expect(LightViewModel.shouldPromptForReview(useCount: 7, hasRequestedReview: false) == true)
+    }
+
+    @Test func doesNotPromptOnceAlreadyRequested() async throws {
+        #expect(LightViewModel.shouldPromptForReview(useCount: 5, hasRequestedReview: true) == false)
+    }
+
+    @Test func didRequestReviewClearsPendingFlag() async throws {
+        let viewModel = LightViewModel()
+        viewModel.shouldRequestReview = true
+        viewModel.didRequestReview()
+        #expect(viewModel.shouldRequestReview == false)
+    }
+}
+
 // MARK: - LightColor Tests
 
 struct LightColorTests {
-    
+
     @Test func presetsContainFourColors() async throws {
         #expect(LightColor.presets.count == 4)
     }
