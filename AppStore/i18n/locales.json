@@ -96,6 +96,72 @@
       "xcode": "ar",
       "script": "ar",
       "name": "Arabic"
+    },
+    {
+      "asc": "hi",
+      "xcode": "hi",
+      "script": "devanagari",
+      "name": "Hindi"
+    },
+    {
+      "asc": "id",
+      "xcode": "id",
+      "script": "latin",
+      "name": "Indonesian"
+    },
+    {
+      "asc": "th",
+      "xcode": "th",
+      "script": "thai",
+      "name": "Thai"
+    },
+    {
+      "asc": "vi",
+      "xcode": "vi",
+      "script": "latin",
+      "name": "Vietnamese"
+    },
+    {
+      "asc": "sv",
+      "xcode": "sv",
+      "script": "latin",
+      "name": "Swedish"
+    },
+    {
+      "asc": "da",
+      "xcode": "da",
+      "script": "latin",
+      "name": "Danish"
+    },
+    {
+      "asc": "no",
+      "xcode": "nb",
+      "script": "latin",
+      "name": "Norwegian"
+    },
+    {
+      "asc": "fi",
+      "xcode": "fi",
+      "script": "latin",
+      "name": "Finnish"
+    },
+    {
+      "asc": "el",
+      "xcode": "el",
+      "script": "greek",
+      "name": "Greek"
+    },
+    {
+      "asc": "uk",
+      "xcode": "uk",
+      "script": "cyrillic",
+      "name": "Ukrainian"
+    },
+    {
+      "asc": "lt",
+      "xcode": "lt",
+      "script": "latin",
+      "name": "Lithuanian"
     }
   ]
 }

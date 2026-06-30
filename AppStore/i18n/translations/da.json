@@ -1,0 +1,64 @@
+{
+  "store": {
+    "name": "Baby Light: Rødt natlys",
+    "subtitle": "Blødt natlys til natamning",
+    "promotionalText": "Det enkleste røde natlys til babyer. Ingen reklamer, ingen tilmelding, ingen lyde — bare et varmt, dæmpbart skær til natamning, der ikke vækker jer begge. Gratis.",
+    "keywords": "natlampe,nyfødt,spædbarn,barnekammer,amning,sengetid,melatonin,lampe,dæmp,rav,lur,vugge,søvn,mørke",
+    "whatsNew": "• Nu tilgængelig på 26 sprog\n• Nyt: et hurtigt tip ved første start viser dig, hvordan du skjuler knapperne og stryger for at dæmpe\n• Mere flydende, gennemarbejdede knapper og amningstimer\n• Det samme blide, fuldskærms røde natlys til babyer — og til trætte forældre klokken 2 om natten\n• Dyb rød, rav, levende lys og varm hvid\n• Sluk-selv-timer, stryg for at dæmpe og en blid amningstimer\n• Apple Watch-app inkluderet\n\nIngen reklamer. Ingen tilmelding. Ingen data indsamles. Sov godt.",
+    "description": "Forvandl din telefon eller tablet til et varmt rødt natlys lavet til babyer — og til forældrene, der er vågne klokken 2 om natten sammen med dem.\n\nKlart hvidt og blåt lys fortæller hjernen \"det er dag.\" Baby Light fylder i stedet din skærm med dybt rødt og ravfarvet lys, så du kan se under natamning, bleskift og hurtige tjek uden det skarpe skær, der river dig — og din baby — lysvågen.\n\nIngen reklamer. Ingen tilmelding. Ingen lyde, du ikke har bedt om. Åbn den, og rummet gløder.\n\n— VIDENSKABEN, KORT FORTALT —\nLys er det stærkeste signal, din krop bruger til at skelne dag fra nat. Særlige receptorer i øjet er mest følsomme over for blåt lys (omkring 480 nm) — den slags i hvide telefonskærme og loftslamper. Om aftenen kan det blå lys hæmme melatonin, hormonet, der hjælper os med at føle os søvnige.\n\nRødt og ravfarvet lys ligger i den fjerne ende af spektret (cirka 600-700 nm). Forskning hos voksne viser, at disse længere bølgelængder har langt mindre effekt på de receptorer og på melatonin end blåt eller hvidt lys har. Det er derfor, ubåde, cockpits, observatorier og mange hospitalsafdelinger skifter til rødt lys om natten — og derfor et rødt skær er et blidere valg til en natamning end at tænde lampen.\n\nBaby Light kan ikke love, at din baby sover natten igennem (det kan ingen app!). Det, den gør, er at give dig akkurat nok lys til at gøre det, du skal — uden at oversvømme rummet med den mest opkvikkende slags lys på det værst tænkelige tidspunkt.\n\n— HVAD DU FÅR —\nFire søvnvenlige lystilstande\n   Dyb rød (bedst om natten), varm rav, blødt levende lys og en blid varm hvid til, når du faktisk har brug for at se.\n\nÆgte fuldskærmsskær\n   Kant til kant, statuslinjen skjult, skærmen forbliver tændt. Kun lys.\n\nSluk-selv-timer\n   Indstil den til 15 min, 30 min, 1 t, 2 t — eller lad den være tændt hele natten. Skærmen falmer til sort af sig selv, så den ikke lyser barnekammeret op, når alle sover.\n\nStryg for at dæmpe\n   Ingen små skydeknapper at fumle efter i mørket. Stryg op for at lysne, ned for at dæmpe, helt ned til næsten sort.\n\nSmart lysstyrke\n   Lysner til fuld styrke, når du åbner den, så du kan finde vej, og dæmper din skærm til minimum, når du lukker den — så du ikke bliver blændet, når du lægger telefonen fra dig.\n\nBlid amningstimer\n   En blød, næsten usynlig tæller viser, hvor længe du har været oppe, i samme rolige nuance som lyset. Justér, hvor synlig den er, eller skjul den helt.\n\nApple Watch-app inkluderet\n   Det samme røde skær på dit håndled. Tryk for at skifte farve, drej på Digital Crown for at dæmpe, og kig hurtigt på amningstimeren — alt sammen uden at række efter din telefon.\n\nDesignet til mørket\n   Roligt, minimalt, til én hånd. Intet at læse, intet at trykke på to gange.\n\n— PERFEKT TIL —\n• Natamning og klargøring af flaske\n• Bleskift uden loftslyset\n• At tjekke en sovende baby\n• At dysse en nyfødt i søvn igen\n• Rejser og hotelværelser uden natlys\n• Småbørn, der er bange for mørket\n• Enhver, der ønsker et blændfrit lys ved sengen\n\n— PRIVAT AF DESIGN —\nIngen konto. Ingen reklamer. Ingen sporing. Ingen data forlader din enhed — dine indstillinger gemmes kun på din telefon. Virker helt offline.\n\nGratis. Hent Baby Light, og gør den næste nat klokken 2 lidt lettere.\n\nTip: dobbelttryk på skærmen for at vise eller skjule knapperne."
+  },
+  "captions": [
+    [
+      "Et rødt natlys lavet til babyer",
+      "Se i mørket uden at vække nogen"
+    ],
+    [
+      "Lys, der ikke bekæmper melatonin",
+      "Rød og rav ligger i spektrets rolige ende"
+    ],
+    [
+      "Fire søvnvenlige farver",
+      "Dyb rød, rav, levende lys og varm hvid"
+    ],
+    [
+      "Indstil den, og lad den falme",
+      "Sluk selv efter 15 min, 30 min, 1 t eller 2 t"
+    ],
+    [
+      "Stryg for at dæmpe. Lukker til sort.",
+      "Lys, når du åbner, mørk, når du ikke gør"
+    ],
+    [
+      "Ingen reklamer. Ingen tilmelding. Ingen lyd.",
+      "Bare et varmt skær til natteskiftet — gratis"
+    ]
+  ],
+  "ui": {
+    "light_color": "LYSFARVE",
+    "auto_off_timer": "SLUK-SELV-TIMER",
+    "auto_brightness": "AUTO-LYSSTYRKE",
+    "max_bright_open": "Maks. lysstyrke ved åbning",
+    "dim_close": "Dæmp til minimum ved lukning",
+    "elapsed_timer": "FORLØBET TID",
+    "brightness": "Lysstyrke",
+    "hint": "Dobbelttryk for at skjule • Stryg for at justere lysstyrke",
+    "hint_short": "Dobbelttryk for at skjule • Stryg for at justere",
+    "color_deep_red": "Dyb rød",
+    "color_amber": "Rav",
+    "color_candle": "Levende lys",
+    "color_wheat": "Hvede",
+    "color_warm_white": "Varm hvid",
+    "desc_best_sleep": "Bedst til søvn",
+    "desc_warm_soothing": "Varm og beroligende",
+    "desc_soft_orange": "Blød orange",
+    "desc_more_light": "Hvis du har brug for mere lys",
+    "ax_elapsed_time": "Forløbet tid",
+    "ax_light_bg": "Lysets baggrundsfarve: %@",
+    "ax_timer_brightness": "Lysstyrke for forløbet tid"
+  },
+  "watch_captions": [
+    "Et natlys på dit håndled",
+    "Tryk for at skifte farve",
+    "Drej på kronen for at dæmpe"
+  ]
+}

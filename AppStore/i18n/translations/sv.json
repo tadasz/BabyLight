@@ -1,0 +1,64 @@
+{
+  "store": {
+    "name": "Baby Light: röd nattlampa",
+    "subtitle": "Mjukt sken för nattamning",
+    "promotionalText": "Den enklaste röda nattlampan för bebisar. Inga annonser, ingen registrering, inget ljud — bara ett varmt, dimbart sken för nattamning som inte väcker er. Gratis.",
+    "keywords": "nattlampa,spädbarn,bebis,barnkammare,amning,läggdags,melatonin,lampa,dimma,bärnsten,tupplur,vagga",
+    "whatsNew": "• Nu tillgänglig på 26 språk\n• Nytt: ett snabbt tips vid första starten visar gesterna för att dölja kontrollerna och svepa för att dimma\n• Mjukare, mer polerade kontroller och amningstimer\n• Samma milda röda nattlampa i helskärm för bebisar — och för trötta föräldrar klockan två på natten\n• Lägen för djupröd, bärnsten, levande ljus och varmvitt\n• Avstängningstimer, svep för att dimma och en mjuk amningstimer\n• Apple Watch-app ingår\n\nInga annonser. Ingen registrering. Ingen data samlas in. Sov gott.",
+    "description": "Förvandla din telefon eller surfplatta till en varm röd nattlampa gjord för bebisar — och för föräldrarna som är vakna klockan två på natten med dem.\n\nStarkt vitt och blått ljus säger till hjärnan att \"det är dag\". Baby Light fyller i stället skärmen med djupt rött och bärnstensfärgat ljus, så att du kan se under nattamning, blöjbyten och snabba koll utan det skarpa skenet som väcker både dig — och din bebis — helt klarvaken.\n\nInga annonser. Ingen registrering. Inga ljud du inte bett om. Öppna den, och rummet får ett mjukt sken.\n\n— VETENSKAPEN, ENKELT FÖRKLARAD —\nLjus är den starkaste signalen kroppen använder för att skilja dag från natt. Särskilda receptorer i ögat är mest känsliga för blått ljus (kring 480 nm) — den sortens ljus som finns i vita telefonskärmar och taklampor. På kvällen kan det blå ljuset dämpa melatonin, hormonet som hjälper oss att bli sömniga.\n\nRött och bärnstensfärgat ljus ligger i den bortre änden av spektrumet (ungefär 600–700 nm). Forskning på vuxna visar att dessa längre våglängder har betydligt mindre effekt på de receptorerna och på melatonin än vad blått eller vitt ljus har. Det är därför ubåtar, flygplanscockpitar, observatorier och många sjukhusavdelningar går över till rött ljus på natten — och varför ett rött sken är ett mildare val för en nattamning än att tända lampan.\n\nBaby Light kan inte lova att din bebis kommer sova hela natten (ingen app kan det!). Det den gör är att ge dig precis tillräckligt med ljus för att göra det du behöver göra — utan att fylla rummet med den mest väckande sortens ljus vid sämsta tänkbara tidpunkt.\n\n— DET HÄR FÅR DU —\nFyra sömnvänliga ljuslägen\n   Djupröd (bäst för natten), varm bärnsten, mjukt levande ljus och ett milt varmvitt för när du verkligen behöver se.\n\nÄkta helskärmssken\n   Kant till kant, statusfältet dolt, skärmen hålls tänd. Bara ljus.\n\nAvstängningstimer\n   Ställ in den på 15 min, 30 min, 1 tim, 2 tim — eller låt den lysa hela natten. Skärmen tonar ner till svart av sig själv så att den inte lyser upp barnkammaren när alla har somnat.\n\nSvep för att dimma\n   Inga små reglage att fumla efter i mörkret. Svep uppåt för att göra ljusare, nedåt för att dimma, ända ner till nästan svart.\n\nSmart ljusstyrka\n   Lyser upp helt när du öppnar den så att du hittar, och dimmar skärmen till minimum när du stänger den — så att du inte bländas när du lägger ifrån dig telefonen.\n\nMild amningstimer\n   En mjuk, knappt synlig räknare visar hur länge du varit uppe, i samma lugna nyans som ljuset. Justera hur synlig den är, eller dölj den helt.\n\nApple Watch-app ingår\n   Samma röda sken på din handled. Tryck för att byta färg, vrid på Digital Crown för att dimma, och kika på amningstimern — allt utan att sträcka dig efter telefonen.\n\nGjord för mörkret\n   Lugn, minimal, för en hand. Inget att läsa, inget att trycka två gånger.\n\n— PERFEKT FÖR —\n• Nattamning och flaskberedning\n• Blöjbyten utan taklampan\n• Att titta till en sovande bebis\n• Att vagga ett spädbarn till sömns igen\n• Resor och hotellrum utan nattlampa\n• Småbarn som är rädda för mörkret\n• Alla som vill ha ett bländfritt ljus vid sängen\n\n— PRIVAT FRÅN GRUNDEN —\nInget konto. Inga annonser. Ingen spårning. Ingen data lämnar din enhet — dina inställningar sparas bara på din telefon. Fungerar helt offline.\n\nGratis. Ladda ner Baby Light och gör nästa nattpass lite enklare.\n\nTips: dubbeltryck på skärmen för att visa eller dölja kontrollerna."
+  },
+  "captions": [
+    [
+      "En röd nattlampa gjord för bebisar",
+      "Se i mörkret utan att väcka någon"
+    ],
+    [
+      "Ljus som inte motverkar melatonin",
+      "Rött och bärnsten ligger i den lugna änden av spektrumet"
+    ],
+    [
+      "Fyra sömnvänliga färger",
+      "Djupröd, bärnsten, levande ljus och varmvitt"
+    ],
+    [
+      "Ställ in och låt det tona ut",
+      "Stängs av efter 15 min, 30 min, 1 tim eller 2 tim"
+    ],
+    [
+      "Svep för att dimma. Stängs till svart.",
+      "Ljust när du öppnar, mörkt när du inte gör det"
+    ],
+    [
+      "Inga annonser. Ingen registrering. Inget ljud.",
+      "Bara ett varmt sken för nattpasset — gratis"
+    ]
+  ],
+  "ui": {
+    "light_color": "LJUSFÄRG",
+    "auto_off_timer": "AVSTÄNGNINGSTIMER",
+    "auto_brightness": "AUTOMATISK LJUSSTYRKA",
+    "max_bright_open": "Full ljusstyrka när den öppnas",
+    "dim_close": "Dimma till minimum när den stängs",
+    "elapsed_timer": "FÖRLUPEN TID",
+    "brightness": "Ljusstyrka",
+    "hint": "Dubbeltryck för att dölja • Svep för att justera ljusstyrkan",
+    "hint_short": "Dubbeltryck för att dölja • Svep för att justera",
+    "color_deep_red": "Djupröd",
+    "color_amber": "Bärnsten",
+    "color_candle": "Levande ljus",
+    "color_wheat": "Vete",
+    "color_warm_white": "Varmvit",
+    "desc_best_sleep": "Bäst för sömn",
+    "desc_warm_soothing": "Varm och rogivande",
+    "desc_soft_orange": "Mjuk orange",
+    "desc_more_light": "Om du behöver mer ljus",
+    "ax_elapsed_time": "Förlupen tid",
+    "ax_light_bg": "Ljusets bakgrundsfärg: %@",
+    "ax_timer_brightness": "Ljusstyrka för förlupen tid"
+  },
+  "watch_captions": [
+    "En nattlampa på din handled",
+    "Tryck för att byta färg",
+    "Vrid på Crown för att dimma"
+  ]
+}
