@@ -49,6 +49,17 @@ def all_locales():
     return [e["asc"] for e in entries(include_base=True)]
 
 
+def store_locales(include_base=True):
+    """Locales that App Store Connect accepts for STORE metadata/screenshots.
+
+    A registry entry with "store": false (e.g. Lithuanian — Apple localizes the
+    app *binary* into it but does NOT offer it as an App Store listing language)
+    is excluded; such languages ship in-app only and their storefront inherits
+    the primary language's listing.
+    """
+    return [e["asc"] for e in entries(include_base=include_base) if e.get("store", True)]
+
+
 def _by_asc():
     return {e["asc"]: e for e in entries(include_base=True)}
 
