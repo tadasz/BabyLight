@@ -37,6 +37,8 @@ HIRA   = "/System/Library/Fonts/Hiragino Sans GB.ttc"
 SONGTI = "/System/Library/Fonts/Supplemental/Songti.ttc"
 SDGOTH = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
 GEEZA  = "/System/Library/Fonts/GeezaPro.ttc"
+KOHINOOR = "/System/Library/Fonts/Kohinoor.ttc"               # Devanagari (Hindi)
+THONBURI = "/System/Library/Fonts/Supplemental/Thonburi.ttc"  # Thai
 
 # script (from locales.json) -> font file + TTC face indices per role + flags.
 # Add an entry here ONLY when introducing a writing system not already covered.
@@ -48,6 +50,13 @@ FONT_SETS = {
     "cjk_tc":   {"file": SONGTI, "head": 2, "sub": 5, "body": 7, "label": 2, "title": 2, "cjk": True,  "rtl": False},
     "ko":       {"file": SDGOTH, "head": 6, "sub": 2, "body": 2, "label": 4, "title": 6, "cjk": True,  "rtl": False},
     "ar":       {"file": GEEZA,  "head": 1, "sub": 0, "body": 0, "label": 1, "title": 1, "cjk": False, "rtl": True},
+    # Devanagari (Hindi): Kohinoor faces 0=Reg 1=Med 2=Semibold 3=Bold 4=Light.
+    "devanagari": {"file": KOHINOOR, "head": 3, "sub": 2, "body": 0, "label": 2, "title": 3, "cjk": False, "rtl": False},
+    # Thai has no inter-word spaces -> wrap per character (cjk=True). Thonburi 0=Reg 1=Bold 2=Light.
+    "thai":       {"file": THONBURI, "head": 1, "sub": 0, "body": 0, "label": 1, "title": 1, "cjk": True,  "rtl": False},
+    # Greek: Avenir Next faces 8-11 (the heaviest weights) LACK Greek glyphs, so the
+    # headline (head) must use a Greek-covering face. Faces 0(Bold)/5(Regular)/2(Regular) cover Greek.
+    "greek":      {"file": AVENIR, "head": 0, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
 }
 
 _cache = {}

@@ -93,6 +93,72 @@
             "state": "translated",
             "value": "لون الضوء"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रोशनी का रंग"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WARNA CAHAYA"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีของแสง"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MÀU ÁNH SÁNG"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LJUSFÄRG"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LYSFARVE"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LYSFARGE"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VALON VÄRI"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ΧΡΩΜΑ ΦΩΤΟΣ"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "КОЛІР СВІТЛА"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ŠVIESOS SPALVA"
+          }
         }
       }
     },
@@ -187,6 +253,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "مؤقّت الإيقاف التلقائي"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वतः-बंद टाइमर"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WAKTU MATI OTOMATIS"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ตัวจับเวลาปิดอัตโนมัติ"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HẸN GIỜ TỰ TẮT"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AVSTÄNGNINGSTIMER"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SLUK-SELV-TIMER"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTO-AV-TIMER"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SAMMUTUSAJASTIN"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ΑΥΤΟΜΑΤΟ ΣΒΗΣΙΜΟ"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ТАЙМЕР АВТОВИМКНЕННЯ"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IŠSIJUNGIMO LAIKMATIS"
           }
         }
       }
@@ -283,6 +415,72 @@
             "state": "translated",
             "value": "السطوع التلقائي"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वतः चमक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KECERAHAN OTOMATIS"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ความสว่างอัตโนมัติ"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ĐỘ SÁNG TỰ ĐỘNG"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTOMATISK LJUSSTYRKA"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTO-LYSSTYRKE"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTO LYSSTYRKE"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTOM. KIRKKAUS"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ΑΥΤΟΜΑΤΗ ΦΩΤΕΙΝΟΤΗΤΑ"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "АВТОЯСКРАВІСТЬ"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AUTOMATINIS RYŠKUMAS"
+          }
         }
       }
     },
@@ -377,6 +575,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "أقصى سطوع عند الفتح"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खोलने पर अधिकतम चमक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kecerahan maksimal saat dibuka"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สว่างสูงสุดเมื่อเปิด"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sáng tối đa khi mở"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full ljusstyrka när den öppnas"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maks. lysstyrke ved åbning"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maks lysstyrke når den åpnes"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Täysi kirkkaus avattaessa"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Μέγιστη φωτεινότητα στο άνοιγμα"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макс. яскравість при відкритті"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Didžiausias ryškumas atvėrus"
           }
         }
       }
@@ -473,6 +737,72 @@
             "state": "translated",
             "value": "أدنى سطوع عند الإغلاق"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद करने पर न्यूनतम तक मद्धम"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redupkan ke minimum saat ditutup"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "หรี่ต่ำสุดเมื่อปิด"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giảm xuống mức tối thiểu khi đóng"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimma till minimum när den stängs"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dæmp til minimum ved lukning"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dim til minimum når den lukkes"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Himmennä minimiin suljettaessa"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ελάχιστη φωτεινότητα στο κλείσιμο"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приглушити до мінімуму при закритті"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pritemdyti iki minimumo užvėrus"
+          }
         }
       }
     },
@@ -567,6 +897,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "الوقت المنقضي"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बीता समय टाइमर"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PENGHITUNG WAKTU"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ตัวจับเวลาที่ผ่านไป"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BỘ ĐẾM THỜI GIAN"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FÖRLUPEN TID"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FORLØBET TID"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FORLØPT TID"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KULUNUT AIKA"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ΧΡΟΝΟΜΕΤΡΟ"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ТАЙМЕР ЧАСУ"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRAĖJUSIO LAIKO LAIKMATIS"
           }
         }
       }
@@ -663,6 +1059,72 @@
             "state": "translated",
             "value": "السطوع"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चमक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kecerahan"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ความสว่าง"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Độ sáng"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ljusstyrka"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lysstyrke"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lysstyrke"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirkkaus"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Φωτεινότητα"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Яскравість"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ryškumas"
+          }
         }
       }
     },
@@ -757,6 +1219,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "انقر نقرتين للإخفاء • اسحب لضبط السطوع"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छिपाने के लिए दो बार टैप करें • चमक समायोजित करने के लिए स्वाइप करें"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketuk dua kali untuk sembunyikan • Geser untuk atur kecerahan"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แตะสองครั้งเพื่อซ่อน • ปัดเพื่อปรับความสว่าง"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạm hai lần để ẩn • Vuốt để chỉnh độ sáng"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dubbeltryck för att dölja • Svep för att justera ljusstyrkan"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobbelttryk for at skjule • Stryg for at justere lysstyrke"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobbelttrykk for å skjule • Sveip for å justere lysstyrken"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaksoisnapauta piilottaaksesi • Säädä kirkkautta pyyhkäisemällä"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Διπλό πάτημα για απόκρυψη • Σύρετε για ένταση"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подвійний дотик — приховати • Свайп — змінити яскравість"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakstelėkite du kartus, kad paslėptumėte • Braukite, kad pakeistumėte ryškumą"
           }
         }
       }
@@ -853,6 +1381,72 @@
             "state": "translated",
             "value": "أحمر غامق"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गहरा लाल"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merah Pekat"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีแดงเข้ม"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đỏ đậm"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Djupröd"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyb rød"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyprød"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Syvänpunainen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Βαθύ κόκκινο"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Глибокий червоний"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamsiai raudona"
+          }
         }
       }
     },
@@ -947,6 +1541,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "كهرماني"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नारंगी"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oranye"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีเหลืองอำพัน"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hổ phách"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bärnsten"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rav"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rav"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meripihka"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Κεχριμπάρι"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бурштин"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gintarinė"
           }
         }
       }
@@ -1043,6 +1703,72 @@
             "state": "translated",
             "value": "شمعة"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मोमबत्ती"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lilin"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แสงเทียน"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ánh nến"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Levande ljus"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Levende lys"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stearinlys"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kynttilä"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Κερί"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свічка"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žvakė"
+          }
         }
       }
     },
@@ -1137,6 +1863,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "قمحي"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गेहुँआ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gandum"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีข้าวสาลี"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lúa mì"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vete"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hvede"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hvete"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vehnä"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Σιτάρι"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пшениця"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kviečių"
           }
         }
       }
@@ -1233,6 +2025,72 @@
             "state": "translated",
             "value": "الأفضل للنوم"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नींद के लिए सर्वोत्तम"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terbaik untuk tidur"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ดีที่สุดสำหรับการนอน"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tốt nhất cho giấc ngủ"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bäst för sömn"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedst til søvn"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best for søvn"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paras uneen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ιδανικό για ύπνο"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Найкраще для сну"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geriausia miegui"
+          }
         }
       }
     },
@@ -1327,6 +2185,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "دافئ ومهدّئ"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गर्म और सुकूनदायक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangat & menenangkan"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "อุ่นและผ่อนคลาย"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ấm và dễ chịu"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varm och rogivande"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varm og beroligende"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varm og beroligende"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lämmin ja rauhoittava"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ζεστό & καταπραϋντικό"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тепле й заспокійливе"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Šilta ir raminanti"
           }
         }
       }
@@ -1423,6 +2347,72 @@
             "state": "translated",
             "value": "برتقالي ناعم"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हल्का नारंगी"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oranye lembut"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีส้มนุ่มนวล"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cam dịu"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mjuk orange"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blød orange"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Myk oransje"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pehmeä oranssi"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Απαλό πορτοκαλί"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "М’який помаранчевий"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Švelni oranžinė"
+          }
         }
       }
     },
@@ -1517,6 +2507,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "إذا احتجت ضوءًا أكثر"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अगर आपको ज़्यादा रोशनी चाहिए"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika perlu lebih banyak cahaya"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "หากคุณต้องการแสงมากขึ้น"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khi bạn cần sáng hơn"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Om du behöver mer ljus"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hvis du har brug for mere lys"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hvis du trenger mer lys"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jos tarvitset enemmän valoa"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Αν θέλετε περισσότερο φως"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо потрібно більше світла"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jei reikia daugiau šviesos"
           }
         }
       }
@@ -1613,6 +2669,72 @@
             "state": "translated",
             "value": "الوقت المنقضي"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बीता समय"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waktu berlalu"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เวลาที่ผ่านไป"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thời gian đã trôi qua"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Förlupen tid"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forløbet tid"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forløpt tid"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kulunut aika"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Χρόνος που πέρασε"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Минулий час"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Praėjęs laikas"
+          }
         }
       }
     },
@@ -1707,6 +2829,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "لون خلفية الضوء: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रोशनी की पृष्ठभूमि का रंग: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warna latar cahaya: %@"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "สีพื้นหลังของแสง: %@"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Màu nền ánh sáng: %@"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ljusets bakgrundsfärg: %@"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lysets baggrundsfarve: %@"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakgrunnsfarge for lys: %@"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valon taustaväri: %@"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Χρώμα φόντου φωτός: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колір фонового світла: %@"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Šviesos fono spalva: %@"
           }
         }
       }
@@ -1803,87 +2991,73 @@
             "state": "translated",
             "value": "سطوع المؤقّت"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बीता समय टाइमर की चमक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kecerahan penghitung waktu"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ความสว่างของตัวจับเวลาที่ผ่านไป"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Độ sáng bộ đếm thời gian"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ljusstyrka för förlupen tid"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lysstyrke for forløbet tid"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lysstyrke for forløpt tid"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuluneen ajan ajastimen kirkkaus"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Φωτεινότητα χρονομέτρου"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Яскравість таймера часу"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laikmačio ryškumas"
+          }
         }
-      }
-    },
-    "Tap to show controls": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "点按以显示控制项" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "點按以顯示控制項" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "タップして操作パネルを表示" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "탭하여 컨트롤 표시" } },
-        "ru": { "stringUnit": { "state": "translated", "value": "Коснитесь, чтобы показать управление" } },
-        "de": { "stringUnit": { "state": "translated", "value": "Tippen, um die Steuerung anzuzeigen" } },
-        "fr": { "stringUnit": { "state": "translated", "value": "Touchez pour afficher les commandes" } },
-        "es": { "stringUnit": { "state": "translated", "value": "Toca para mostrar los controles" } },
-        "es-MX": { "stringUnit": { "state": "translated", "value": "Toca para mostrar los controles" } },
-        "it": { "stringUnit": { "state": "translated", "value": "Tocca per mostrare i controlli" } },
-        "pt-BR": { "stringUnit": { "state": "translated", "value": "Toque para mostrar os controles" } },
-        "nl": { "stringUnit": { "state": "translated", "value": "Tik om de bediening te tonen" } },
-        "tr": { "stringUnit": { "state": "translated", "value": "Kontrolleri göstermek için dokunun" } },
-        "pl": { "stringUnit": { "state": "translated", "value": "Dotknij, aby pokazać elementy sterujące" } },
-        "ar": { "stringUnit": { "state": "translated", "value": "انقر لإظهار عناصر التحكم" } }
-      }
-    },
-    "Double-tap anywhere to hide these controls and dim the screen to a calm night light.": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "双击屏幕任意处可隐藏控制项，并将屏幕调暗为柔和的夜灯。" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "雙擊螢幕任一處可隱藏控制項，並將螢幕調暗為柔和的夜燈。" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "画面のどこでもダブルタップで操作パネルを隠し、画面を落ち着いた常夜灯の明るさにします。" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "화면 아무 곳이나 두 번 탭하면 컨트롤이 숨겨지고 화면이 은은한 수면등으로 어두워집니다." } },
-        "ru": { "stringUnit": { "state": "translated", "value": "Дважды коснитесь в любом месте, чтобы скрыть управление и приглушить экран до спокойного ночника." } },
-        "de": { "stringUnit": { "state": "translated", "value": "Doppeltippe irgendwo, um diese Steuerung auszublenden und den Bildschirm zu einem ruhigen Nachtlicht zu dimmen." } },
-        "fr": { "stringUnit": { "state": "translated", "value": "Touchez deux fois n'importe où pour masquer ces commandes et tamiser l'écran en une veilleuse apaisante." } },
-        "es": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para ocultar estos controles y atenuar la pantalla como una luz nocturna suave." } },
-        "es-MX": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para ocultar estos controles y atenuar la pantalla como una luz nocturna suave." } },
-        "it": { "stringUnit": { "state": "translated", "value": "Tocca due volte un punto qualsiasi per nascondere questi controlli e attenuare lo schermo come una luce notturna delicata." } },
-        "pt-BR": { "stringUnit": { "state": "translated", "value": "Toque duas vezes em qualquer lugar para ocultar estes controles e escurecer a tela como uma luz noturna suave." } },
-        "nl": { "stringUnit": { "state": "translated", "value": "Dubbeltik ergens om deze bediening te verbergen en het scherm te dimmen tot een rustig nachtlampje." } },
-        "tr": { "stringUnit": { "state": "translated", "value": "Bu kontrolleri gizlemek ve ekranı sakin bir gece lambasına kısmak için herhangi bir yere çift dokunun." } },
-        "pl": { "stringUnit": { "state": "translated", "value": "Stuknij dwukrotnie w dowolnym miejscu, aby ukryć te elementy sterujące i przyciemnić ekran do spokojnej lampki nocnej." } },
-        "ar": { "stringUnit": { "state": "translated", "value": "انقر نقرتين في أي مكان لإخفاء عناصر التحكم هذه وخفض إضاءة الشاشة إلى ضوء ليلي هادئ." } }
-      }
-    },
-    "Double-tap anywhere to show the controls again. Swipe up or down to adjust the brightness.": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "双击屏幕任意处可再次显示控制项。上下滑动可调节亮度。" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "雙擊螢幕任一處可再次顯示控制項。上下滑動可調節亮度。" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "画面のどこでもダブルタップで操作パネルを再表示。上下にスワイプで明るさを調整できます。" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "화면 아무 곳이나 두 번 탭하면 컨트롤이 다시 표시됩니다. 위아래로 스와이프하여 밝기를 조절하세요." } },
-        "ru": { "stringUnit": { "state": "translated", "value": "Дважды коснитесь в любом месте, чтобы снова показать управление. Свайп вверх или вниз меняет яркость." } },
-        "de": { "stringUnit": { "state": "translated", "value": "Doppeltippe irgendwo, um die Steuerung wieder einzublenden. Wische nach oben oder unten, um die Helligkeit anzupassen." } },
-        "fr": { "stringUnit": { "state": "translated", "value": "Touchez deux fois n'importe où pour réafficher les commandes. Glissez vers le haut ou le bas pour régler la luminosité." } },
-        "es": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para volver a mostrar los controles. Desliza hacia arriba o abajo para ajustar el brillo." } },
-        "es-MX": { "stringUnit": { "state": "translated", "value": "Toca dos veces en cualquier lugar para volver a mostrar los controles. Desliza hacia arriba o abajo para ajustar el brillo." } },
-        "it": { "stringUnit": { "state": "translated", "value": "Tocca due volte un punto qualsiasi per mostrare di nuovo i controlli. Scorri verso l'alto o il basso per regolare la luminosità." } },
-        "pt-BR": { "stringUnit": { "state": "translated", "value": "Toque duas vezes em qualquer lugar para mostrar os controles novamente. Deslize para cima ou para baixo para ajustar o brilho." } },
-        "nl": { "stringUnit": { "state": "translated", "value": "Dubbeltik ergens om de bediening weer te tonen. Veeg omhoog of omlaag om de helderheid aan te passen." } },
-        "tr": { "stringUnit": { "state": "translated", "value": "Kontrolleri yeniden göstermek için herhangi bir yere çift dokunun. Parlaklığı ayarlamak için yukarı veya aşağı kaydırın." } },
-        "pl": { "stringUnit": { "state": "translated", "value": "Stuknij dwukrotnie w dowolnym miejscu, aby ponownie pokazać elementy sterujące. Przesuń w górę lub w dół, aby dostosować jasność." } },
-        "ar": { "stringUnit": { "state": "translated", "value": "انقر نقرتين في أي مكان لإظهار عناصر التحكم مرة أخرى. اسحب لأعلى أو لأسفل لضبط السطوع." } }
-      }
-    },
-    "Hide the controls": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "隐藏控制项" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "隱藏控制項" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "操作パネルを隠す" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "컨트롤 숨기기" } },
-        "ru": { "stringUnit": { "state": "translated", "value": "Скрыть управление" } },
-        "de": { "stringUnit": { "state": "translated", "value": "Steuerung ausblenden" } },
-        "fr": { "stringUnit": { "state": "translated", "value": "Masquer les commandes" } },
-        "es": { "stringUnit": { "state": "translated", "value": "Ocultar los controles" } },
-        "es-MX": { "stringUnit": { "state": "translated", "value": "Ocultar los controles" } },
-        "it": { "stringUnit": { "state": "translated", "value": "Nascondere i controlli" } },
-        "pt-BR": { "stringUnit": { "state": "translated", "value": "Ocultar os controles" } },
-        "nl": { "stringUnit": { "state": "translated", "value": "Bediening verbergen" } },
-        "tr": { "stringUnit": { "state": "translated", "value": "Kontrolleri gizle" } },
-        "pl": { "stringUnit": { "state": "translated", "value": "Ukryj elementy sterujące" } },
-        "ar": { "stringUnit": { "state": "translated", "value": "إخفاء عناصر التحكم" } }
       }
     }
   },
