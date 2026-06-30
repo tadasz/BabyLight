@@ -20,6 +20,9 @@ from asc import ASC  # noqa: E402
 
 MARKETING_URL = "https://dogo.app"
 SUPPORT_URL = "https://dogo.app"
+# App Review requires a privacyPolicyUrl on EVERY appInfoLocalization, not just
+# en-US — a missing one on a newly-created localized appInfo blocks submission.
+PRIVACY_POLICY_URL = "https://dogo.app/privacy-policy/"
 
 
 def main():
@@ -32,7 +35,10 @@ def main():
     c = ASC()
 
     only = set(x for x in args.only.split(",") if x)
-    locales = [l for l in lib.all_locales() if lib.has_translation(l) and (not only or l in only)]
+    # store_locales() drops languages Apple doesn't accept as App Store listing
+    # languages (e.g. Lithuanian), which would otherwise 409 as an invalid locale.
+    locales = [l for l in lib.store_locales(include_base=True)
+               if lib.has_translation(l) and (not only or l in only)]
 
     for loc in locales:
         store = lib.load_translation(loc)["store"]
@@ -42,7 +48,8 @@ def main():
         # cached once at the start goes stale and POSTs would 409 as duplicates.
         info_locs = {x["attributes"]["locale"]: x["id"] for x in
                      c.get_all(f"/v1/appInfos/{args.appinfo_id}/appInfoLocalizations")}
-        info_attrs = {"name": store["name"], "subtitle": store["subtitle"]}
+        info_attrs = {"name": store["name"], "subtitle": store["subtitle"],
+                      "privacyPolicyUrl": PRIVACY_POLICY_URL}
         if loc in info_locs:
             c.patch(f"/v1/appInfoLocalizations/{info_locs[loc]}",
                     {"data": {"type": "appInfoLocalizations", "id": info_locs[loc], "attributes": info_attrs}})
