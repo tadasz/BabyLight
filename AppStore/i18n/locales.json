@@ -161,7 +161,8 @@
       "asc": "lt",
       "xcode": "lt",
       "script": "latin",
-      "name": "Lithuanian"
+      "name": "Lithuanian",
+      "store": false
     }
   ]
 }

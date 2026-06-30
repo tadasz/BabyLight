@@ -62,7 +62,7 @@ def main():
     c = ASC()
     only = set(x for x in args.only.split(",") if x)
     devs = set(x for x in args.device.split(",") if x)
-    locales = [l for l in lib.target_locales() if (not only or l in only)]
+    locales = [l for l in lib.store_locales(include_base=False) if (not only or l in only)]
 
     ver_locs = {x["attributes"]["locale"]: x["id"] for x in
                 c.get_all(f"/v1/appStoreVersions/{args.version_id}/appStoreVersionLocalizations")}
