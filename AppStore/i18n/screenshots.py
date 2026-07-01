@@ -44,7 +44,12 @@ THONBURI = "/System/Library/Fonts/Supplemental/Thonburi.ttc"  # Thai
 # Add an entry here ONLY when introducing a writing system not already covered.
 FONT_SETS = {
     "latin":    {"file": AVENIR, "head": 8, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
-    "cyrillic": {"file": AVENIR, "head": 8, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
+    # Vietnamese: Avenir Next Heavy (face 8) lacks the precomposed stacked vowel+tone
+    # glyphs (ủ ố ờ ặ ấ …), so the headline must use face 0 (Bold), which covers them.
+    "latin_vi": {"file": AVENIR, "head": 0, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
+    # Cyrillic: Avenir Next Heavy (face 8) has NO Cyrillic glyphs (same gap as Greek),
+    # so the headline must use face 0 (Bold), which covers Cyrillic.
+    "cyrillic": {"file": AVENIR, "head": 0, "sub": 5, "body": 5, "label": 2, "title": 0, "cjk": False, "rtl": False},
     "cjk_sc":   {"file": HIRA,   "head": 2, "sub": 0, "body": 0, "label": 2, "title": 2, "cjk": True,  "rtl": False},
     "ja":       {"file": HIRA,   "head": 2, "sub": 0, "body": 0, "label": 2, "title": 2, "cjk": True,  "rtl": False},
     "cjk_tc":   {"file": SONGTI, "head": 2, "sub": 5, "body": 7, "label": 2, "title": 2, "cjk": True,  "rtl": False},
@@ -174,6 +179,10 @@ def screen_controls(spec, ui, bg, highlight):
     cx = SW//2; lx = px+44; rx = px+pw-44; y = py+44
     F_TITLE = font(spec,"title",46); F_LABEL = font(spec,"label",27)
     F_BODY = font(spec,"body",28); F_PILL = font(spec,"body",30); F_TINY = font(spec,"body",24)
+    # The auto-off pills ("∞ 15m 30m 1h 2h") are language-neutral Latin labels.
+    # GeezaPro (Arabic) has no Latin digits/∞, so render them in a Latin face.
+    if spec["file"] == GEEZA:
+        F_PILL = ImageFont.truetype(AVENIR, 30, index=5)
     def ctext(s, yy, fnt, fill):
         ss = shape(s, rtl); w = d.textlength(ss,font=fnt)
         d.text((cx-w/2, yy), ss, font=fnt, fill=fill)
@@ -246,9 +255,11 @@ def tagline_icon(img, spec, tagline):
     center_lines(d, W/2, cy+sz//2+64, tagline, font(spec,"title",46), WHITE, W-160, spec["rtl"], spec["cjk"])
     return img
 
-def spectrum(img, spec, line):
+def spectrum(img, spec):
+    # The science subtext is drawn once by header(); this panel only adds the
+    # gradient bar. (Previously it re-drew the subtext, which duplicated it and
+    # collided with the header line in long-subtext locales.)
     d = ImageDraw.Draw(img)
-    center_lines(d, W/2, int(H*0.20), line, font(spec,"body",34), (208,200,222), W-220, spec["rtl"], spec["cjk"], gap=12)
     bx0,bx1 = 120,W-120; by=int(H*0.40); bh=78
     cols=[(150,40,220),(40,80,255),(0,200,255),(0,220,120),(255,230,0),(255,140,0),(255,0,0)]
     grad=Image.new("RGB",(len(cols),1))
@@ -354,7 +365,7 @@ def build_locale(asc):
 
     page_dots(hero(RED, "0:42", 0, (150,20,20)), 0).save(os.path.join(outdir,"01_hero_red.png"))
     img = base_bg((120,30,20),(W/2,H*0.66),900)
-    header(img, spec, caps[1][0], caps[1][1]); img = spectrum(img, spec, caps[1][1])
+    header(img, spec, caps[1][0], caps[1][1]); img = spectrum(img, spec)
     page_dots(img, 1).save(os.path.join(outdir,"02_science.png"))
     img = base_bg((120,30,20),(W/2,H*0.66),950)
     header(img, spec, caps[2][0], caps[2][1])
