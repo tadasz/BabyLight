@@ -71,6 +71,18 @@ Caveats to design around:
   **user-adjustable** (e.g. ±5 min steps) and the glow should **repeat every
   ~5 min** a few times, because the first cue lands mid-range, not at a
   guaranteed moment.
+- Real-world data point (our own 6-month-old): successful transfers often land
+  **7–12 min after sleep onset** — right at the fast edge of the 6-month range,
+  and consistent with the "20-minute rule" being a *newborn* rule that stops
+  applying once sleep onset shifts to NREM. Two design consequences: the first
+  glow should fire at the **early edge** of the age window (repeats cover the
+  tail), and per-baby calibration (§7) matters more than nailing the population
+  average.
+- The descent into deep sleep is a probability curve, not a switch. Night-to-
+  night shifts come from sleep pressure (bedtime after an active day → faster,
+  deeper descent; a low-pressure nap → shallower), overtiredness, teething/
+  illness/regressions, and the transfer itself (the tilt toward the mattress
+  can trigger an arousal from lighter stages).
 - The limp-limb test stays the ground truth. Tip copy should say "try the arm
   test", not "baby is in deep sleep".
 - A future refinement (§7) lets the parent tap once when the baby actually
@@ -180,12 +192,51 @@ Session ends on long background, cry-reset, or manual reset.
 (`AppStore/LOCALIZATION.md`) — budget for it; the settings section adds maybe
 6–8 strings plus the mic usage description.
 
-## 6. Risks / open questions
+## 6. Learning from patterns (per-baby calibration)
+
+The cry detector doubles as a **free outcome label** for every session — no
+extra taps needed:
+
+- **"Too early" evidence:** a confirmed cry within ~5 min of a glow window
+  (the parent likely attempted the transfer and it failed, or the baby wasn't
+  deep yet).
+- **"Success" evidence:** the session ends calmly — no cry after the glow, app
+  backgrounded/closed later, or auto-off reached.
+
+Per session, log locally (UserDefaults / small JSON, on-device only): baby age
+that day, nap vs. night (by clock time), settle duration, glow time(s), cry
+events with timestamps, outcome. That's ~30–60 labeled samples/month from
+normal use — plenty to tune a single parameter.
+
+Calibration rule (deliberately simple, no ML):
+
+1. Start from the age-based default (§2).
+2. Keep a rolling window of the last ~20 outcomes, **bucketed nap vs. night**
+   (descent speed differs with sleep pressure).
+3. Nudge the glow time with a slow EMA (α ≈ 0.2) toward the earliest
+   *successful* attempt times, and later when "too early" outcomes cluster.
+4. Bound the learned value to a sane window around the age default (e.g.
+   ±10 min) and require ≥5 outcomes in a bucket before deviating at all.
+5. Show the learned value in settings ("your baby: ~16 min, learned from 12
+   nights") so it stays inspectable and overridable.
+
+Failure modes to respect: cries have causes other than a failed transfer
+(hunger, noise) — the EMA and outcome clustering absorb that noise; growth
+spurts/regressions temporarily break the pattern — the rolling window ages old
+data out naturally; and the age prior keeps drifting underneath as the birth
+date advances, so the learned offset should be stored *relative* to the age
+default, not as an absolute time.
+
+Explicitly out of scope for now: inferring the exact transfer moment from
+device motion (CoreMotion signature of standing up while holding the phone) —
+interesting, speculative, revisit after Phase 2 ships real cry data.
+
+## 7. Risks / open questions
 
 - **Timing defaults are heuristics.** Ranges above come from parenting-science
   summaries of sleep-lab findings, not from a validated dataset. Adjustability
-  + repeat pulses are the mitigation. Could later learn per-baby offsets from
-  history (which attempt times preceded sessions that *didn't* end in a cry).
+  + repeat pulses are the near-term mitigation; per-baby calibration (§6) is
+  the durable one.
 - **Does a cry mean full restart?** After a brief rousing, babies often return
   to sleep faster than from fully awake. V1 keeps it simple (full reset);
   worth revisiting with real usage.
@@ -196,16 +247,20 @@ Session ends on long background, cry-reset, or manual reset.
 - **App Review:** mic + baby apps are common (baby monitors); the on-device,
   nothing-stored story is clean. No expected issues.
 
-## 7. Suggested phasing
+## 8. Suggested phasing
 
 1. **Phase 1 — glow tip, no microphone.** Birth-month setting, session
    semantics, `SleepTipEngine`, glow pulses, manual reset gesture. Zero new
-   permissions, ships fast, already better than guessing.
+   permissions, ships fast, already better than guessing. Start logging
+   session records locally from day one so calibration has history to work
+   with when it arrives.
 2. **Phase 2 — cry reset.** `CryDetector` with SoundAnalysis, mic permission
-   flow, debounce tuning.
-3. **Phase 3 — refinements.** Watch wrist-tap tip; optional "baby just fell
-   asleep" single tap to anchor the countdown at sleep onset; per-baby learned
-   offsets.
+   flow, debounce tuning. Cry events flow into the session log.
+3. **Phase 3 — per-baby calibration (§6).** Learned glow offsets from session
+   outcomes, nap/night buckets, "learned from N nights" display in settings.
+4. **Phase 4 — refinements.** Watch wrist-tap tip; optional "baby just fell
+   asleep" single tap to anchor the countdown at sleep onset; motion-based
+   transfer detection experiment.
 
 ## Sources
 
