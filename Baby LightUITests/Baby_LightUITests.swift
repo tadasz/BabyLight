@@ -177,6 +177,25 @@ final class Baby_LightUITests: XCTestCase {
                       "Double-tap must still show the controls with the tip off")
     }
 
+    @MainActor
+    func testDeepSleepTipControlsRespondWhileOverlayVisible() throws {
+        // Regression: the settling-time gestures on the light surface must not
+        // swallow taps meant for the section's date picker / stepper while the
+        // overlay is open (found in TestFlight 28 dogfood).
+        app.launchArguments += ["-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
+        app.launch()
+
+        let stepper = app.steppers["sleepTipFineTuneStepper"]
+        XCTAssertTrue(stepper.waitForExistence(timeout: 5), "Fine-tune stepper should exist with the feature on")
+        XCTAssertTrue(app.staticTexts["0m"].waitForExistence(timeout: 3), "Fine-tune starts at 0m")
+
+        // The plus half of the stepper (labels differ across OS versions, so
+        // tap by position rather than by button identifier).
+        stepper.coordinate(withNormalizedOffset: CGVector(dx: 0.75, dy: 0.5)).tap()
+        XCTAssertTrue(app.staticTexts["+1m"].waitForExistence(timeout: 3),
+                      "Stepper must respond to taps while the controls overlay is visible")
+    }
+
     // MARK: - Performance Tests
 
     @MainActor

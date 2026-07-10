@@ -60,10 +60,11 @@
     "ax_timer_brightness": "Kecerahan penghitung waktu",
     "deep_sleep_tip": "TIPS TIDUR NYENYAK",
     "sleep_tip_toggle": "Berpendar saat bayi mungkin tertidur nyenyak",
-    "birth_month": "Bulan lahir bayi",
-    "fine_tune": "Sesuaikan waktu",
+    "birthday": "Tanggal lahir bayi",
+    "glow_offset": "Berpendar lebih awal atau lambat",
     "sleep_tip_hint": "Pendaran lembut menandakan saat yang tepat untuk membaringkan bayi.",
-    "sleep_tip_gestures": "Ketuk pendaran untuk menutup • Tahan untuk memulai ulang"
+    "sleep_tip_gestures": "Ketuk pendaran untuk menutup • Tahan untuk memulai ulang",
+    "sleep_tip_window": "Berpendar sekitar %lld menit setelah aplikasi dibuka — waktu umum untuk mencapai tidur nyenyak di usia ini."
   },
   "watch_captions": [
     "Lampu tidur di pergelangan tangan Anda",

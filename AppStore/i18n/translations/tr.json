@@ -60,10 +60,11 @@
     "color_warm_white": "Sıcak beyaz",
     "deep_sleep_tip": "DERİN UYKU İPUCU",
     "sleep_tip_toggle": "Bebek derin uykudayken hafifçe parlasın",
-    "birth_month": "Bebeğin doğum ayı",
-    "fine_tune": "Zamanlamayı ayarla",
+    "birthday": "Bebeğin doğum tarihi",
+    "glow_offset": "Daha erken veya geç parlasın",
     "sleep_tip_hint": "Yumuşak bir parıltı, bebeği yatırmayı denemek için iyi bir anı gösterir.",
-    "sleep_tip_gestures": "Kapatmak için parıltıya dokun • Yeniden başlatmak için basılı tut"
+    "sleep_tip_gestures": "Kapatmak için parıltıya dokun • Yeniden başlatmak için basılı tut",
+    "sleep_tip_window": "Uygulamayı açtıktan yaklaşık %lld dk sonra parlar — bu yaşta derin uykuya geçişin tipik süresi."
   },
   "watch_captions": [
     "Bileğinizde bir gece ışığı",

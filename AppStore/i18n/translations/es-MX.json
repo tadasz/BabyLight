@@ -60,10 +60,11 @@
     "color_warm_white": "Blanco cálido",
     "deep_sleep_tip": "CONSEJO DE SUEÑO PROFUNDO",
     "sleep_tip_toggle": "Brillo cuando el bebé podría dormir profundamente",
-    "birth_month": "Mes de nacimiento del bebé",
-    "fine_tune": "Ajustar el momento",
+    "birthday": "Fecha de nacimiento del bebé",
+    "glow_offset": "Brillo antes o después",
     "sleep_tip_hint": "Un brillo suave sugiere un buen momento para acostarlo.",
-    "sleep_tip_gestures": "Toca el brillo para descartar • Mantén presionado para reiniciar"
+    "sleep_tip_gestures": "Toca el brillo para descartar • Mantén presionado para reiniciar",
+    "sleep_tip_window": "Brilla unos %lld min después de abrir la app: el tiempo típico para alcanzar el sueño profundo a esta edad."
   },
   "watch_captions": [
     "Una luz nocturna en tu muñeca",

@@ -60,10 +60,11 @@
     "color_warm_white": "暖白",
     "deep_sleep_tip": "深睡提示",
     "sleep_tip_toggle": "宝宝可能进入深睡时发出微光",
-    "birth_month": "宝宝出生月份",
-    "fine_tune": "微调时间",
+    "birthday": "宝宝的出生日期",
+    "glow_offset": "提前或延后发光",
     "sleep_tip_hint": "柔和的微光提示：现在是尝试放下宝宝的好时机。",
-    "sleep_tip_gestures": "轻点微光以关闭 • 长按以重新计时"
+    "sleep_tip_gestures": "轻点微光以关闭 • 长按以重新计时",
+    "sleep_tip_window": "打开应用约 %lld 分钟后发光——这是此月龄进入深睡通常所需的时间。"
   },
   "watch_captions": [
     "手腕上的夜灯",

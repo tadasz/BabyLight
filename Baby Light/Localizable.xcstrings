@@ -4026,324 +4026,324 @@
         }
       }
     },
-    "Baby's birth month": {
+    "Baby's birthday": {
       "extractionState": "manual",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "宝宝出生月份"
+            "value": "宝宝的出生日期"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "寶寶出生月份"
+            "value": "寶寶的出生日期"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "赤ちゃんの生まれた月"
+            "value": "赤ちゃんの誕生日"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "아기의 출생 월"
+            "value": "아기의 생년월일"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Месяц рождения малыша"
+            "value": "Дата рождения малыша"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geburtsmonat des Babys"
+            "value": "Geburtstag des Babys"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mois de naissance de bébé"
+            "value": "Date de naissance de bébé"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mes de nacimiento del bebé"
+            "value": "Fecha de nacimiento del bebé"
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mes de nacimiento del bebé"
+            "value": "Fecha de nacimiento del bebé"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mese di nascita del bimbo"
+            "value": "Data di nascita del bimbo"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mês de nascimento do bebê"
+            "value": "Data de nascimento do bebê"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geboortemaand van baby"
+            "value": "Geboortedatum van baby"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bebeğin doğum ayı"
+            "value": "Bebeğin doğum tarihi"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Miesiąc urodzenia dziecka"
+            "value": "Data urodzenia dziecka"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "شهر ميلاد الطفل"
+            "value": "تاريخ ميلاد الطفل"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "शिशु का जन्म माह"
+            "value": "शिशु की जन्म तिथि"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bulan lahir bayi"
+            "value": "Tanggal lahir bayi"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "เดือนเกิดของลูกน้อย"
+            "value": "วันเกิดของลูกน้อย"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tháng sinh của bé"
+            "value": "Ngày sinh của bé"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Barnets födelsemånad"
+            "value": "Barnets födelsedatum"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Babys fødselsmåned"
+            "value": "Babys fødselsdato"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "translated",
-            "value": "Babyens fødselsmåned"
+            "value": "Babyens fødselsdato"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vauvan syntymäkuukausi"
+            "value": "Vauvan syntymäpäivä"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Μήνας γέννησης του μωρού"
+            "value": "Ημερομηνία γέννησης του μωρού"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Місяць народження малюка"
+            "value": "Дата народження малюка"
           }
         },
         "lt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mažylio gimimo mėnuo"
+            "value": "Mažylio gimimo data"
           }
         }
       }
     },
-    "Fine-tune timing": {
+    "Glow earlier or later": {
       "extractionState": "manual",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "微调时间"
+            "value": "提前或延后发光"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "微調時間"
+            "value": "提前或延後發光"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "タイミング調整"
+            "value": "光るタイミングを前後に調整"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "타이밍 조절"
+            "value": "빛나는 시점 조절"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Точная настройка"
+            "value": "Свечение раньше или позже"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feinabstimmung"
+            "value": "Früher oder später leuchten"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Affiner le minutage"
+            "value": "Lueur plus tôt ou plus tard"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustar el momento"
+            "value": "Brillo antes o después"
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustar el momento"
+            "value": "Brillo antes o después"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regola i tempi"
+            "value": "Bagliore prima o dopo"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustar o tempo"
+            "value": "Brilho mais cedo ou mais tarde"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Timing bijstellen"
+            "value": "Gloed eerder of later"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zamanlamayı ayarla"
+            "value": "Daha erken veya geç parlasın"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dostrojenie czasu"
+            "value": "Poświata wcześniej lub później"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "ضبط التوقيت"
+            "value": "التوهّج أبكر أو لاحقًا"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "समय का समायोजन"
+            "value": "चमक पहले या बाद में"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesuaikan waktu"
+            "value": "Berpendar lebih awal atau lambat"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "ปรับจังหวะเวลา"
+            "value": "เรืองแสงเร็วขึ้นหรือช้าลง"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinh chỉnh thời điểm"
+            "value": "Phát sáng sớm hơn hoặc muộn hơn"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Finjustera timing"
+            "value": "Glöd tidigare eller senare"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Finjustér timing"
+            "value": "Glød før eller senere"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "translated",
-            "value": "Finjuster timing"
+            "value": "Glød tidligere eller senere"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajoituksen hienosäätö"
+            "value": "Hehku aiemmin tai myöhemmin"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ρύθμιση χρονισμού"
+            "value": "Λάμψη νωρίτερα ή αργότερα"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Точне налаштування"
+            "value": "Світіння раніше чи пізніше"
           }
         },
         "lt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Laiko derinimas"
+            "value": "Švytėti anksčiau ar vėliau"
           }
         }
       }
@@ -4505,6 +4505,167 @@
           "stringUnit": {
             "state": "translated",
             "value": "Švelnus švytėjimas parodo tinkamą akimirką paguldyti mažylį."
+          }
+        }
+      }
+    },
+    "Glows about %lld min after you open the app — the typical time to reach deep sleep at this age.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开应用约 %lld 分钟后发光——这是此月龄进入深睡通常所需的时间。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開 App 約 %lld 分鐘後發光——這是此月齡進入深睡通常所需的時間。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリを開いてから約%lld分後に光ります — この月齢で深い眠りに入るまでのおおよその時間です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱을 연 뒤 약 %lld분 후에 빛납니다 — 이 월령에서 깊은 잠에 드는 데 걸리는 일반적인 시간입니다."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Засветится примерно через %lld мин после открытия приложения — типичное время погружения в глубокий сон в этом возрасте."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leuchtet ca. %lld Min., nachdem du die App geöffnet hast — die typische Zeit bis zum Tiefschlaf in diesem Alter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S'illumine environ %lld min après l'ouverture de l'app — le temps habituel pour atteindre le sommeil profond à cet âge."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilla unos %lld min después de abrir la app: el tiempo típico para alcanzar el sueño profundo a esta edad."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilla unos %lld min después de abrir la app: el tiempo típico para alcanzar el sueño profundo a esta edad."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si illumina circa %lld min dopo l'apertura dell'app — il tempo tipico per raggiungere il sonno profondo a questa età."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilha cerca de %lld min depois de abrir o app — o tempo típico para chegar ao sono profundo nessa idade."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gloeit ongeveer %lld min nadat je de app opent — de gebruikelijke tijd tot diepe slaap op deze leeftijd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamayı açtıktan yaklaşık %lld dk sonra parlar — bu yaşta derin uykuya geçişin tipik süresi."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaświeci ok. %lld min po otwarciu aplikacji — tyle zwykle trwa osiągnięcie głębokiego snu w tym wieku."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتوهّج بعد نحو %lld دقيقة من فتح التطبيق — الوقت المعتاد للوصول إلى النوم العميق في هذا العمر."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऐप खोलने के लगभग %lld मिनट बाद चमकेगा — इस उम्र में गहरी नींद तक पहुँचने का सामान्य समय।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berpendar sekitar %lld menit setelah aplikasi dibuka — waktu umum untuk mencapai tidur nyenyak di usia ini."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "จะเรืองแสงประมาณ %lld นาทีหลังเปิดแอป — เวลาปกติที่ลูกวัยนี้ใช้กว่าจะหลับลึก"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát sáng khoảng %lld phút sau khi mở ứng dụng — thời gian thường để bé ở tuổi này ngủ sâu."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glöder ca %lld min efter att du öppnat appen — den typiska tiden till djupsömn i den här åldern."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gløder ca. %lld min. efter du åbner appen — den typiske tid til dyb søvn i denne alder."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gløder ca. %lld min etter at du åpner appen — den typiske tiden til dyp søvn i denne alderen."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hehkuu noin %lld min sovelluksen avaamisesta — tyypillinen aika syvään uneen tässä iässä."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Λάμπει περίπου %lld λεπτά αφού ανοίξετε την εφαρμογή — ο συνήθης χρόνος για βαθύ ύπνο σε αυτή την ηλικία."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Засвітиться приблизно через %lld хв після відкриття застосунку — типовий час занурення в глибокий сон у цьому віці."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sušvinta praėjus maždaug %lld min. nuo programėlės atidarymo — tiek šiame amžiuje paprastai trunka pasiekti gilų miegą."
           }
         }
       }

@@ -60,10 +60,11 @@
     "color_warm_white": "Bianco caldo",
     "deep_sleep_tip": "CONSIGLIO SONNO PROFONDO",
     "sleep_tip_toggle": "Bagliore quando il bimbo potrebbe dormire profondamente",
-    "birth_month": "Mese di nascita del bimbo",
-    "fine_tune": "Regola i tempi",
+    "birthday": "Data di nascita del bimbo",
+    "glow_offset": "Bagliore prima o dopo",
     "sleep_tip_hint": "Un bagliore delicato suggerisce un buon momento per metterlo giù.",
-    "sleep_tip_gestures": "Tocca il bagliore per chiudere • Tieni premuto per ricominciare"
+    "sleep_tip_gestures": "Tocca il bagliore per chiudere • Tieni premuto per ricominciare",
+    "sleep_tip_window": "Si illumina circa %lld min dopo l'apertura dell'app — il tempo tipico per raggiungere il sonno profondo a questa età."
   },
   "watch_captions": [
     "Una luce notturna al polso",

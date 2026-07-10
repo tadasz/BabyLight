@@ -60,10 +60,11 @@
     "color_warm_white": "暖色ホワイト",
     "deep_sleep_tip": "深い眠りのヒント",
     "sleep_tip_toggle": "赤ちゃんが深く眠った頃に光でお知らせ",
-    "birth_month": "赤ちゃんの生まれた月",
-    "fine_tune": "タイミング調整",
+    "birthday": "赤ちゃんの誕生日",
+    "glow_offset": "光るタイミングを前後に調整",
     "sleep_tip_hint": "やさしい光は、寝かしつけを試す良いタイミングの合図です。",
-    "sleep_tip_gestures": "光をタップで閉じる • 長押しでやり直す"
+    "sleep_tip_gestures": "光をタップで閉じる • 長押しでやり直す",
+    "sleep_tip_window": "アプリを開いてから約%lld分後に光ります — この月齢で深い眠りに入るまでのおおよその時間です。"
   },
   "watch_captions": [
     "手首にナイトライト",

@@ -60,10 +60,11 @@
     "ax_timer_brightness": "Elapsed timer brightness",
     "deep_sleep_tip": "DEEP SLEEP TIP",
     "sleep_tip_toggle": "Glow when baby may be deeply asleep",
-    "birth_month": "Baby's birth month",
-    "fine_tune": "Fine-tune timing",
+    "birthday": "Baby's birthday",
+    "glow_offset": "Glow earlier or later",
     "sleep_tip_hint": "A gentle glow suggests a good moment to try the put-down.",
-    "sleep_tip_gestures": "Tap the glow to dismiss • Hold the light to restart timing"
+    "sleep_tip_gestures": "Tap the glow to dismiss • Hold the light to restart timing",
+    "sleep_tip_window": "Glows about %lld min after you open the app — the typical time to reach deep sleep at this age."
   },
   "watch_captions": [
     "A night light on your wrist",

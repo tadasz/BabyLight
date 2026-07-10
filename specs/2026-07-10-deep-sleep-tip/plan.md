@@ -37,6 +37,8 @@ Purpose: make the engine visible and configurable without disturbing baby or exi
 
 Exit criteria: Phase-1 acceptance — AC1–AC5 + AC10 pass end-to-end; feature off → app identical to today; touched feature folders and patterns §4 updated.
 
+Dogfood round 1 (TestFlight 28, 2026-07-11): settling-time gestures masked `.subviews` while controls are visible (defect: ancestor long-press swallowed picker/stepper taps); birth month → birthday; stepper relabeled "Glow earlier or later" + live window caption (requirements → Decisions). Regression UI test: `testDeepSleepTipControlsRespondWhileOverlayVisible`.
+
 ## 4. CryDetector + anchor switching — delivers US-2 (Phase 2)
 
 Purpose: swap the fuzzy app-open anchor for cry-cessation when the mic can prove it.

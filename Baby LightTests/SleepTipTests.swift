@@ -172,6 +172,20 @@ struct SettlingSessionLifecycleTests {
     }
   }
 
+  @Test func glowMinutesCaptionReflectsBucketAndOffset() async throws {
+    withSleepTipEnabled { viewModel in
+      let eightMonthsAgo = Calendar.current.date(byAdding: .month, value: -8, to: Date())!
+      viewModel.sleepTipBirthMonth = eightMonthsAgo
+      #expect(viewModel.sleepTipGlowMinutes == 25)  // 6–12 mo appOpen window
+      viewModel.sleepTipFineTuneMinutes = 5
+      #expect(viewModel.sleepTipGlowMinutes == 30)
+      viewModel.sleepTipBirthMonth = nil
+      #expect(viewModel.sleepTipGlowMinutes == nil)
+    }
+    UserDefaults.standard.removeObject(forKey: BabyProfile.birthMonthKey)
+    UserDefaults.standard.removeObject(forKey: "sleepTipFineTune")
+  }
+
   @Test func fineTuneAppliesToRunningSession() async throws {
     withSleepTipEnabled { viewModel in
       viewModel.beginSettlingSession(at: t0)

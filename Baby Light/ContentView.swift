@@ -127,16 +127,24 @@ struct ContentView: View {
           TapGesture()
             .onEnded {
               _ = viewModel.acknowledgeSleepTip()
-            }
+            },
+          including: viewModel.controlsVisible ? .subviews : .all
         )
         .simultaneousGesture(
           // Deep-sleep tip: long-press starts a fresh settling session — the
           // manual reset for a failed put-down. Guarded off inside the view
           // model while the feature is disabled.
+          //
+          // Both settling-time gestures are masked to `.subviews` while the
+          // controls are open: an ancestor long-press recognizer swallows taps
+          // meant for the overlay's UIKit-backed controls (compact date
+          // picker, stepper), and a stray long-press while adjusting settings
+          // must not reset the session.
           LongPressGesture(minimumDuration: 0.6)
             .onEnded { _ in
               viewModel.resetSettlingSession()
-            }
+            },
+          including: viewModel.controlsVisible ? .subviews : .all
         )
       }
     }

@@ -138,6 +138,8 @@ struct ControlsOverlay: View {
         Text("A gentle glow suggests a good moment to try the put-down.")
           .font(.system(size: 13))
           .foregroundColor(Color(white: 0.5))
+          // Wrap instead of truncating when the panel is vertically tight.
+          .fixedSize(horizontal: false, vertical: true)
           .frame(maxWidth: .infinity, alignment: .leading)
 
         if viewModel.sleepTipEnabled {
@@ -149,7 +151,7 @@ struct ControlsOverlay: View {
             in: ...Date(),
             displayedComponents: .date
           ) {
-            Text("Baby's birth month")
+            Text("Baby's birthday")
               .font(.system(size: 15))
               .foregroundColor(.white)
           }
@@ -157,7 +159,7 @@ struct ControlsOverlay: View {
           .accessibilityIdentifier("sleepTipBirthMonthPicker")
 
           HStack(spacing: 12) {
-            Text("Fine-tune timing")
+            Text("Glow earlier or later")
               .font(.system(size: 15))
               .foregroundColor(.white)
 
@@ -177,12 +179,23 @@ struct ControlsOverlay: View {
             .labelsHidden()
             .environment(\.colorScheme, .dark)
             .accessibilityIdentifier("sleepTipFineTuneStepper")
-            .accessibilityLabel("Fine-tune timing")
+            .accessibilityLabel("Glow earlier or later")
+          }
+
+          // Live answer to "how long will this take": the age-window logic,
+          // updated as the birthday or the offset stepper changes.
+          if let minutes = viewModel.sleepTipGlowMinutes {
+            Text("Glows about \(minutes) min after you open the app — the typical time to reach deep sleep at this age.")
+              .font(.system(size: 13))
+              .foregroundColor(Color(white: 0.5))
+              .fixedSize(horizontal: false, vertical: true)
+              .frame(maxWidth: .infinity, alignment: .leading)
           }
 
           Text("Tap the glow to dismiss • Hold the light to restart timing")
             .font(.system(size: 13))
             .foregroundColor(Color(white: 0.5))
+            .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
       }

@@ -4,7 +4,7 @@ Tiers (adapted for BabyLight — no local/develop/staging envs exist there): `si
 
 ## QA-G — Goal demo (P1) — cites: Success outcome, US-1 — tier: sim
 
-Preconditions: feature toggled on; birth month set to a 6–12 mo age; fine-tune 0; simulated clock injected (engine test harness or a debug time-scale flag — plan task 2.1's injected clock is the recipe).
+Preconditions: feature toggled on; birthday set to a 6–12 mo age; fine-tune 0; simulated clock injected (engine test harness or a debug time-scale flag — plan task 2.1's injected clock is the recipe).
 
 1. Activate the app → expect: settling session starts; on-screen timer counts from session start.
 2. Advance clock 24 min → expect: no glow yet (window is 25 min for 6–12 mo from `appOpen`).
@@ -55,5 +55,7 @@ Preconditions: Phase-1 (later Phase-2) TestFlight on the nightstand phone; hardw
 4. After ≥ 3 sessions → expect: log records match what actually happened (outcomes plausible) — the Success-outcome evidence stream is real.
 
 Dry-run: 2026-07-10 — 2 findings folded into spec (AC5's log-inspection path had no recipe → added to QA-G step 6 + preconditions now name the injected-clock/scripted-events harness recipes from plan tasks 2.1/4.6/5.3; journey step 8's "learned from N nights" observation is Phase-3-only → journey re-scoped to the log record itself, learned caption moved to QA-4).
+
+Dogfood: 2026-07-11 (TestFlight 28) — picker/stepper taps swallowed by the ancestor long-press → gestures now masked while controls are open (regression UI test added); birth month → birthday; "Fine-tune timing" relabeled + live "glows about N min" caption added so the logic explains itself.
 
 Port review: 2026-07-10 (BabyLight PR #21) — tap/long-press steps retargeted from "the timer" to the light surface: the timer text has `allowsHitTesting(false)` (`ContentView.swift:61`), so gestures land on the light, not the text.

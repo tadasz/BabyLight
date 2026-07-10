@@ -1,3 +1,4 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
 - 2026-07-10 NO-SPEC — fourth palette preset renamed "Wheat" → "Warm White" (id `dim-white` → `warm-white`), unified with the watch and the App Store description; direct owner instruction
 - 2026-07-10 2026-07-10-deep-sleep-tip — glow-pulse cue on the light surface (GlowPulse.swift) + tap-acknowledge and long-press-reset gestures joined the gesture stack via simultaneousGesture
+- 2026-07-11 2026-07-10-deep-sleep-tip — settling-time gestures masked to .subviews while controls are open (fixes overlay picker/stepper taps; prevents accidental resets)

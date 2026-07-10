@@ -60,10 +60,11 @@
     "ax_timer_brightness": "Lysstyrke for forløbet tid",
     "deep_sleep_tip": "DYB SØVN-TIP",
     "sleep_tip_toggle": "Glød når baby måske sover dybt",
-    "birth_month": "Babys fødselsmåned",
-    "fine_tune": "Finjustér timing",
+    "birthday": "Babys fødselsdato",
+    "glow_offset": "Glød før eller senere",
     "sleep_tip_hint": "En blid glød viser et godt tidspunkt at lægge baby ned.",
-    "sleep_tip_gestures": "Tryk på gløden for at lukke • Hold nede for at starte forfra"
+    "sleep_tip_gestures": "Tryk på gløden for at lukke • Hold nede for at starte forfra",
+    "sleep_tip_window": "Gløder ca. %lld min. efter du åbner appen — den typiske tid til dyb søvn i denne alder."
   },
   "watch_captions": [
     "Et natlys på dit håndled",

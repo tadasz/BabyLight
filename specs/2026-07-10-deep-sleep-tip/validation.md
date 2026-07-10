@@ -58,7 +58,7 @@ XCTest UI tests: settings section appears (plan task 3.5); feature-off parity (A
 
 ## Field dogfood
 
-- [ ] Per-phase TestFlight build out; ≥ 3 real-nursery sessions logged before the next phase starts
+- [ ] Per-phase TestFlight build out; ≥ 3 real-nursery sessions logged before the next phase starts — TestFlight 28 out 2026-07-10; round-1 feedback folded back 2026-07-11 (see qa.md → Dogfood); sessions still accruing
 
 ## Release readiness
 

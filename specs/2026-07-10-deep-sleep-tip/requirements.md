@@ -67,13 +67,13 @@ Acceptance scenarios:
 
 Phase-1 (P1) journey; cry-anchored variants layer onto the same steps in Phase 2.
 
-1. **Entry point** — the parent already opens Baby Light on the nightstand when settling starts (it *is* the night light). One-time setup: double-tap → controls overlay → "DEEP SLEEP TIP" section → toggle on, pick birth month.
+1. **Entry point** — the parent already opens Baby Light on the nightstand when settling starts (it *is* the night light). One-time setup: double-tap → controls overlay → "DEEP SLEEP TIP" section → toggle on, pick the baby's birthday.
 2. App becomes active → a settling session starts; the big on-screen timer now counts time since session start.
 3. Parent briefly checks a message (< 3 min) → on return the timer and estimate have kept running, not reset.
 4. At the age window (e.g. 6–12 mo: ~25 min from open) → the background gently pulses 3 × ~1.5 s, ~+12 % lightness, keeping hue; no sound, no haptics.
 5. Parent does the limp-limb test and attempts the put-down → single tap on the light acknowledges (the timer text has `allowsHitTesting(false)`; the gesture lives on the light surface); pulsing stops (tap-to-acknowledge is live only while pulsing).
 6. **Most likely failure:** baby wasn't deep yet and rouses → parent long-presses the light (0.6 s) → fresh session starts; (unacknowledged glows would re-fire every 5 min, max 4 rounds).
-7. **Empty / first-use state:** feature off by default → app behaves exactly as today; enabling reveals the birth-month picker and fine-tune stepper.
+7. **Empty / first-use state:** feature off by default → app behaves exactly as today; enabling reveals the birthday picker, the glow-offset stepper, and the live "glows about N min" caption.
 8. **Success:** session ends calmly (app backgrounded after the put-down) → one session record lands in the on-device log — the raw material the Success outcome and Phase-3 calibration are measured from.
 
 ## Goal
@@ -140,7 +140,7 @@ The `specs/features/` corpus exists since PR #20; every touched folder's README 
 
 On-device persistence only — no server, nothing leaves the device.
 
-- `UserDefaults`: birth month (optional `Date`), feature on/off, mic toggle (Phase 2), fine-tune minutes (−10…+10).
+- `UserDefaults`: birthday (optional `Date`; stored under the original `sleepTipBirthMonth` key — permanent API), feature on/off, mic toggle (Phase 2), fine-tune minutes (−10…+10).
 - Session log: JSON ring buffer, ~100 records, Application Support — owned by `SessionLog.swift`.
 
 | Field | Type | Null? | Notes |
@@ -169,6 +169,7 @@ On-device persistence only — no server, nothing leaves the device.
 - Learned offset relative to age default (not absolute), clamp ±10, ≥ 5-outcome gate, α = 0.2 EMA — stays valid as the baby ages; regressions age out via the ~20-outcome window.
 - Session survives < 3 min interruptions — checking a message must not restart the estimate (today `elapsedSeconds` resets on every activation).
 - Session logging ships in Phase 1 despite calibration being Phase 3 — calibration needs history on day one.
+- Dogfood amendments (TestFlight 28, 2026-07-11, owner): (1) full **birthday** instead of birth month — the picker was already date-granular; labels/copy now say birthday and the age math gains day precision; the `sleepTipBirthMonth` UserDefaults key is permanent API and keeps its name. (2) The fine-tune stepper is relabeled "Glow earlier or later" and a live caption ("Glows about N min after you open the app — the typical time to reach deep sleep at this age.") explains the age-window logic and makes the stepper's effect visible — no later story covered explaining the logic, so it lands in Phase 1. (3) The tap-acknowledge and long-press gestures are masked to `.subviews` while the controls overlay is open — an ancestor long-press recognizer swallowed taps meant for the overlay's date picker and stepper (the dogfood defect), and the mask also prevents accidental session resets while adjusting settings.
 - Success measured by on-device log + parent-reported nursery protocol — analytics are out by privacy design; this is the honest maximum evidence available.
 - Session semantics are feature-gated — feature off leaves the existing reset-on-activation path (`startElapsedTimer`) untouched, which is what makes AC4's parity clause literal. With the feature on, the elapsed display derives from the session-start `Date` (wall-clock), not tick counting — timers don't fire while suspended, so a < 3 min interruption must not under-count. This deliberately changes the feed-timer contract for the feature-on path and resolves that folder's recorded tick-counting debt there (owner-approved 2026-07-10; feed-timer README updated in the Phase-1 PR).
 - SessionLog persists as a JSON file in Application Support — a sanctioned deviation from patterns §4 ("no files on disk"; UserDefaults is unsuited to a ~100-record ring buffer). Owner-approved 2026-07-10; the Phase-1 PR amends patterns §4 to record the exception.

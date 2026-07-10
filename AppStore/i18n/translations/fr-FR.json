@@ -60,10 +60,11 @@
     "color_warm_white": "Blanc chaud",
     "deep_sleep_tip": "CONSEIL SOMMEIL PROFOND",
     "sleep_tip_toggle": "Lueur quand bébé dort peut-être profondément",
-    "birth_month": "Mois de naissance de bébé",
-    "fine_tune": "Affiner le minutage",
+    "birthday": "Date de naissance de bébé",
+    "glow_offset": "Lueur plus tôt ou plus tard",
     "sleep_tip_hint": "Une douce lueur suggère un bon moment pour poser bébé.",
-    "sleep_tip_gestures": "Touchez la lueur pour fermer • Maintenez pour recommencer"
+    "sleep_tip_gestures": "Touchez la lueur pour fermer • Maintenez pour recommencer",
+    "sleep_tip_window": "S'illumine environ %lld min après l'ouverture de l'app — le temps habituel pour atteindre le sommeil profond à cet âge."
   },
   "watch_captions": [
     "Une veilleuse à votre poignet",

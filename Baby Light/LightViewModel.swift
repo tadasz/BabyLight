@@ -202,6 +202,16 @@ class LightViewModel {
   /// fired round and never resets, so a session reset can't retrigger it.
   private(set) var glowCount = 0
 
+  /// Minutes from app open to the first glow with the current settings —
+  /// drives the live "how long will this take" caption in the controls.
+  /// Nil while the birthday is unset (no glow is scheduled then).
+  var sleepTipGlowMinutes: Int? {
+    guard let birthday = sleepTipBirthMonth else { return nil }
+    let bucket = BabyProfile.bucket(
+      forAgeMonths: BabyProfile.ageInMonths(birthMonth: birthday, now: Date()))
+    return BabyProfile.windowMinutes(for: bucket, anchor: .appOpen) + sleepTipFineTuneMinutes
+  }
+
   /// True while a glow is pulsing — the only window in which a single tap
   /// acknowledges (AC2).
   func acknowledgeSleepTip(at now: Date = Date()) -> Bool {
