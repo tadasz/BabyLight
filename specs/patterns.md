@@ -40,7 +40,7 @@ The watch target is **source-independent** from the iOS target. The palette is d
 - **`UserDefaults.standard` directly, with string keys, written in `didSet`** — the house pattern for persisted settings ([LightViewModel.swift](../Baby%20Light/LightViewModel.swift) → `dimOnClose`, `brightenOnOpen`, `timerLightness`). Read back in `init()` guarded by `object(forKey:) != nil` so coded defaults win on first launch.
 - Existing keys (`hasLaunchedBefore`, `dimOnClose`, `brightenOnOpen`, `timerLightness`, `appUseCount`, `hasRequestedReview`) are effectively persistent API — never rename them; migrations aren't worth it here.
 - Keys are declared at their point of use. If a key gains a third use site, hoist it to a constant then.
-- No `@AppStorage` in the view model (it's a view-layer wrapper); no Core Data, no files on disk.
+- No `@AppStorage` in the view model (it's a view-layer wrapper); no Core Data, and no files on disk **except** the deep-sleep tip's session log — a ~100-record JSON ring buffer in Application Support owned by [SleepTip/SessionLog.swift](../Baby%20Light/SleepTip/SessionLog.swift) (owner-approved deviation, `specs/2026-07-10-deep-sleep-tip` → Decisions; UserDefaults is unsuited to a capped ring buffer). Nothing else may write files without a new owner decision.
 - **Derive, don't duplicate:** prefer a computed property over a second stored flag — `isScreenOff` is computed from `timeRemaining == 0`, not stored ([LightViewModel.swift](../Baby%20Light/LightViewModel.swift)).
 
 ## 5. Testability — pure gating logic as static functions
