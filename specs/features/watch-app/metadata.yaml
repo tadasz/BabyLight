@@ -1,0 +1,13 @@
+name: Watch app
+status: active
+owner: tadas
+files:
+  - Baby Light Watch App/BabyLightWatchApp.swift
+  - Baby Light Watch App/WatchContentView.swift
+  - Baby Light Watch App/WatchLight.swift
+  - Baby Light Watch App/Localizable.xcstrings
+targets: [Baby Light Watch App]
+related_features:
+  - light-screen
+  - feed-timer
+specs: []

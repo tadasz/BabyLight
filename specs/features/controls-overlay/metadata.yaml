@@ -1,0 +1,13 @@
+name: Controls overlay
+status: active
+owner: tadas
+files:
+  - Baby Light/ControlsOverlay.swift
+targets: [Baby Night Light]
+related_features:
+  - light-screen
+  - auto-off-timer
+  - feed-timer
+  - first-run-tutorial
+  - rating-prompt
+specs: []

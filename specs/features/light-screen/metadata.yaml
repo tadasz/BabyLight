@@ -1,0 +1,17 @@
+name: Light screen
+status: active
+owner: tadas
+files:
+  - Baby Light/ContentView.swift
+  - Baby Light/Baby_LightApp.swift
+  - Baby Light/LightViewModel.swift
+  - Baby Light/LightColor.swift
+targets: [Baby Night Light]
+related_features:
+  - controls-overlay
+  - auto-off-timer
+  - feed-timer
+  - first-run-tutorial
+  - rating-prompt
+  - watch-app
+specs: []
