@@ -56,8 +56,10 @@ The feature needs a slightly smarter "session" (see §5).
 
 ### Putting it together — tip time measured from app open
 
-The app can't know the moment of sleep onset, only the moment settling started
-(app open). So the default tip time = settle latency + onset→deep-sleep time:
+Without the microphone the app can't know the moment of sleep onset, only the
+moment settling started (app open). So the mic-less default tip time = settle
+latency + onset→deep-sleep time (with the mic, cry cessation gives a much
+tighter anchor — see §4):
 
 | Baby age | Falling asleep | Sleep onset → deep sleep | **Default glow tip (from app open)** |
 |---|---|---|---|
@@ -110,7 +112,41 @@ invisible-ish to the baby, silent.
 - **Apple Watch follow-up:** a silent wrist tap is the ideal channel for a
   parent holding a baby — the watch app already exists. Phase 3 (§7).
 
-## 4. Resetting when the baby cries
+## 4. The microphone: detecting sleep onset + resetting on cries
+
+### Cry cessation as the sleep-onset anchor
+
+Many babies (ours included) cry or fuss right up until they drop off. That
+makes **the end of the last crying bout** a much better sleep-onset marker
+than app-open — it removes the fuzziest term (settle latency) from the
+estimate entirely:
+
+```
+glow time = end of last crying bout + onset→deep-sleep window (age-based, §2)
+          ≈ quiet + ~10 min for a 6-month-old
+```
+
+Mechanics:
+- **Bout end** = no confirmed cry for ≥ ~2 min after a bout. The gap threshold
+  matters: crying is naturally intermittent (breath pauses, brief lulls), so
+  short silences must not end a bout prematurely. Tunable, start at 2 min.
+- **Anchor hierarchy:** if the session had crying, anchor at the last bout
+  end and use just the onset→deep window (early edge). If the baby settles
+  quietly — some nights, some babies — fall back to the app-open anchor with
+  the full default from §2. Both paths feed the same `SleepTipEngine`.
+- **Reset-on-cry falls out for free:** a new confirmed bout simply moves the
+  anchor forward. No separate reset feature needed.
+- **Conservative failure direction:** a sleep-cry that survives the debounce
+  (baby cries out but stays asleep) pushes the anchor — and the glow — later.
+  Annoying but safe; the calibration loop (§6) absorbs it over time.
+- Cry-stop isn't *exactly* sleep onset — some babies calm, then drift for a
+  few minutes. That residual offset is precisely what per-baby calibration
+  learns; with this anchor it's learning a small clean number instead of a
+  large noisy one.
+- Edge cases: a sibling crying nearby or crying on a TV would move the anchor
+  (rare at 2am, acceptable); worth checking `knownClassifications` for usable
+  "awake" signals like `baby_laughter` or babbling (parent speech makes the
+  generic speech labels unreliable as an awake signal).
 
 ### Recommended: Apple's built-in sound classifier (on-device)
 
@@ -184,7 +220,7 @@ Session ends on long background, cry-reset, or manual reset.
 | Component | Responsibility |
 |---|---|
 | `SleepTipEngine` | Pure state machine: `settling → tipDue → tipping(round n) → acknowledged`; inputs are elapsed time, age bucket, cry events, manual reset. No UI, no timers inside → unit-testable like `shouldPromptForReview`. |
-| `CryDetector` | Wraps AVAudioEngine + SNAudioStreamAnalyzer; owns permission state, start/stop with scene phase, sustained-cry debounce; emits `cryConfirmed` events. |
+| `CryDetector` | Wraps AVAudioEngine + SNAudioStreamAnalyzer; owns permission state, start/stop with scene phase, sustained-cry debounce and bout-gap tracking; emits `cryBoutStarted` / `cryBoutEnded` events (the latter is the sleep-onset anchor). |
 | Glow pulse | A view modifier animating `lightened(by:)` on the background color, driven by `SleepTipEngine` state. |
 | Controls UI | New "DEEP SLEEP TIP" section in `ControlsOverlay`: birth-month picker, on/off, tip-time fine-tune (±), cry-reset toggle (with mic permission flow). |
 
@@ -212,7 +248,8 @@ Calibration rule (deliberately simple, no ML):
 
 1. Start from the age-based default (§2).
 2. Keep a rolling window of the last ~20 outcomes, **bucketed nap vs. night**
-   (descent speed differs with sleep pressure).
+   (descent speed differs with sleep pressure) and **by anchor type**
+   (cry-cessation vs. app-open, §4 — the two have different baselines).
 3. Nudge the glow time with a slow EMA (α ≈ 0.2) toward the earliest
    *successful* attempt times, and later when "too early" outcomes cluster.
 4. Bound the learned value to a sane window around the age default (e.g.
@@ -254,8 +291,10 @@ interesting, speculative, revisit after Phase 2 ships real cry data.
    permissions, ships fast, already better than guessing. Start logging
    session records locally from day one so calibration has history to work
    with when it arrives.
-2. **Phase 2 — cry reset.** `CryDetector` with SoundAnalysis, mic permission
-   flow, debounce tuning. Cry events flow into the session log.
+2. **Phase 2 — microphone: sleep-onset anchor + cry reset.** `CryDetector`
+   with SoundAnalysis, mic permission flow, debounce + bout-gap tuning. Cry
+   bout end re-anchors the countdown (§4); a new bout moves it forward, which
+   *is* the reset. Cry events flow into the session log.
 3. **Phase 3 — per-baby calibration (§6).** Learned glow offsets from session
    outcomes, nap/night buckets, "learned from N nights" display in settings.
 4. **Phase 4 — refinements.** Watch wrist-tap tip; optional "baby just fell
