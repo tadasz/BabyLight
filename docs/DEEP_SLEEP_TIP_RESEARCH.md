@@ -1,0 +1,224 @@
+# Deep-Sleep Tip — Research & Proposed Design
+
+**Status:** research / pre-implementation
+**Feature idea:** while a parent settles the baby in their arms with the app open,
+the light should *gently glow a few times* when the baby has probably reached deep
+sleep — the cue to try putting them down. If the baby cries, the estimate resets.
+
+Everything here is deliberately approximate. The goal is a better-than-guessing
+nudge, not a medical device.
+
+---
+
+## 1. What the app already gives us
+
+- `LightViewModel.elapsedSeconds` already counts up from the moment the app
+  becomes active, and is rendered as the big on-screen timer. This *is* the
+  settling timer — parents open the app when they start rocking/feeding.
+- `Color.lightened(by:)` (used for the timer text) gives us a ready-made way to
+  pulse the background subtly without touching hardware brightness.
+- The app keeps the screen on (`isIdleTimerDisabled = true`) and stays
+  foreground for the whole settling session — which is exactly the window where
+  live microphone classification is allowed to run.
+
+One catch: `handleAppDidBecomeActive()` resets `elapsedSeconds` on **every**
+re-activation, so briefly checking a notification would restart the estimate.
+The feature needs a slightly smarter "session" (see §5).
+
+## 2. Sleep science: when can you put a baby down?
+
+### Newborns (0–3 months)
+- Newborns fall asleep into **active (REM) sleep** — twitching, grunting,
+  irregular breathing — and only transition to **quiet (deep) sleep about
+  20–30 minutes after sleep onset**. Sleep cycles are ~50–60 min, split roughly
+  evenly between active and quiet sleep.
+- This is why the classic advice is: **wait at least 20 minutes after they fall
+  asleep** before attempting the transfer, then confirm with the **"limp-limb"
+  test** (lift an arm — if it drops floppy, they're in deep sleep; resistance
+  means light sleep).
+- Transfers attempted during active sleep usually fail — the baby is easily
+  roused.
+
+### The 3–4 month transition
+- Around 3–4 months sleep architecture matures into adult-like stages
+  (N1/N2/N3 + REM). Sleep onsets are mostly REM until ~3 months, then
+  progressively shift until they are **predominantly NREM from ~6 months on**.
+- Practically: the window from falling asleep to "transferable" deep sleep
+  **shrinks** as the baby ages.
+
+### Older babies (6+ months)
+- They enter sleep through NREM like adults and reach deep slow-wave sleep
+  within roughly **10–15 minutes** of sleep onset.
+
+### Sleep-onset latency (falling asleep itself)
+- Typical time to fall asleep once settling starts is **10–20 minutes**
+  (under ~10 min often means overtired; over ~30 min under/overtired).
+
+### Putting it together — tip time measured from app open
+
+The app can't know the moment of sleep onset, only the moment settling started
+(app open). So the default tip time = settle latency + onset→deep-sleep time:
+
+| Baby age | Falling asleep | Sleep onset → deep sleep | **Default glow tip (from app open)** |
+|---|---|---|---|
+| 0–3 mo  | ~10–20 min | ~20–25 min | **~35 min** |
+| 3–6 mo  | ~10–15 min | ~15–20 min | **~30 min** |
+| 6–12 mo | ~10–15 min | ~10–15 min | **~25 min** |
+| 12+ mo  | ~10–15 min | ~10 min    | **~20 min** |
+
+Caveats to design around:
+- Variance between babies (and between nights) is large. The number must be
+  **user-adjustable** (e.g. ±5 min steps) and the glow should **repeat every
+  ~5 min** a few times, because the first cue lands mid-range, not at a
+  guaranteed moment.
+- The limp-limb test stays the ground truth. Tip copy should say "try the arm
+  test", not "baby is in deep sleep".
+- A future refinement (§7) lets the parent tap once when the baby actually
+  falls asleep, anchoring the countdown to sleep onset instead of app open —
+  more accurate, one extra interaction.
+
+## 3. The glow tip
+
+Requirements: visible to a parent glancing at the screen in a dark room,
+invisible-ish to the baby, silent.
+
+- **Pulse the background color's lightness**, not `UIScreen.brightness`:
+  the user may have swiped hardware brightness near zero, and brightness writes
+  are what we already fight with in lifecycle code. `lightened(by:)` on the
+  current preset keeps the hue (red/amber science intact) and works at any
+  hardware brightness.
+- Shape: ~3 pulses, each ~1.5 s ease-in-out, raising lightness by ~10–15 %,
+  then settle back. Repeat the triplet every ~5 min, max ~4 rounds, until:
+  - the user acknowledges (any existing gesture — double-tap, or a light tap on
+    the timer), or
+  - a cry reset fires, or
+  - the app is backgrounded.
+- No sound, no phone haptics (the phone is usually lying on a surface; a buzz
+  could be audible).
+- **Apple Watch follow-up:** a silent wrist tap is the ideal channel for a
+  parent holding a baby — the watch app already exists. Phase 3 (§7).
+
+## 4. Resetting when the baby cries
+
+### Recommended: Apple's built-in sound classifier (on-device)
+
+Apple's SoundAnalysis framework ships a built-in classifier
+(`SNClassifySoundRequest(classifierIdentifier: .version1)`, iOS 15+; we target
+iOS 26) that recognizes 300+ sounds **entirely on-device**, including a
+dedicated **`baby_crying`** label (there's also `baby_laughter`). This is the
+same tech behind iOS's accessibility "Sound Recognition → Crying Baby" feature.
+
+Live-audio pipeline:
+
+```
+AVAudioEngine input tap → SNAudioStreamAnalyzer → SNClassifySoundRequest(.version1)
+                                                   windowDuration ≈ 1.5–2 s, overlap 50 %
+→ per-window results: (identifier, confidence)
+→ debounce: cry confirmed only if confidence ≥ ~0.6 in ≥ 3 windows within ~10 s
+```
+
+**The debounce is the load-bearing part.** Newborn *active* sleep is full of
+grunts, whimpers, and short squawks that do **not** mean "awake" — a single
+noisy window must not reset the timer (that would reset constantly and make the
+feature useless). Only sustained crying (~5–10 s) resets. Thresholds need
+tuning with real-world audio; start conservative.
+
+On confirmed cry:
+- reset the deep-sleep countdown to zero (baby roused → estimate restarts),
+- keep the visible elapsed timer semantics consistent (probably reset it too —
+  it currently represents "this settling attempt").
+
+### Practicalities
+
+- **Permission:** needs `NSMicrophoneUsageDescription` + one-time mic prompt.
+  If denied, the feature degrades gracefully: glow tip still works, reset is
+  manual only.
+- **Privacy:** classification is fully on-device; no audio is recorded, stored,
+  or transmitted. App Store privacy label can stay **"Data Not Collected"**.
+  Usage string should say exactly that ("listens locally for crying to reset
+  the sleep timer; nothing is recorded or leaves the device").
+- **The orange mic indicator dot** will show while listening — a small orange
+  dot visible in a dark room. System-mandated, can't be hidden. Mitigation:
+  only listen while the deep-sleep tip feature is enabled and a session is
+  running; mention it in the feature's UI copy so it doesn't surprise anyone.
+- **Battery/thermal:** negligible next to the always-on screen. Runs only while
+  foreground (which is the app's whole use pattern anyway).
+- **False negatives are fine** — a manual reset gesture (e.g. long-press the
+  timer) backs it up. False *positives* are the thing to guard against, hence
+  the sustained-cry rule and preferring the classifier over any dB threshold.
+
+### Rejected alternative: loudness threshold
+
+Simple audio metering (`AVAudioRecorder` peak power over a dB threshold) needs
+no ML but can't tell crying from a white-noise machine, a parent's voice, a
+door, or the baby's own active-sleep grunts. In a nursery, white noise is the
+common case, not the edge case. Not worth shipping even as v1.
+
+## 5. What the app needs (design sketch)
+
+**Age input.** A one-time "baby's birth month" picker (stored in
+`UserDefaults`, local only, optional). A birth date beats an age-bucket picker
+because the defaults keep adjusting as the baby grows — set it once at 2 months
+and the tip time is still right at 8 months. Bucket boundaries: 0–3, 3–6, 6–12,
+12+ months.
+
+**Session semantics.** Introduce a `SettlingSession` concept on top of
+`elapsedSeconds`: a session survives brief resign-active gaps (< ~2–3 min, e.g.
+checking a message) instead of resetting on every activation like today.
+Session ends on long background, cry-reset, or manual reset.
+
+**New components:**
+
+| Component | Responsibility |
+|---|---|
+| `SleepTipEngine` | Pure state machine: `settling → tipDue → tipping(round n) → acknowledged`; inputs are elapsed time, age bucket, cry events, manual reset. No UI, no timers inside → unit-testable like `shouldPromptForReview`. |
+| `CryDetector` | Wraps AVAudioEngine + SNAudioStreamAnalyzer; owns permission state, start/stop with scene phase, sustained-cry debounce; emits `cryConfirmed` events. |
+| Glow pulse | A view modifier animating `lightened(by:)` on the background color, driven by `SleepTipEngine` state. |
+| Controls UI | New "DEEP SLEEP TIP" section in `ControlsOverlay`: birth-month picker, on/off, tip-time fine-tune (±), cry-reset toggle (with mic permission flow). |
+
+**Localization.** Every new string goes through the existing 26-locale pipeline
+(`AppStore/LOCALIZATION.md`) — budget for it; the settings section adds maybe
+6–8 strings plus the mic usage description.
+
+## 6. Risks / open questions
+
+- **Timing defaults are heuristics.** Ranges above come from parenting-science
+  summaries of sleep-lab findings, not from a validated dataset. Adjustability
+  + repeat pulses are the mitigation. Could later learn per-baby offsets from
+  history (which attempt times preceded sessions that *didn't* end in a cry).
+- **Does a cry mean full restart?** After a brief rousing, babies often return
+  to sleep faster than from fully awake. V1 keeps it simple (full reset);
+  worth revisiting with real usage.
+- **Exact classifier labels** should be confirmed in code via
+  `SNClassifySoundRequest(classifierIdentifier: .version1).knownClassifications`
+  (expect `baby_crying`; consider also treating `crying_sobbing` as a match if
+  present).
+- **App Review:** mic + baby apps are common (baby monitors); the on-device,
+  nothing-stored story is clean. No expected issues.
+
+## 7. Suggested phasing
+
+1. **Phase 1 — glow tip, no microphone.** Birth-month setting, session
+   semantics, `SleepTipEngine`, glow pulses, manual reset gesture. Zero new
+   permissions, ships fast, already better than guessing.
+2. **Phase 2 — cry reset.** `CryDetector` with SoundAnalysis, mic permission
+   flow, debounce tuning.
+3. **Phase 3 — refinements.** Watch wrist-tap tip; optional "baby just fell
+   asleep" single tap to anchor the countdown at sleep onset; per-baby learned
+   offsets.
+
+## Sources
+
+- [Parenting Science — Baby sleep stages: active vs quiet sleep](https://parentingscience.com/baby-sleep-stages/)
+- [Parenting Science — Newborn sleep patterns](https://parentingscience.com/newborn-sleep/)
+- [Sleep Foundation — Infant sleep cycles vs adults](https://www.sleepfoundation.org/baby-sleep/baby-sleep-cycle)
+- [Karger, Annals of Nutrition & Metabolism — Sleep and Early Brain Development](https://karger.com/anm/article/75/Suppl.%201/44/42656/Sleep-and-Early-Brain-Development)
+- [ISSR — Normal sleep architecture in infants and children](https://issr.in/normal-sleep-architecture-in-infants-and-children/)
+- [Ask Dr. Sears — 8 infant sleep facts (limp-limb sign, ~20 min to deep sleep)](https://www.askdrsears.com/topics/health-concerns/sleep-problems/8-infant-sleep-facts-every-parent-should-know/)
+- [Hey Sleepy Baby — Sleep latency](https://heysleepybaby.com/sleep-latency/)
+- [Apple — SoundAnalysis framework](https://developer.apple.com/documentation/soundanalysis/)
+- [Apple — SNClassifySoundRequest](https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest)
+- [Apple — Classifying live audio with the built-in sound classifier](https://developer.apple.com/documentation/SoundAnalysis/classifying-live-audio-input-with-a-built-in-sound-classifier)
+- [WWDC21 — Discover built-in sound classification in SoundAnalysis](https://developer.apple.com/videos/play/wwdc2021/10036/)
+- [Swiftjective-C — the 300-sound built-in model (includes `baby_crying`)](https://www.swiftjectivec.com/sound-analysis-framework-built-in-model/)
+- [Apple Support — Sound Recognition accessibility feature (crying baby)](https://support.apple.com/guide/iphone/use-sound-recognition-iphf2dc33312/ios)
