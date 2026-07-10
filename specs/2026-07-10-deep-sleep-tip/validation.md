@@ -46,13 +46,15 @@ XCTest UI tests: settings section appears (plan task 3.5); feature-off parity (A
 
 ## Non-regression
 
-- [ ] Existing flows still work: double-tap opens controls, drag adjusts brightness, auto-off timer, review-prompt logic (`Tips.swift`) untouched
+- [ ] Existing flows still work: double-tap opens controls, drag adjusts brightness, auto-off timer; first-run tutorial (TipKit, `Tips.swift` — its step-2 tip anchors on the timer text) and rating-prompt gating (`LightViewModel.maybeRequestReview()`) untouched
 - [ ] Diff stayed within **Edit surface & blast radius**; overflow surfaced as a separate ticket
 - [ ] Feature off → zero behavioral delta (AC4 is the regression gate)
 
 ## Touched feature folders
 
-- [ ] none — no feature-folder corpus yet; seed `specs/features/deep-sleep-tip/` after ship if SDD sticks (requirements → Touches features)
+- [ ] README + changelog updated in the same PR as the behaviour change (requirements → Touches features): feed-timer, light-screen, controls-overlay, auto-off-timer, first-run-tutorial (per phase, as touched)
+- [ ] Constitution amendments landed with the code that motivates them: `specs/patterns.md` §4 SessionLog file exception (Phase 1); `specs/tech-stack.md` frameworks + patterns §8 concurrency (Phase 2)
+- [ ] `specs/features/deep-sleep-tip/` seeded after Phase-1 ship (README + metadata + changelog from this folder)
 
 ## Field dogfood
 
