@@ -37,6 +37,10 @@ struct ContentView: View {
             .ignoresSafeArea()
             .accessibilityIdentifier("lightBackground")
             .accessibilityLabel("Light background color: \(viewModel.currentColor.name)")
+            // Deep-sleep tip cue: the light breathes brighter for ~4.5 s each
+            // time a glow round fires (no-op while the feature is off).
+            .modifier(GlowPulse(color: viewModel.currentColor.color,
+                                trigger: viewModel.glowCount))
 
           // Elapsed timer - same hue as the background, slightly lighter so
           // it stays visible without changing the overall lighting. The font
@@ -113,6 +117,25 @@ struct ContentView: View {
               if dragStartY == 0 {
                 dragStartY = value.location.y
               }
+            }
+        )
+        .simultaneousGesture(
+          // Deep-sleep tip: a single tap acknowledges the glow. Simultaneous
+          // so the double-tap toggle keeps zero recognition delay; the engine
+          // only accepts the tap while a glow is pulsing, so this is inert
+          // the rest of the time (and always, with the feature off).
+          TapGesture()
+            .onEnded {
+              _ = viewModel.acknowledgeSleepTip()
+            }
+        )
+        .simultaneousGesture(
+          // Deep-sleep tip: long-press starts a fresh settling session — the
+          // manual reset for a failed put-down. Guarded off inside the view
+          // model while the feature is disabled.
+          LongPressGesture(minimumDuration: 0.6)
+            .onEnded { _ in
+              viewModel.resetSettlingSession()
             }
         )
       }

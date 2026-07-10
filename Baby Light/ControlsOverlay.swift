@@ -117,6 +117,80 @@ struct ControlsOverlay: View {
         }
       }
 
+      // Deep Sleep Tip Settings
+      VStack(spacing: 12) {
+        Text("DEEP SLEEP TIP")
+          .font(.system(size: 14, weight: .semibold))
+          .foregroundColor(Color(white: 0.85))
+          .tracking(1)
+          .frame(maxWidth: .infinity, alignment: .leading)
+
+        Toggle(isOn: $viewModel.sleepTipEnabled) {
+          Text("Glow when baby may be deeply asleep")
+            .font(.system(size: 15))
+            .foregroundColor(.white)
+            // Wraps instead of truncating — several locales run long here.
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .tint(.white)
+        .accessibilityIdentifier("sleepTipToggle")
+
+        Text("A gentle glow suggests a good moment to try the put-down.")
+          .font(.system(size: 13))
+          .foregroundColor(Color(white: 0.5))
+          .frame(maxWidth: .infinity, alignment: .leading)
+
+        if viewModel.sleepTipEnabled {
+          DatePicker(
+            selection: Binding(
+              get: { viewModel.sleepTipBirthMonth ?? Date() },
+              set: { viewModel.sleepTipBirthMonth = $0 }
+            ),
+            in: ...Date(),
+            displayedComponents: .date
+          ) {
+            Text("Baby's birth month")
+              .font(.system(size: 15))
+              .foregroundColor(.white)
+          }
+          .environment(\.colorScheme, .dark)
+          .accessibilityIdentifier("sleepTipBirthMonthPicker")
+
+          HStack(spacing: 12) {
+            Text("Fine-tune timing")
+              .font(.system(size: 15))
+              .foregroundColor(.white)
+
+            Spacer()
+
+            // Numeric abbreviation like the timer capsules ("15m") — not a
+            // catalog entry.
+            Text(viewModel.sleepTipFineTuneMinutes > 0
+                 ? "+\(viewModel.sleepTipFineTuneMinutes)m"
+                 : "\(viewModel.sleepTipFineTuneMinutes)m")
+              .font(.system(size: 15, weight: .semibold))
+              .monospacedDigit()
+              .foregroundColor(.white)
+
+            Stepper(value: $viewModel.sleepTipFineTuneMinutes, in: -10...10) {
+            }
+            .labelsHidden()
+            .environment(\.colorScheme, .dark)
+            .accessibilityIdentifier("sleepTipFineTuneStepper")
+            .accessibilityLabel("Fine-tune timing")
+          }
+
+          Text("Tap the glow to dismiss • Hold the light to restart timing")
+            .font(.system(size: 13))
+            .foregroundColor(Color(white: 0.5))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+      }
+      // Container so otherElements["deepSleepTipSection"] resolves in UI
+      // tests (same wiring as the controlsOverlay identifier).
+      .accessibilityElement(children: .contain)
+      .accessibilityIdentifier("deepSleepTipSection")
+
       // Hint
       Text("Double-tap to hide • Swipe to adjust brightness")
         .font(.system(size: 13))

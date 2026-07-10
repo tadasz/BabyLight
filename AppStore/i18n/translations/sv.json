@@ -57,7 +57,13 @@
     "desc_more_light": "Om du behöver mer ljus",
     "ax_elapsed_time": "Förlupen tid",
     "ax_light_bg": "Ljusets bakgrundsfärg: %@",
-    "ax_timer_brightness": "Ljusstyrka för förlupen tid"
+    "ax_timer_brightness": "Ljusstyrka för förlupen tid",
+    "deep_sleep_tip": "DJUPSÖMNSTIPS",
+    "sleep_tip_toggle": "Glöd när barnet kanske sover djupt",
+    "birth_month": "Barnets födelsemånad",
+    "fine_tune": "Finjustera timing",
+    "sleep_tip_hint": "En mjuk glöd visar ett bra tillfälle att lägga ner barnet.",
+    "sleep_tip_gestures": "Tryck på glöden för att stänga • Håll ned för att börja om"
   },
   "watch_captions": [
     "En nattlampa på din handled",

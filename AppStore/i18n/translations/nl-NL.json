@@ -57,7 +57,13 @@
     "ax_elapsed_time": "Verstreken tijd",
     "ax_light_bg": "Achtergrondkleur van licht: %@",
     "ax_timer_brightness": "Helderheid van timer",
-    "color_warm_white": "Warm wit"
+    "color_warm_white": "Warm wit",
+    "deep_sleep_tip": "DIEPE-SLAAPTIP",
+    "sleep_tip_toggle": "Gloed wanneer baby misschien diep slaapt",
+    "birth_month": "Geboortemaand van baby",
+    "fine_tune": "Timing bijstellen",
+    "sleep_tip_hint": "Een zachte gloed wijst op een goed moment om baby neer te leggen.",
+    "sleep_tip_gestures": "Tik op de gloed om te sluiten • Houd vast om opnieuw te beginnen"
   },
   "watch_captions": [
     "Een nachtlampje om je pols",

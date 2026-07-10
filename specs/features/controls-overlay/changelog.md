@@ -1,1 +1,2 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 2026-07-10-deep-sleep-tip — new "DEEP SLEEP TIP" section: toggle, birth-month picker, fine-tune stepper, gesture hint; identifiers deepSleepTipSection/sleepTipToggle; keys sleepTipEnabled/sleepTipBirthMonth/sleepTipFineTune

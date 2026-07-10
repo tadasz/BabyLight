@@ -57,7 +57,13 @@
     "ax_elapsed_time": "已用時間",
     "ax_light_bg": "燈光背景顏色：%@",
     "ax_timer_brightness": "計時亮度",
-    "color_warm_white": "暖白"
+    "color_warm_white": "暖白",
+    "deep_sleep_tip": "深睡提示",
+    "sleep_tip_toggle": "寶寶可能進入深睡時發出微光",
+    "birth_month": "寶寶出生月份",
+    "fine_tune": "微調時間",
+    "sleep_tip_hint": "柔和的微光提示：現在是嘗試放下寶寶的好時機。",
+    "sleep_tip_gestures": "輕點微光以關閉 • 長按以重新計時"
   },
   "watch_captions": [
     "手腕上的夜燈",

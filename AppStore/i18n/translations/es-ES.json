@@ -57,7 +57,13 @@
     "ax_elapsed_time": "Tiempo transcurrido",
     "ax_light_bg": "Color de fondo de la luz: %@",
     "ax_timer_brightness": "Brillo del temporizador transcurrido",
-    "color_warm_white": "Blanco cálido"
+    "color_warm_white": "Blanco cálido",
+    "deep_sleep_tip": "CONSEJO DE SUEÑO PROFUNDO",
+    "sleep_tip_toggle": "Brillo cuando el bebé podría dormir profundamente",
+    "birth_month": "Mes de nacimiento del bebé",
+    "fine_tune": "Ajustar el momento",
+    "sleep_tip_hint": "Un brillo suave sugiere un buen momento para acostarlo.",
+    "sleep_tip_gestures": "Toca el brillo para descartar • Mantén pulsado para reiniciar"
   },
   "watch_captions": [
     "Una luz nocturna en tu muñeca",

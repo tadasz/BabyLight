@@ -109,6 +109,13 @@ class LightViewModel {
     if UserDefaults.standard.object(forKey: "timerLightness") != nil {
       timerLightness = CGFloat(UserDefaults.standard.double(forKey: "timerLightness"))
     }
+    if UserDefaults.standard.object(forKey: "sleepTipFineTune") != nil {
+      sleepTipFineTuneMinutes = UserDefaults.standard.integer(forKey: "sleepTipFineTune")
+    }
+    sleepTipBirthMonth = BabyProfile.loadBirthMonth()
+    if UserDefaults.standard.object(forKey: "sleepTipEnabled") != nil {
+      sleepTipEnabled = UserDefaults.standard.bool(forKey: "sleepTipEnabled")
+    }
 
     // Count this launch as a "use" and remember whether we've already asked
     // for a rating, so the prompt is gated to returning users and shown once.
@@ -126,16 +133,212 @@ class LightViewModel {
     elapsedTimer?.invalidate()
     elapsedSeconds = 0
     elapsedTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-      self?.elapsedSeconds += 1
+      guard let self = self else { return }
+      if let start = self.sessionStart {
+        // With a settling session running, the readout derives from the start
+        // date instead of counting ticks — ticks don't fire while suspended,
+        // and the value must be correct after a short interruption keeps the
+        // session alive. `sessionStart` is always nil with the feature off,
+        // so that path counts ticks exactly as before.
+        let now = Date()
+        self.elapsedSeconds = Int(now.timeIntervalSince(start))
+        let roundsBefore = self.sleepTipEngine.roundsFired
+        self.sleepTipEngine.tick(now: now)
+        if self.sleepTipEngine.roundsFired > roundsBefore {
+          self.glowCount += 1
+        }
+      } else {
+        self.elapsedSeconds += 1
+      }
     }
+  }
+
+  // MARK: - Deep Sleep Tip (settling session)
+
+  /// When enabled, opening the app starts a settling session and the elapsed
+  /// readout counts from the session start, surviving interruptions shorter
+  /// than `maxSessionInterruption` instead of resetting on every activation
+  /// (specs/2026-07-10-deep-sleep-tip). Off by default; while off, every code
+  /// path of this feature is inert and the app behaves exactly as before.
+  var sleepTipEnabled: Bool = false {
+    didSet {
+      UserDefaults.standard.set(sleepTipEnabled, forKey: "sleepTipEnabled")
+      if !sleepTipEnabled {
+        endSettlingSession(reason: .manualReset)
+      } else {
+        // The date picker can't display "unset", so first enable seeds the
+        // birth month with today — the newborn bucket has the longest window,
+        // which fails in the conservative direction (glow later, never
+        // earlier) until the parent picks the real month.
+        if sleepTipBirthMonth == nil {
+          sleepTipBirthMonth = Date()
+        }
+        if sessionStart == nil {
+          beginSettlingSession()
+        }
+      }
+    }
+  }
+
+  /// The baby's birth month backing the age-bucket window lookup; persisted
+  /// through `BabyProfile` so the lookup logic stays view-model-free.
+  var sleepTipBirthMonth: Date? {
+    didSet {
+      BabyProfile.save(birthMonth: sleepTipBirthMonth)
+      sleepTipEngine.updateBucket(ageBucket(at: Date()))
+    }
+  }
+
+  /// Parent adjustment on top of the age window, −10…+10 minutes; applies to
+  /// the running session as well as future ones.
+  var sleepTipFineTuneMinutes: Int = 0 {
+    didSet {
+      UserDefaults.standard.set(sleepTipFineTuneMinutes, forKey: "sleepTipFineTune")
+      sleepTipEngine.updateFineTune(minutes: sleepTipFineTuneMinutes)
+    }
+  }
+
+  /// Monotonic glow counter driving the pulse animation — bumps once per
+  /// fired round and never resets, so a session reset can't retrigger it.
+  private(set) var glowCount = 0
+
+  /// True while a glow is pulsing — the only window in which a single tap
+  /// acknowledges (AC2).
+  func acknowledgeSleepTip(at now: Date = Date()) -> Bool {
+    sleepTipEngine.acknowledge(at: now)
+  }
+
+  /// Start of the current settling session; nil when none is running
+  /// (feature off, session ended by auto-off, or a long interruption).
+  private(set) var sessionStart: Date?
+
+  /// The tip state machine — pure, clock-driven; ticked from the elapsed
+  /// timer while a session runs.
+  private(set) var sleepTipEngine = SleepTipEngine()
+
+  /// Where session records land at session end. `var` so tests can point it
+  /// at a temporary file instead of the app container.
+  var sessionLog = SessionLog()
+
+  /// When the app last left the foreground with a session running — the
+  /// timestamp the interruption rule measures against.
+  private var sessionResignedAt: Date?
+
+  /// Interruptions up to this long keep the session (and its tip estimate)
+  /// alive; anything longer ends it and the next activation starts fresh.
+  static let maxSessionInterruption: TimeInterval = 180
+
+  enum SettlingSessionAction {
+    case start    // no session yet → begin one
+    case resume   // short interruption → keep the session and its estimate
+    case restart  // interruption exceeded the limit → end old, begin fresh
+  }
+
+  /// Pure decision rule for what a foreground activation does to the settling
+  /// session. Static and side-effect-free so tests can drive it with
+  /// simulated dates (same shape as `shouldPromptForReview`).
+  static func settlingSessionAction(now: Date, sessionStart: Date?, resignedAt: Date?) -> SettlingSessionAction {
+    guard sessionStart != nil else { return .start }
+    if let resignedAt, now.timeIntervalSince(resignedAt) > maxSessionInterruption {
+      return .restart
+    }
+    return .resume
+  }
+
+  /// Begin a fresh settling session anchored at `now`.
+  func beginSettlingSession(at now: Date = Date()) {
+    sessionStart = now
+    sessionResignedAt = nil
+    sleepTipEngine.sessionStarted(at: now, bucket: ageBucket(at: now),
+                                  fineTuneMinutes: sleepTipFineTuneMinutes)
+    startElapsedTimer()
+  }
+
+  /// End the current session (auto-off firing, long interruption, manual
+  /// reset, or the feature being switched off), appending one record to the
+  /// on-device session log (AC5). The elapsed readout keeps ticking from its
+  /// current value — nothing ever stops the on-light clock.
+  func endSettlingSession(reason: SessionRecord.EndReason) {
+    if let start = sessionStart {
+      let record = SessionRecord(
+        date: start,
+        ageMonths: sleepTipBirthMonth.map { BabyProfile.ageInMonths(birthMonth: $0, now: start) },
+        napOrNight: SessionRecord.napOrNight(for: start),
+        anchorKind: sleepTipEngine.anchorKind,
+        anchorTime: sleepTipEngine.anchorTime ?? start,
+        glowTimes: sleepTipEngine.glowTimes,
+        cryBouts: [],
+        acknowledgeTime: sleepTipEngine.acknowledgeTime,
+        outcome: Self.sessionOutcome(glowCount: sleepTipEngine.glowTimes.count, endReason: reason),
+        endReason: reason)
+      sessionLog.append(record)
+    }
+    sessionStart = nil
+    sessionResignedAt = nil
+    sleepTipEngine.sessionEnded()
+  }
+
+  /// Manual reset (long-press on the light): ends the running session and
+  /// starts a fresh one on the spot — the backup for a missed cue.
+  func resetSettlingSession(at now: Date = Date()) {
+    guard sleepTipEnabled else { return }
+    endSettlingSession(reason: .manualReset)
+    beginSettlingSession(at: now)
+  }
+
+  /// Phase-1 outcome labeling — the mic-less projection of the calibration
+  /// rule (plan task 5.1): a glow followed by a calm background end reads as
+  /// a successful put-down; a glow followed by a manual reset means the baby
+  /// roused (too early). Everything else is honest `unknown` until the cry
+  /// detector can say more. Static and pure so tests hit it directly.
+  static func sessionOutcome(glowCount: Int, endReason: SessionRecord.EndReason) -> SessionRecord.Outcome {
+    guard glowCount > 0 else { return .unknown }
+    switch endReason {
+    case .background: return .success
+    case .manualReset: return .tooEarly
+    case .autoOff: return .unknown
+    }
+  }
+
+  /// Age bucket for the window lookup; nil when the birth month is unset
+  /// (the session still runs and logs, but no glow is scheduled).
+  private func ageBucket(at now: Date) -> BabyProfile.AgeBucket? {
+    guard let birthMonth = sleepTipBirthMonth else { return nil }
+    return BabyProfile.bucket(forAgeMonths: BabyProfile.ageInMonths(birthMonth: birthMonth, now: now))
   }
 
   // MARK: - App Lifecycle
 
-  /// Called when the app becomes active (opened). Resets the elapsed timer and,
+  /// Session bookkeeping for a foreground activation, separated from the
+  /// UIKit brightness side effects so unit tests can drive it with simulated
+  /// dates without touching `UIScreen` (which traps off the main queue).
+  func applySettlingSessionActivation(now: Date = Date()) {
+    guard sleepTipEnabled else {
+      startElapsedTimer()
+      return
+    }
+    switch Self.settlingSessionAction(now: now, sessionStart: sessionStart, resignedAt: sessionResignedAt) {
+    case .resume:
+      sessionResignedAt = nil
+      sleepTipEngine.becameActive(at: now)
+      // Correct the readout immediately rather than waiting for the next tick.
+      if let start = sessionStart {
+        elapsedSeconds = Int(now.timeIntervalSince(start))
+      }
+    case .start:
+      beginSettlingSession(at: now)
+    case .restart:
+      // The old session ended in the background; its record says so.
+      endSettlingSession(reason: .background)
+      beginSettlingSession(at: now)
+    }
+  }
+
+  /// Called when the app becomes active (opened). Resets the elapsed timer
+  /// (or resumes/starts a settling session when the deep-sleep tip is on) and,
   /// if enabled, brightens the screen to maximum.
   func handleAppDidBecomeActive() {
-    startElapsedTimer()
+    applySettlingSessionActivation()
     if brightenOnOpen {
       brightness = 1.0
       activeScreen?.brightness = 1.0
@@ -153,8 +356,20 @@ class LightViewModel {
   /// the write is silently dropped — which is why the previous
   /// background-only implementation never actually dimmed.
   func handleAppWillResignActive() {
+    noteSettlingSessionResigned()
     if dimOnClose {
       activeScreen?.brightness = 0.0
+    }
+  }
+
+  /// Stamps when the app left the foreground with a session running — the
+  /// timestamp the interruption rule measures against. Separated from the
+  /// brightness side effect for the same testability reason as
+  /// `applySettlingSessionActivation(now:)`.
+  func noteSettlingSessionResigned(at now: Date = Date()) {
+    if sessionStart != nil {
+      sessionResignedAt = now
+      sleepTipEngine.wentInactive(at: now)
     }
   }
 
@@ -192,6 +407,8 @@ class LightViewModel {
         // Timer finished, keep at 0 for screen-off state
         self.timer?.invalidate()
         self.timer = nil
+        // Auto-off reaching zero also ends any settling session.
+        self.endSettlingSession(reason: .autoOff)
       }
     }
   }

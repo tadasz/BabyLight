@@ -57,7 +57,13 @@
     "ax_elapsed_time": "経過時間",
     "ax_light_bg": "灯りの背景色：%@",
     "ax_timer_brightness": "タイマーの明るさ",
-    "color_warm_white": "暖色ホワイト"
+    "color_warm_white": "暖色ホワイト",
+    "deep_sleep_tip": "深い眠りのヒント",
+    "sleep_tip_toggle": "赤ちゃんが深く眠った頃に光でお知らせ",
+    "birth_month": "赤ちゃんの生まれた月",
+    "fine_tune": "タイミング調整",
+    "sleep_tip_hint": "やさしい光は、寝かしつけを試す良いタイミングの合図です。",
+    "sleep_tip_gestures": "光をタップで閉じる • 長押しでやり直す"
   },
   "watch_captions": [
     "手首にナイトライト",

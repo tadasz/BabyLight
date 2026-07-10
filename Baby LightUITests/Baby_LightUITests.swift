@@ -132,6 +132,51 @@ final class Baby_LightUITests: XCTestCase {
         }
     }
     
+    // MARK: - Deep Sleep Tip Tests
+
+    @MainActor
+    func testDeepSleepTipSectionAppears() throws {
+        // Pin the feature off regardless of persisted state on the test device.
+        app.launchArguments += ["-sleepTipEnabled", "NO"]
+        app.launch()
+
+        let controlsOverlay = app.otherElements["controlsOverlay"]
+        XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 5),
+                      "Controls overlay should be visible on first launch")
+
+        let section = app.otherElements["deepSleepTipSection"]
+        XCTAssertTrue(section.waitForExistence(timeout: 5),
+                      "DEEP SLEEP TIP section should appear in the controls overlay")
+
+        let toggle = app.switches["sleepTipToggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5),
+                      "Sleep tip toggle should exist")
+    }
+
+    @MainActor
+    func testDeepSleepTipOffByDefaultAndGesturesUnchanged() throws {
+        // Feature-off parity (spec AC4): with the tip off, the pre-existing
+        // gesture surface behaves exactly as before the feature existed.
+        app.launchArguments += ["-sleepTipEnabled", "NO"]
+        app.launch()
+
+        let toggle = app.switches["sleepTipToggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertEqual(toggle.value as? String, "0",
+                       "Deep sleep tip must be off by default")
+
+        // Double-tap still hides and re-shows the controls.
+        let controlsOverlay = app.otherElements["controlsOverlay"]
+        let mainLightView = app.otherElements["mainLightView"]
+        XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
+        mainLightView.doubleTap()
+        XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3),
+                      "Double-tap must still hide the controls with the tip off")
+        mainLightView.doubleTap()
+        XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3),
+                      "Double-tap must still show the controls with the tip off")
+    }
+
     // MARK: - Performance Tests
 
     @MainActor

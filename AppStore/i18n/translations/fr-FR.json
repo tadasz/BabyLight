@@ -57,7 +57,13 @@
     "ax_elapsed_time": "Temps écoulé",
     "ax_light_bg": "Couleur de fond de la lumière : %@",
     "ax_timer_brightness": "Luminosité du chrono",
-    "color_warm_white": "Blanc chaud"
+    "color_warm_white": "Blanc chaud",
+    "deep_sleep_tip": "CONSEIL SOMMEIL PROFOND",
+    "sleep_tip_toggle": "Lueur quand bébé dort peut-être profondément",
+    "birth_month": "Mois de naissance de bébé",
+    "fine_tune": "Affiner le minutage",
+    "sleep_tip_hint": "Une douce lueur suggère un bon moment pour poser bébé.",
+    "sleep_tip_gestures": "Touchez la lueur pour fermer • Maintenez pour recommencer"
   },
   "watch_captions": [
     "Une veilleuse à votre poignet",

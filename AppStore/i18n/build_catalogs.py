@@ -37,6 +37,12 @@ IOS_KEYS = {
     "Elapsed time": "ax_elapsed_time",
     "Light background color: %@": "ax_light_bg",
     "Elapsed timer brightness": "ax_timer_brightness",
+    "DEEP SLEEP TIP": "deep_sleep_tip",
+    "Glow when baby may be deeply asleep": "sleep_tip_toggle",
+    "Baby's birth month": "birth_month",
+    "Fine-tune timing": "fine_tune",
+    "A gentle glow suggests a good moment to try the put-down.": "sleep_tip_hint",
+    "Tap the glow to dismiss • Hold the light to restart timing": "sleep_tip_gestures",
 }
 WATCH_KEYS = {
     "Deep Red": "color_deep_red",

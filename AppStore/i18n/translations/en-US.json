@@ -57,7 +57,13 @@
     "ax_elapsed_time": "Elapsed time",
     "ax_light_bg": "Light background color: %@",
     "ax_timer_brightness": "Elapsed timer brightness",
-    "color_warm_white": "Warm White"
+    "color_warm_white": "Warm White",
+    "deep_sleep_tip": "DEEP SLEEP TIP",
+    "sleep_tip_toggle": "Glow when baby may be deeply asleep",
+    "birth_month": "Baby's birth month",
+    "fine_tune": "Fine-tune timing",
+    "sleep_tip_hint": "A gentle glow suggests a good moment to try the put-down.",
+    "sleep_tip_gestures": "Tap the glow to dismiss • Hold the light to restart timing"
   },
   "watch_captions": [
     "A night light on your wrist",

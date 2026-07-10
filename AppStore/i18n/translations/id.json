@@ -57,7 +57,13 @@
     "desc_more_light": "Jika perlu lebih banyak cahaya",
     "ax_elapsed_time": "Waktu berlalu",
     "ax_light_bg": "Warna latar cahaya: %@",
-    "ax_timer_brightness": "Kecerahan penghitung waktu"
+    "ax_timer_brightness": "Kecerahan penghitung waktu",
+    "deep_sleep_tip": "TIPS TIDUR NYENYAK",
+    "sleep_tip_toggle": "Berpendar saat bayi mungkin tertidur nyenyak",
+    "birth_month": "Bulan lahir bayi",
+    "fine_tune": "Sesuaikan waktu",
+    "sleep_tip_hint": "Pendaran lembut menandakan saat yang tepat untuk membaringkan bayi.",
+    "sleep_tip_gestures": "Ketuk pendaran untuk menutup • Tahan untuk memulai ulang"
   },
   "watch_captions": [
     "Lampu tidur di pergelangan tangan Anda",

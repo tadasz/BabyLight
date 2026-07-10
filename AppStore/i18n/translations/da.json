@@ -57,7 +57,13 @@
     "desc_more_light": "Hvis du har brug for mere lys",
     "ax_elapsed_time": "Forløbet tid",
     "ax_light_bg": "Lysets baggrundsfarve: %@",
-    "ax_timer_brightness": "Lysstyrke for forløbet tid"
+    "ax_timer_brightness": "Lysstyrke for forløbet tid",
+    "deep_sleep_tip": "DYB SØVN-TIP",
+    "sleep_tip_toggle": "Glød når baby måske sover dybt",
+    "birth_month": "Babys fødselsmåned",
+    "fine_tune": "Finjustér timing",
+    "sleep_tip_hint": "En blid glød viser et godt tidspunkt at lægge baby ned.",
+    "sleep_tip_gestures": "Tryk på gløden for at lukke • Hold nede for at starte forfra"
   },
   "watch_captions": [
     "Et natlys på dit håndled",

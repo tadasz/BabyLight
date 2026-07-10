@@ -57,7 +57,13 @@
     "desc_more_light": "Khi bạn cần sáng hơn",
     "ax_elapsed_time": "Thời gian đã trôi qua",
     "ax_light_bg": "Màu nền ánh sáng: %@",
-    "ax_timer_brightness": "Độ sáng bộ đếm thời gian"
+    "ax_timer_brightness": "Độ sáng bộ đếm thời gian",
+    "deep_sleep_tip": "GỢI Ý NGỦ SÂU",
+    "sleep_tip_toggle": "Phát sáng khi bé có thể đã ngủ sâu",
+    "birth_month": "Tháng sinh của bé",
+    "fine_tune": "Tinh chỉnh thời điểm",
+    "sleep_tip_hint": "Ánh sáng dịu nhẹ gợi ý thời điểm tốt để thử đặt bé xuống.",
+    "sleep_tip_gestures": "Chạm vào ánh sáng để tắt • Giữ để bắt đầu lại"
   },
   "watch_captions": [
     "Đèn ngủ ngay trên cổ tay",

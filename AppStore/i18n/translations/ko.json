@@ -57,7 +57,13 @@
     "ax_elapsed_time": "경과 시간",
     "ax_light_bg": "불빛 배경색: %@",
     "ax_timer_brightness": "타이머 밝기",
-    "color_warm_white": "따뜻한 화이트"
+    "color_warm_white": "따뜻한 화이트",
+    "deep_sleep_tip": "깊은 잠 팁",
+    "sleep_tip_toggle": "아기가 깊이 잠들었을 즈음 은은하게 빛나기",
+    "birth_month": "아기의 출생 월",
+    "fine_tune": "타이밍 조절",
+    "sleep_tip_hint": "은은한 빛은 아기를 눕히기 좋은 순간을 알려줍니다.",
+    "sleep_tip_gestures": "빛을 탭하여 닫기 • 길게 눌러 다시 시작"
   },
   "watch_captions": [
     "손목 위 수유등",

@@ -57,7 +57,13 @@
     "desc_more_light": "Jei reikia daugiau šviesos",
     "ax_elapsed_time": "Praėjęs laikas",
     "ax_light_bg": "Šviesos fono spalva: %@",
-    "ax_timer_brightness": "Laikmačio ryškumas"
+    "ax_timer_brightness": "Laikmačio ryškumas",
+    "deep_sleep_tip": "GILAUS MIEGO PATARIMAS",
+    "sleep_tip_toggle": "Švytėjimas, kai mažylis galbūt giliai miega",
+    "birth_month": "Mažylio gimimo mėnuo",
+    "fine_tune": "Laiko derinimas",
+    "sleep_tip_hint": "Švelnus švytėjimas parodo tinkamą akimirką paguldyti mažylį.",
+    "sleep_tip_gestures": "Palieskite švytėjimą, kad užvertumėte • Palaikykite nuspaudę, kad pradėtumėte iš naujo"
   },
   "watch_captions": [
     "Naktinė lemputė ant riešo",
