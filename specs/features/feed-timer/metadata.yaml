@@ -1,0 +1,16 @@
+name: Feed timer
+status: active
+owner: tadas
+files:
+  - Baby Light/LightViewModel.swift
+  - Baby Light/ContentView.swift
+  - Baby Light/ControlsOverlay.swift
+  - Baby Light Watch App/WatchContentView.swift
+targets: [Baby Night Light, Baby Light Watch App]
+related_features:
+  - light-screen
+  - controls-overlay
+  - auto-off-timer
+  - first-run-tutorial
+  - watch-app
+specs: []

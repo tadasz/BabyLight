@@ -1,0 +1,12 @@
+name: Rating prompt
+status: active
+owner: tadas
+files:
+  - Baby Light/LightViewModel.swift
+  - Baby Light/ContentView.swift
+targets: [Baby Night Light]
+related_features:
+  - light-screen
+  - controls-overlay
+  - auto-off-timer
+specs: []

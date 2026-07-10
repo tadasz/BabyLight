@@ -1,0 +1,2 @@
+- 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 NO-SPEC — tutorial tip strings added to the i18n registry + IOS_KEYS (19 → 23 keys), closing the gap where `make catalogs` would drop PR #19's fix

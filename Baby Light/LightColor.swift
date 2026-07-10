@@ -26,7 +26,7 @@ struct LightColor: Identifiable, Equatable {
         LightColor(id: "deep-red", hex: "#FF0000", name: "Deep Red", description: "Best for sleep"),
         LightColor(id: "amber", hex: "#FF4500", name: "Amber", description: "Warm & soothing"),
         LightColor(id: "candle", hex: "#FF8C00", name: "Candle", description: "Soft orange"),
-        LightColor(id: "dim-white", hex: "#F5DEB3", name: "Wheat", description: "If you need more light")
+        LightColor(id: "warm-white", hex: "#F5DEB3", name: "Warm White", description: "If you need more light")
     ]
 }
 
