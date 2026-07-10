@@ -1,6 +1,7 @@
 # Deep-Sleep Tip — Research & Proposed Design
 
 **Status:** research / pre-implementation
+**Implementation plan:** [DEEP_SLEEP_TIP_PLAN.md](DEEP_SLEEP_TIP_PLAN.md)
 **Feature idea:** while a parent settles the baby in their arms with the app open,
 the light should *gently glow a few times* when the baby has probably reached deep
 sleep — the cue to try putting them down. If the baby cries, the estimate resets.
