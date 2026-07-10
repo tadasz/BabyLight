@@ -1,0 +1,12 @@
+name: First-run tutorial
+status: active
+owner: tadas
+files:
+  - Baby Light/Tips.swift
+targets: [Baby Night Light]
+related_features:
+  - controls-overlay
+  - light-screen
+  - rating-prompt
+  - app-store-kit
+specs: []

@@ -1,0 +1,14 @@
+name: App Store kit
+status: active
+owner: tadas
+files:
+  - AppStore/
+targets: []
+related_features:
+  - light-screen
+  - controls-overlay
+  - auto-off-timer
+  - feed-timer
+  - first-run-tutorial
+  - watch-app
+specs: []

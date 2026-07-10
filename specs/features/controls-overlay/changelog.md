@@ -1,0 +1,1 @@
+- 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code

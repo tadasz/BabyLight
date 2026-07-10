@@ -1,0 +1,2 @@
+- 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 NO-SPEC — fourth palette preset renamed "Wheat" → "Warm White" (id `dim-white` → `warm-white`), unified with the watch and the App Store description; direct owner instruction

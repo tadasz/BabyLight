@@ -1,0 +1,2 @@
+- 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 NO-SPEC — fourth preset unified with iOS as `warm-white` / "Warm White" (was `warm`); direct owner instruction
