@@ -1,1 +1,2 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 PR #19 — the four tutorial tip localizations restored to the iOS catalog (26 locales); same day, keys registered in AppStore/i18n so catalog regeneration preserves them
