@@ -25,7 +25,7 @@ enum WatchPalette {
                     name: "Amber", blurb: "Warm & soothing"),
     WatchLightColor(id: "candle", color: Color(red: 1.0, green: 140.0/255.0, blue: 0.0),
                     name: "Candle", blurb: "Soft orange"),
-    WatchLightColor(id: "warm", color: Color(red: 245.0/255.0, green: 222.0/255.0, blue: 179.0/255.0),
+    WatchLightColor(id: "warm-white", color: Color(red: 245.0/255.0, green: 222.0/255.0, blue: 179.0/255.0),
                     name: "Warm White", blurb: "If you need more light"),
   ]
 }

@@ -1772,163 +1772,163 @@
         }
       }
     },
-    "Wheat": {
+    "Warm White": {
       "extractionState": "manual",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "麦色"
+            "value": "暖白"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "麥色"
+            "value": "暖白"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ウィート"
+            "value": "暖色ホワイト"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "밀색"
+            "value": "따뜻한 화이트"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Пшеничный"
+            "value": "Тёплый белый"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Weizen"
+            "value": "Warmweiß"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blé"
+            "value": "Blanc chaud"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trigo"
+            "value": "Blanco cálido"
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trigo"
+            "value": "Blanco cálido"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Grano"
+            "value": "Bianco caldo"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trigo"
+            "value": "Branco quente"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tarwe"
+            "value": "Warm wit"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buğday"
+            "value": "Sıcak beyaz"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pszenica"
+            "value": "Ciepła biel"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "قمحي"
+            "value": "أبيض دافئ"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "गेहुँआ"
+            "value": "गर्म सफेद"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gandum"
+            "value": "Putih Hangat"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "สีข้าวสาลี"
+            "value": "สีขาวอุ่น"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lúa mì"
+            "value": "Trắng ấm"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vete"
+            "value": "Varmvit"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hvede"
+            "value": "Varm hvid"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hvete"
+            "value": "Varmhvit"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vehnä"
+            "value": "Lämmin valkoinen"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Σιτάρι"
+            "value": "Ζεστό λευκό"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Пшениця"
+            "value": "Теплий білий"
           }
         },
         "lt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kviečių"
+            "value": "Šilta balta"
           }
         }
       }

@@ -25,7 +25,7 @@ IOS_KEYS = {
     "Deep Red": "color_deep_red",
     "Amber": "color_amber",
     "Candle": "color_candle",
-    "Wheat": "color_wheat",
+    "Warm White": "color_warm_white",
     "Best for sleep": "desc_best_sleep",
     "Warm & soothing": "desc_warm_soothing",
     "Soft orange": "desc_soft_orange",
