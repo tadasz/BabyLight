@@ -8,9 +8,9 @@ Groups land as self-contained commits, red/green TDD (simulated clock — same p
 
 Purpose: replace "timer resets on every activation" with a real session the estimate can trust.
 
-1.1 `Baby Light/SleepTip/BabyProfile.swift` — birth-month storage (`UserDefaults`), age-bucket boundaries (0–3/3–6/6–12/12+ mo), window lookup per anchor kind (35/30/25/20 from `appOpen`; 20/15/10/10 from `cryCessation`).
-1.2 `SettlingSession` semantics in `LightViewModel.swift`: survives resign-active < 3 min; ends on background > 3 min, auto-off reaching 0, or manual reset; on-screen timer switches to time-since-session-start. Feature-gated: with the feature off, the existing `startElapsedTimer` reset-on-activation path runs untouched (AC4). Session elapsed time derives from the session-start `Date`, not tick counting — timers don't fire while suspended, and the display must be correct after a < 3 min interruption (requirements → Decisions; resolves feed-timer's recorded tick-counting debt for this path).
-1.3 Unit tests: bucket boundaries, window lookup, interruption survival/expiry with a simulated clock.
+✅ 1.1 `Baby Light/SleepTip/BabyProfile.swift` — birth-month storage (`UserDefaults`), age-bucket boundaries (0–3/3–6/6–12/12+ mo), window lookup per anchor kind (35/30/25/20 from `appOpen`; 20/15/10/10 from `cryCessation`).
+✅ 1.2 `SettlingSession` semantics in `LightViewModel.swift`: survives resign-active < 3 min; ends on background > 3 min, auto-off reaching 0, or manual reset; on-screen timer switches to time-since-session-start. Feature-gated: with the feature off, the existing `startElapsedTimer` reset-on-activation path runs untouched (AC4). Session elapsed time derives from the session-start `Date`, not tick counting — timers don't fire while suspended, and the display must be correct after a < 3 min interruption (requirements → Decisions; resolves feed-timer's recorded tick-counting debt for this path).
+✅ 1.3 Unit tests: bucket boundaries, window lookup, interruption survival/expiry with a simulated clock.
 
 Exit criteria: AC3 passes; profile lookups pure and tested.
 
@@ -18,9 +18,9 @@ Exit criteria: AC3 passes; profile lookups pure and tested.
 
 Purpose: the testable core — when to glow, when to re-arm, what to record.
 
-2.1 `Baby Light/SleepTip/SleepTipEngine.swift` — pure state machine `idle → settling → tipDue(round) → acknowledged`, driven by injected clock ticks + events (`sessionStarted`, `wentInactive/BecameActive`, `cryBoutConfirmed/Ended`, `acknowledged`, `manualReset`); tip time = anchor + window(ageBucket, anchorKind) + learnedOffset(bucket) + userFineTune; repeat every 5 min, max 4 rounds.
-2.2 `Baby Light/SleepTip/SessionLog.swift` — record model per requirements → Data model; ring buffer ~100, JSON in Application Support; one append at session end. Background-expired sessions get their record written on the next activation; tolerate loss on force-quit (requirements → Data model durability caveat).
-2.3 Unit tests: glow timing per bucket ± fine-tune, repeat/max-round rules, anchor override ordering, log record shape + ring-buffer cap.
+✅ 2.1 `Baby Light/SleepTip/SleepTipEngine.swift` — pure state machine `idle → settling → tipDue(round) → acknowledged`, driven by injected clock ticks + events (`sessionStarted`, `wentInactive/BecameActive`, `cryBoutConfirmed/Ended`, `acknowledged`, `manualReset`); tip time = anchor + window(ageBucket, anchorKind) + learnedOffset(bucket) + userFineTune; repeat every 5 min, max 4 rounds.
+✅ 2.2 `Baby Light/SleepTip/SessionLog.swift` — record model per requirements → Data model; ring buffer ~100, JSON in Application Support; one append at session end. Background-expired sessions get their record written on the next activation; tolerate loss on force-quit (requirements → Data model durability caveat).
+✅ 2.3 Unit tests: glow timing per bucket ± fine-tune, repeat/max-round rules, anchor override ordering, log record shape + ring-buffer cap.
 
 Exit criteria: AC1, AC2, AC5 pass at engine level (UI pending group 3); Data-model invariants asserted.
 
@@ -28,14 +28,16 @@ Exit criteria: AC1, AC2, AC5 pass at engine level (UI pending group 3); Data-mod
 
 Purpose: make the engine visible and configurable without disturbing baby or existing gestures.
 
-3.1 `Baby Light/GlowPulse.swift` — ViewModifier animating `lightened(by:)` on the light color: 3 pulses × ~1.5 s ease-in-out, ~+12 % lightness, hue preserved.
-3.2 `ContentView.swift` — glow modifier wired to engine state; single-tap acknowledge active only while pulsing; long-press (0.6 s) reset via `simultaneousGesture`. Both gestures attach to the light surface — the timer text keeps `allowsHitTesting(false)`. Verify on device: no conflict with double-tap (controls) / drag (brightness), no added double-tap recognition latency, no TipKit popover interference (step-2 tip anchors on the timer text).
-3.3 `ControlsOverlay.swift` — "DEEP SLEEP TIP" section: on/off, birth-month picker, fine-tune stepper (−10…+10), learned-value caption placeholder. Accessibility identifiers on elements the UI tests need (patterns §11), e.g. `deepSleepTipSection`.
-3.4 Localize ~10 new strings through the 26-locale pipeline (`AppStore/LOCALIZATION.md`); update per-locale screenshots of the controls section (existing tooling).
-3.5 UI tests: settings section appears; feature-off parity with current app.
-3.6 Same-PR docs (CLAUDE.md §1): update README + changelog of `specs/features/{feed-timer,light-screen,controls-overlay,auto-off-timer,first-run-tutorial}`; amend `specs/patterns.md` §4 with the sanctioned SessionLog file-on-disk exception (requirements → Decisions).
+✅ 3.1 `Baby Light/GlowPulse.swift` — ViewModifier animating `lightened(by:)` on the light color: 3 pulses × ~1.5 s ease-in-out, ~+12 % lightness, hue preserved.
+✅ 3.2 `ContentView.swift` — glow modifier wired to engine state; single-tap acknowledge active only while pulsing; long-press (0.6 s) reset via `simultaneousGesture`. Both gestures attach to the light surface — the timer text keeps `allowsHitTesting(false)`. Verify on device: no conflict with double-tap (controls) / drag (brightness), no added double-tap recognition latency, no TipKit popover interference (step-2 tip anchors on the timer text).
+✅ 3.3 `ControlsOverlay.swift` — "DEEP SLEEP TIP" section: on/off, birth-month picker, fine-tune stepper (−10…+10), learned-value caption placeholder. Accessibility identifiers on elements the UI tests need (patterns §11), e.g. `deepSleepTipSection`.
+✅ 3.4 Localize ~10 new strings through the 26-locale pipeline (`AppStore/LOCALIZATION.md`); update per-locale screenshots of the controls section (existing tooling).
+✅ 3.5 UI tests: settings section appears; feature-off parity with current app.
+✅ 3.6 Same-PR docs (CLAUDE.md §1): update README + changelog of `specs/features/{feed-timer,light-screen,controls-overlay,auto-off-timer,first-run-tutorial}`; amend `specs/patterns.md` §4 with the sanctioned SessionLog file-on-disk exception (requirements → Decisions).
 
 Exit criteria: Phase-1 acceptance — AC1–AC5 + AC10 pass end-to-end; feature off → app identical to today; touched feature folders and patterns §4 updated.
+
+Dogfood round 1 (TestFlight 28, 2026-07-11): settling-time gestures masked `.subviews` while controls are visible (defect: ancestor long-press swallowed picker/stepper taps); birth month → birthday; stepper relabeled "Glow earlier or later" + live window caption (requirements → Decisions). Regression UI test: `testDeepSleepTipControlsRespondWhileOverlayVisible`.
 
 ## 4. CryDetector + anchor switching — delivers US-2 (Phase 2)
 

@@ -165,6 +165,64 @@ struct ReviewPromptTests {
         viewModel.didRequestReview()
         #expect(viewModel.shouldRequestReview == false)
     }
+
+    // MARK: - Deferred prompt (never over a just-opened panel or the dim light)
+
+    @Test func doesNotRaiseWhenControlsHidden() async throws {
+        // The deferred prompt must not fire once the controls are hidden —
+        // that would surface it over the dim light (dark is sacred).
+        #expect(LightViewModel.shouldRaiseReviewPrompt(
+            controlsVisible: false, useCount: 5, hasRequestedReview: false) == false)
+    }
+
+    @Test func raisesWhenControlsVisibleAndEligible() async throws {
+        #expect(LightViewModel.shouldRaiseReviewPrompt(
+            controlsVisible: true, useCount: 2, hasRequestedReview: false) == true)
+    }
+
+    @Test func doesNotRaiseWhenAlreadyRequested() async throws {
+        #expect(LightViewModel.shouldRaiseReviewPrompt(
+            controlsVisible: true, useCount: 5, hasRequestedReview: true) == false)
+    }
+
+    @Test func doesNotRaiseOnFirstUseEvenWhenVisible() async throws {
+        #expect(LightViewModel.shouldRaiseReviewPrompt(
+            controlsVisible: true, useCount: 1, hasRequestedReview: false) == false)
+    }
+}
+
+// MARK: - Rating Prompt Timing (reproduction: prompt must not block the panel)
+
+/// Serialized: seeds the persisted rating counters so the gate passes, then
+/// restores them so other tests see clean defaults.
+@Suite(.serialized)
+struct ReviewPromptTimingTests {
+
+    @Test func openingControlsDoesNotSynchronouslyRaisePrompt() async throws {
+        // Reproduction of the dogfood defect: even when the rating gate passes,
+        // opening the controls must NOT raise the prompt on the same turn — the
+        // StoreKit card would land on top of the freshly-opened panel and block
+        // it. The prompt is deferred (see maybeRequestReview / reviewPromptDelay).
+        let priorCount = UserDefaults.standard.object(forKey: "appUseCount")
+        let priorReq = UserDefaults.standard.object(forKey: "hasRequestedReview")
+        UserDefaults.standard.set(5, forKey: "appUseCount")           // gate: useCount >= 2
+        UserDefaults.standard.set(false, forKey: "hasRequestedReview") // gate: never asked
+        defer {
+            if let priorCount { UserDefaults.standard.set(priorCount, forKey: "appUseCount") }
+            else { UserDefaults.standard.removeObject(forKey: "appUseCount") }
+            if let priorReq { UserDefaults.standard.set(priorReq, forKey: "hasRequestedReview") }
+            else { UserDefaults.standard.removeObject(forKey: "hasRequestedReview") }
+        }
+
+        let viewModel = LightViewModel()   // useCount becomes 6, gate passes
+        viewModel.controlsVisible = false  // start hidden
+        viewModel.shouldRequestReview = false
+
+        viewModel.toggleControls()         // open the controls
+
+        // Under the old code this was true immediately (prompt blocked the panel).
+        #expect(viewModel.shouldRequestReview == false)
+    }
 }
 
 // MARK: - LightColor Tests

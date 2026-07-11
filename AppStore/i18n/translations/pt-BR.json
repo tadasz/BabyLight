@@ -57,7 +57,14 @@
     "ax_elapsed_time": "Tempo decorrido",
     "ax_light_bg": "Cor de fundo da luz: %@",
     "ax_timer_brightness": "Brilho do contador de tempo",
-    "color_warm_white": "Branco quente"
+    "color_warm_white": "Branco quente",
+    "deep_sleep_tip": "DICA DE SONO PROFUNDO",
+    "sleep_tip_toggle": "Brilho quando o bebê pode estar em sono profundo",
+    "birthday": "Data de nascimento do bebê",
+    "glow_offset": "Brilho mais cedo ou mais tarde",
+    "sleep_tip_hint": "Um brilho suave sugere um bom momento para deitar o bebê.",
+    "sleep_tip_gestures": "Toque no brilho para dispensar • Segure para recomeçar",
+    "sleep_tip_window": "Brilha cerca de %lld min depois de abrir o app — o tempo típico para chegar ao sono profundo nessa idade."
   },
   "watch_captions": [
     "Uma luz noturna no seu pulso",

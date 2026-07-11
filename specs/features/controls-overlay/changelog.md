@@ -1,1 +1,4 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 2026-07-10-deep-sleep-tip — new "DEEP SLEEP TIP" section: toggle, birth-month picker, fine-tune stepper, gesture hint; identifiers deepSleepTipSection/sleepTipToggle; keys sleepTipEnabled/sleepTipBirthMonth/sleepTipFineTune
+- 2026-07-11 2026-07-10-deep-sleep-tip — dogfood round 1: birthday picker + "Glow earlier or later" stepper + live window caption (labels/copy); picker/stepper tap-blocking fixed via gesture masks
+- 2026-07-11 2026-07-10-deep-sleep-tip — dogfood round 3: UIKit Stepper → SwiftUI FineTuneStepper (−/+ buttons, ids sleepTipFineTuneMinus/Plus) routing through LightViewModel.adjustFineTune(by:), which suppresses a double-tap-to-hide for 0.6s after a −/+ tap so rapid offset taps are not mis-read as the toggle

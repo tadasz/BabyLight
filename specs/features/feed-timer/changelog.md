@@ -1,1 +1,2 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-10 2026-07-10-deep-sleep-tip — settling-session semantics (group 1): with the tip on, elapsed derives from session start and survives ≤ 3 min interruptions; feature off keeps reset-on-activation

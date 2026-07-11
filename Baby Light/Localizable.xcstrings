@@ -3703,6 +3703,1133 @@
           }
         }
       }
+    },
+    "DEEP SLEEP TIP": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深睡提示"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深睡提示"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深い眠りのヒント"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "깊은 잠 팁"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подсказка глубокого сна"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TIEFSCHLAF-TIPP"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONSEIL SOMMEIL PROFOND"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONSEJO DE SUEÑO PROFUNDO"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONSEJO DE SUEÑO PROFUNDO"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONSIGLIO SONNO PROFONDO"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DICA DE SONO PROFUNDO"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DIEPE-SLAAPTIP"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DERİN UYKU İPUCU"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WSKAZÓWKA GŁĘBOKIEGO SNU"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلميح النوم العميق"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गहरी नींद का संकेत"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TIPS TIDUR NYENYAK"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เคล็ดลับหลับลึก"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GỢI Ý NGỦ SÂU"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DJUPSÖMNSTIPS"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DYB SØVN-TIP"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DYPSØVN-TIPS"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SYVÄN UNEN VINKKI"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ΣΥΜΒΟΥΛΗ ΒΑΘΙΟΥ ΥΠΝΟΥ"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ПІДКАЗКА ГЛИБОКОГО СНУ"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GILAUS MIEGO PATARIMAS"
+          }
+        }
+      }
+    },
+    "Glow when baby may be deeply asleep": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "宝宝可能进入深睡时发出微光"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "寶寶可能進入深睡時發出微光"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "赤ちゃんが深く眠った頃に光でお知らせ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아기가 깊이 잠들었을 즈음 은은하게 빛나기"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свечение, когда малыш, возможно, крепко спит"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leuchten, wenn das Baby tief schlafen könnte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lueur quand bébé dort peut-être profondément"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brillo cuando el bebé podría dormir profundamente"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brillo cuando el bebé podría dormir profundamente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bagliore quando il bimbo potrebbe dormire profondamente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilho quando o bebê pode estar em sono profundo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gloed wanneer baby misschien diep slaapt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bebek derin uykudayken hafifçe parlasın"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poświata, gdy maluch może już spać głęboko"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توهّج عندما يكون الطفل في نوم عميق على الأرجح"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जब शिशु शायद गहरी नींद में हो, तब हल्की चमक"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berpendar saat bayi mungkin tertidur nyenyak"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เรืองแสงเมื่อลูกน้อยอาจหลับลึก"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát sáng khi bé có thể đã ngủ sâu"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glöd när barnet kanske sover djupt"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glød når baby måske sover dybt"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glød når babyen kanskje sover dypt"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hehku, kun vauva saattaa nukkua syvään"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Λάμψη όταν το μωρό ίσως κοιμάται βαθιά"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Світіння, коли малюк, можливо, міцно спить"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Švytėjimas, kai mažylis galbūt giliai miega"
+          }
+        }
+      }
+    },
+    "Baby's birthday": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "宝宝的出生日期"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "寶寶的出生日期"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "赤ちゃんの誕生日"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아기의 생년월일"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дата рождения малыша"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geburtstag des Babys"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date de naissance de bébé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de nacimiento del bebé"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de nacimiento del bebé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data di nascita del bimbo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data de nascimento do bebê"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geboortedatum van baby"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bebeğin doğum tarihi"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data urodzenia dziecka"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاريخ ميلاد الطفل"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शिशु की जन्म तिथि"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanggal lahir bayi"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "วันเกิดของลูกน้อย"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngày sinh của bé"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barnets födelsedatum"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Babys fødselsdato"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Babyens fødselsdato"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vauvan syntymäpäivä"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ημερομηνία γέννησης του μωρού"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дата народження малюка"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mažylio gimimo data"
+          }
+        }
+      }
+    },
+    "Glow earlier or later": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提前或延后发光"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提前或延後發光"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "光るタイミングを前後に調整"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빛나는 시점 조절"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свечение раньше или позже"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Früher oder später leuchten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lueur plus tôt ou plus tard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brillo antes o después"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brillo antes o después"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bagliore prima o dopo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilho mais cedo ou mais tarde"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gloed eerder of later"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha erken veya geç parlasın"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poświata wcześniej lub później"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التوهّج أبكر أو لاحقًا"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चमक पहले या बाद में"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berpendar lebih awal atau lambat"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เรืองแสงเร็วขึ้นหรือช้าลง"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát sáng sớm hơn hoặc muộn hơn"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glöd tidigare eller senare"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glød før eller senere"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glød tidligere eller senere"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hehku aiemmin tai myöhemmin"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Λάμψη νωρίτερα ή αργότερα"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Світіння раніше чи пізніше"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Švytėti anksčiau ar vėliau"
+          }
+        }
+      }
+    },
+    "A gentle glow suggests a good moment to try the put-down.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "柔和的微光提示：现在是尝试放下宝宝的好时机。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "柔和的微光提示：現在是嘗試放下寶寶的好時機。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "やさしい光は、寝かしつけを試す良いタイミングの合図です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "은은한 빛은 아기를 눕히기 좋은 순간을 알려줍니다."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Мягкое свечение подсказывает удачный момент переложить малыша."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein sanftes Leuchten zeigt einen guten Moment zum Ablegen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une douce lueur suggère un bon moment pour poser bébé."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un brillo suave sugiere un buen momento para acostarlo."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un brillo suave sugiere un buen momento para acostarlo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un bagliore delicato suggerisce un buon momento per metterlo giù."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um brilho suave sugere um bom momento para deitar o bebê."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een zachte gloed wijst op een goed moment om baby neer te leggen."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yumuşak bir parıltı, bebeği yatırmayı denemek için iyi bir anı gösterir."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delikatna poświata podpowiada dobry moment na odłożenie malucha."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توهّج لطيف يشير إلى لحظة مناسبة لمحاولة وضع الطفل في سريره."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हल्की चमक बताती है कि शिशु को लिटाने का यह अच्छा समय है।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pendaran lembut menandakan saat yang tepat untuk membaringkan bayi."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แสงเรืองอ่อน ๆ บอกช่วงเวลาที่เหมาะจะลองวางลูกน้อย"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ánh sáng dịu nhẹ gợi ý thời điểm tốt để thử đặt bé xuống."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En mjuk glöd visar ett bra tillfälle att lägga ner barnet."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En blid glød viser et godt tidspunkt at lægge baby ned."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En myk glød viser et godt øyeblikk å legge babyen ned."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pehmeä hehku kertoo hyvästä hetkestä laskea vauva sänkyyn."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Μια απαλή λάμψη δείχνει μια καλή στιγμή να ακουμπήσετε το μωρό."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "М’яке світіння підказує вдалий момент перекласти малюка."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Švelnus švytėjimas parodo tinkamą akimirką paguldyti mažylį."
+          }
+        }
+      }
+    },
+    "Glows about %lld min after you open the app — the typical time to reach deep sleep at this age.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开应用约 %lld 分钟后发光——这是此月龄进入深睡通常所需的时间。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開 App 約 %lld 分鐘後發光——這是此月齡進入深睡通常所需的時間。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリを開いてから約%lld分後に光ります — この月齢で深い眠りに入るまでのおおよその時間です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱을 연 뒤 약 %lld분 후에 빛납니다 — 이 월령에서 깊은 잠에 드는 데 걸리는 일반적인 시간입니다."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Засветится примерно через %lld мин после открытия приложения — типичное время погружения в глубокий сон в этом возрасте."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leuchtet ca. %lld Min., nachdem du die App geöffnet hast — die typische Zeit bis zum Tiefschlaf in diesem Alter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S'illumine environ %lld min après l'ouverture de l'app — le temps habituel pour atteindre le sommeil profond à cet âge."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilla unos %lld min después de abrir la app: el tiempo típico para alcanzar el sueño profundo a esta edad."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilla unos %lld min después de abrir la app: el tiempo típico para alcanzar el sueño profundo a esta edad."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si illumina circa %lld min dopo l'apertura dell'app — il tempo tipico per raggiungere il sonno profondo a questa età."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brilha cerca de %lld min depois de abrir o app — o tempo típico para chegar ao sono profundo nessa idade."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gloeit ongeveer %lld min nadat je de app opent — de gebruikelijke tijd tot diepe slaap op deze leeftijd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamayı açtıktan yaklaşık %lld dk sonra parlar — bu yaşta derin uykuya geçişin tipik süresi."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaświeci ok. %lld min po otwarciu aplikacji — tyle zwykle trwa osiągnięcie głębokiego snu w tym wieku."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتوهّج بعد نحو %lld دقيقة من فتح التطبيق — الوقت المعتاد للوصول إلى النوم العميق في هذا العمر."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऐप खोलने के लगभग %lld मिनट बाद चमकेगा — इस उम्र में गहरी नींद तक पहुँचने का सामान्य समय।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berpendar sekitar %lld menit setelah aplikasi dibuka — waktu umum untuk mencapai tidur nyenyak di usia ini."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "จะเรืองแสงประมาณ %lld นาทีหลังเปิดแอป — เวลาปกติที่ลูกวัยนี้ใช้กว่าจะหลับลึก"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát sáng khoảng %lld phút sau khi mở ứng dụng — thời gian thường để bé ở tuổi này ngủ sâu."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glöder ca %lld min efter att du öppnat appen — den typiska tiden till djupsömn i den här åldern."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gløder ca. %lld min. efter du åbner appen — den typiske tid til dyb søvn i denne alder."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gløder ca. %lld min etter at du åpner appen — den typiske tiden til dyp søvn i denne alderen."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hehkuu noin %lld min sovelluksen avaamisesta — tyypillinen aika syvään uneen tässä iässä."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Λάμπει περίπου %lld λεπτά αφού ανοίξετε την εφαρμογή — ο συνήθης χρόνος για βαθύ ύπνο σε αυτή την ηλικία."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Засвітиться приблизно через %lld хв після відкриття застосунку — типовий час занурення в глибокий сон у цьому віці."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sušvinta praėjus maždaug %lld min. nuo programėlės atidarymo — tiek šiame amžiuje paprastai trunka pasiekti gilų miegą."
+          }
+        }
+      }
+    },
+    "Tap the glow to dismiss • Hold the light to restart timing": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轻点微光以关闭 • 长按以重新计时"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輕點微光以關閉 • 長按以重新計時"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "光をタップで閉じる • 長押しでやり直す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빛을 탭하여 닫기 • 길게 눌러 다시 시작"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коснитесь свечения, чтобы скрыть • Удерживайте, чтобы начать заново"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Ausblenden aufs Leuchten tippen • Zum Neustarten gedrückt halten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez la lueur pour fermer • Maintenez pour recommencer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca el brillo para descartar • Mantén pulsado para reiniciar"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca el brillo para descartar • Mantén presionado para reiniciar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca il bagliore per chiudere • Tieni premuto per ricominciare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque no brilho para dispensar • Segure para recomeçar"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tik op de gloed om te sluiten • Houd vast om opnieuw te beginnen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapatmak için parıltıya dokun • Yeniden başlatmak için basılı tut"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stuknij poświatę, by ukryć • Przytrzymaj, by zacząć od nowa"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر على التوهّج للإغلاق • اضغط مطوّلًا لإعادة البدء"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चमक हटाने के लिए टैप करें • फिर से शुरू करने के लिए दबाए रखें"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketuk pendaran untuk menutup • Tahan untuk memulai ulang"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แตะแสงเพื่อปิด • กดค้างเพื่อเริ่มใหม่"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạm vào ánh sáng để tắt • Giữ để bắt đầu lại"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryck på glöden för att stänga • Håll ned för att börja om"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryk på gløden for at lukke • Hold nede for at starte forfra"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trykk på gløden for å lukke • Hold inne for å starte på nytt"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sulje napauttamalla hehkua • Aloita alusta painamalla pitkään"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Πατήστε τη λάμψη για κλείσιμο • Κρατήστε πατημένο για επανεκκίνηση"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Торкніться світіння, щоб приховати • Утримуйте, щоб почати заново"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palieskite švytėjimą, kad užvertumėte • Palaikykite nuspaudę, kad pradėtumėte iš naujo"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

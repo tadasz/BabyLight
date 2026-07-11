@@ -57,7 +57,14 @@
     "desc_more_light": "Hvis du trenger mer lys",
     "ax_elapsed_time": "Forløpt tid",
     "ax_light_bg": "Bakgrunnsfarge for lys: %@",
-    "ax_timer_brightness": "Lysstyrke for forløpt tid"
+    "ax_timer_brightness": "Lysstyrke for forløpt tid",
+    "deep_sleep_tip": "DYPSØVN-TIPS",
+    "sleep_tip_toggle": "Glød når babyen kanskje sover dypt",
+    "birthday": "Babyens fødselsdato",
+    "glow_offset": "Glød tidligere eller senere",
+    "sleep_tip_hint": "En myk glød viser et godt øyeblikk å legge babyen ned.",
+    "sleep_tip_gestures": "Trykk på gløden for å lukke • Hold inne for å starte på nytt",
+    "sleep_tip_window": "Gløder ca. %lld min etter at du åpner appen — den typiske tiden til dyp søvn i denne alderen."
   },
   "watch_captions": [
     "Et nattlys på håndleddet",

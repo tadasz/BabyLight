@@ -18,7 +18,7 @@ iOS target (**Baby Night Light**) only:
 ## Key entry points
 
 - **`LightViewModel.setTimer(_ option: TimerOption)`** (`LightViewModel.swift:172-183`) — the single mutation point. Invalidates any running countdown first, then either starts a fresh countdown (`timeRemaining = minutes * 60`) or clears it (`timeRemaining = nil` for the infinite option).
-- **`LightViewModel.startCountdown()`** (`LightViewModel.swift:185-197`) — a repeating 1-second `Timer.scheduledTimer` with `[weak self]` that decrements `timeRemaining`; on reaching 0 it invalidates itself and deliberately **keeps the value at 0** so `isScreenOff` stays true.
+- **`LightViewModel.startCountdown()`** ([LightViewModel.swift](../../../Baby%20Light/LightViewModel.swift)) — a repeating 1-second `Timer.scheduledTimer` with `[weak self]` that decrements `timeRemaining`; on reaching 0 it invalidates itself and deliberately **keeps the value at 0** so `isScreenOff` stays true. Since `2026-07-10-deep-sleep-tip`, reaching 0 also calls `endSettlingSession()` — the deep-sleep tip *consumes* the auto-off event (a no-op when no session is running); the countdown logic itself is untouched.
 - **`LightViewModel.isScreenOff`** (`LightViewModel.swift:60-62`) — computed as `timeRemaining == 0` (nil means "no countdown", so infinite never reads as off).
 - **`LightViewModel.wakeUp()`** (`LightViewModel.swift:214-221`) — tap on the black screen: invalidates the timer, resets `selectedTimer` to the infinite option, sets `timeRemaining = nil`, shows the controls, and calls `maybeRequestReview()`.
 - **`TimerButton` taps in the overlay** (`ControlsOverlay.swift:59-68`) — the only UI that calls `setTimer(_:)`.

@@ -57,7 +57,14 @@
     "ax_elapsed_time": "Miniony czas",
     "ax_light_bg": "Kolor tła światła: %@",
     "ax_timer_brightness": "Jasność licznika",
-    "color_warm_white": "Ciepła biel"
+    "color_warm_white": "Ciepła biel",
+    "deep_sleep_tip": "WSKAZÓWKA GŁĘBOKIEGO SNU",
+    "sleep_tip_toggle": "Poświata, gdy maluch może już spać głęboko",
+    "birthday": "Data urodzenia dziecka",
+    "glow_offset": "Poświata wcześniej lub później",
+    "sleep_tip_hint": "Delikatna poświata podpowiada dobry moment na odłożenie malucha.",
+    "sleep_tip_gestures": "Stuknij poświatę, by ukryć • Przytrzymaj, by zacząć od nowa",
+    "sleep_tip_window": "Zaświeci ok. %lld min po otwarciu aplikacji — tyle zwykle trwa osiągnięcie głębokiego snu w tym wieku."
   },
   "watch_captions": [
     "Lampka nocna na nadgarstku",

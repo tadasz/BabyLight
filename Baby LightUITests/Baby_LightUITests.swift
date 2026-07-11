@@ -21,6 +21,11 @@ final class Baby_LightUITests: XCTestCase {
     override func tearDownWithError() throws {
         app = nil
     }
+
+    @MainActor
+    private func doubleTapToToggle(_ mainLightView: XCUIElement) {
+        mainLightView.doubleTap()
+    }
     
     // MARK: - Full Screen Red Background Tests
     
@@ -74,7 +79,7 @@ final class Baby_LightUITests: XCTestCase {
         // Double tap to hide controls
         let mainLightView = app.otherElements["mainLightView"]
         XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         
         // Wait for animation and verify controls are hidden
         let controlsHidden = controlsOverlay.waitForNonExistence(timeout: 3)
@@ -93,12 +98,12 @@ final class Baby_LightUITests: XCTestCase {
         XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
         
         // Double tap to hide
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3), 
                       "Controls should hide after first double tap")
         
         // Double tap again to show
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3), 
                       "Controls should show after second double tap")
     }
@@ -121,17 +126,138 @@ final class Baby_LightUITests: XCTestCase {
             }
             
             // Hide
-            mainLightView.doubleTap()
+            doubleTapToToggle(mainLightView)
             XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3), 
                           "Controls should be hidden at cycle \(i)")
             
             // Show
-            mainLightView.doubleTap()
+            doubleTapToToggle(mainLightView)
             XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3), 
                           "Controls should be visible at cycle \(i) end")
         }
     }
     
+    // MARK: - Deep Sleep Tip Tests
+
+    @MainActor
+    func testDeepSleepTipSectionAppears() throws {
+        // Pin the feature off regardless of persisted state on the test device.
+        app.launchArguments += ["-sleepTipEnabled", "NO"]
+        app.launch()
+
+        let controlsOverlay = app.otherElements["controlsOverlay"]
+        XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 5),
+                      "Controls overlay should be visible on first launch")
+
+        let section = app.otherElements["deepSleepTipSection"]
+        XCTAssertTrue(section.waitForExistence(timeout: 5),
+                      "DEEP SLEEP TIP section should appear in the controls overlay")
+
+        let toggle = app.switches["sleepTipToggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5),
+                      "Sleep tip toggle should exist")
+    }
+
+    @MainActor
+    func testDeepSleepTipOffByDefaultAndGesturesUnchanged() throws {
+        // Feature-off parity (spec AC4): with the tip off, the pre-existing
+        // gesture surface behaves exactly as before the feature existed.
+        app.launchArguments += ["-sleepTipEnabled", "NO"]
+        app.launch()
+
+        let toggle = app.switches["sleepTipToggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertEqual(toggle.value as? String, "0",
+                       "Deep sleep tip must be off by default")
+
+        // Double-tap still hides and re-shows the controls.
+        let controlsOverlay = app.otherElements["controlsOverlay"]
+        let mainLightView = app.otherElements["mainLightView"]
+        XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
+        doubleTapToToggle(mainLightView)
+        XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3),
+                      "Double-tap must still hide the controls with the tip off")
+        doubleTapToToggle(mainLightView)
+        XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3),
+                      "Double-tap must still show the controls with the tip off")
+    }
+
+    @MainActor
+    func testDeepSleepTipDatePickerOpensCalendarFirstRunFlow() throws {
+        // Isolation variant: controls visible at launch (no double-tap) and
+        // the rating prompt suppressed, so neither TipKit nor StoreKit can
+        // interfere — probes the picker itself.
+        app.launchArguments = ["-hasLaunchedBefore", "NO",
+                               "-hasRequestedReview", "YES",
+                               "-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
+        app.launch()
+
+        // On a truly first launch the TipKit tutorial popover covers part of
+        // the panel — dismiss it so this test probes the picker, not the tip.
+        let tipClose = app.buttons["Close"]
+        if tipClose.waitForExistence(timeout: 2) {
+            tipClose.tap()
+        }
+
+        let picker = app.datePickers["sleepTipBirthMonthPicker"]
+        XCTAssertTrue(picker.waitForExistence(timeout: 8), "Birthday picker should be visible")
+        picker.tap()
+        XCTAssertTrue(app.buttons["Next Month"].waitForExistence(timeout: 3),
+                      "Tapping the birthday picker must open the calendar popover")
+    }
+
+    @MainActor
+    func testDeepSleepTipStepperFirstRunFlow() throws {
+        app.launchArguments = ["-hasLaunchedBefore", "NO",
+                               "-hasRequestedReview", "YES",
+                               "-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
+        app.launch()
+
+        let plus = app.buttons["sleepTipFineTunePlus"]
+        XCTAssertTrue(plus.waitForExistence(timeout: 8))
+        plus.tap()
+        XCTAssertTrue(app.staticTexts["+1m"].waitForExistence(timeout: 3),
+                      "Fine-tune plus must increment the offset")
+    }
+
+    @MainActor
+    func testDeepSleepTipStepperRapidTapsDoNotDismissControls() throws {
+        // Dogfood round 3: rapid taps to adjust the offset must NOT be read as
+        // the double-tap-to-hide gesture. Two quick taps on the plus button
+        // must increment twice AND leave the controls overlay open.
+        app.launchArguments = ["-hasLaunchedBefore", "NO",
+                               "-hasRequestedReview", "YES",
+                               "-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
+        app.launch()
+
+        let plus = app.buttons["sleepTipFineTunePlus"]
+        XCTAssertTrue(plus.waitForExistence(timeout: 8))
+        plus.tap()
+        plus.tap()
+
+        // The offset increased (at least one tap; XCUITest coalesces the exact
+        // count of two synthetic taps, so we don't assert +2m specifically).
+        XCTAssertFalse(app.staticTexts["0m"].exists,
+                       "Rapid taps must still change the offset")
+        // The point of the fix: rapid taps must NOT be read as a double-tap and
+        // dismiss the controls.
+        XCTAssertTrue(app.otherElements["controlsOverlay"].exists,
+                      "Rapid stepper taps must not dismiss the controls")
+        XCTAssertTrue(app.otherElements["deepSleepTipSection"].exists,
+                      "The deep-sleep section must stay open through rapid taps")
+    }
+
+    // NOTE ON DOUBLE-TAP: the picker/stepper regression is verified via the
+    // two *FirstRunFlow tests above, which open the panel via first-launch
+    // (controls already visible) and then use a real single `.tap()` on each
+    // control. That single tap is the exact interaction that was broken
+    // (TestFlight 28–29: an ancestor zero-distance drag swallowed it) and now
+    // works. A double-tap-to-open variant was intentionally dropped: XCUITest's
+    // synthetic doubleTap() is unreliable on the iOS 26.5 simulator (a
+    // pre-existing, feature-independent quirk — testDoubleTapHidesControlsOverlay
+    // fails there too), which would make the test flaky without adding coverage
+    // of the picker/stepper themselves.
+
     // MARK: - Performance Tests
 
     @MainActor

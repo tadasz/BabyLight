@@ -6,6 +6,7 @@ files:
   - Baby Light/Baby_LightApp.swift
   - Baby Light/LightViewModel.swift
   - Baby Light/LightColor.swift
+  - Baby Light/GlowPulse.swift
 targets: [Baby Night Light]
 related_features:
   - controls-overlay
@@ -14,4 +15,5 @@ related_features:
   - first-run-tutorial
   - rating-prompt
   - watch-app
-specs: []
+specs:
+  - 2026-07-10-deep-sleep-tip

@@ -57,7 +57,14 @@
     "desc_more_light": "Jos tarvitset enemmän valoa",
     "ax_elapsed_time": "Kulunut aika",
     "ax_light_bg": "Valon taustaväri: %@",
-    "ax_timer_brightness": "Kuluneen ajan ajastimen kirkkaus"
+    "ax_timer_brightness": "Kuluneen ajan ajastimen kirkkaus",
+    "deep_sleep_tip": "SYVÄN UNEN VINKKI",
+    "sleep_tip_toggle": "Hehku, kun vauva saattaa nukkua syvään",
+    "birthday": "Vauvan syntymäpäivä",
+    "glow_offset": "Hehku aiemmin tai myöhemmin",
+    "sleep_tip_hint": "Pehmeä hehku kertoo hyvästä hetkestä laskea vauva sänkyyn.",
+    "sleep_tip_gestures": "Sulje napauttamalla hehkua • Aloita alusta painamalla pitkään",
+    "sleep_tip_window": "Hehkuu noin %lld min sovelluksen avaamisesta — tyypillinen aika syvään uneen tässä iässä."
   },
   "watch_captions": [
     "Yövalo ranteessasi",

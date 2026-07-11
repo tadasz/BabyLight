@@ -10,4 +10,5 @@ related_features:
   - controls-overlay
   - feed-timer
   - rating-prompt
-specs: []
+specs:
+  - 2026-07-10-deep-sleep-tip

@@ -31,7 +31,7 @@ It is deliberately `static` and side-effect-free — no `UserDefaults`, no UI �
 
 ### How the prompt is triggered
 
-`maybeRequestReview()` (`LightViewModel.swift:244-249`, private) checks the gate and, if it passes, raises `shouldRequestReview = true` (flag declared at `LightViewModel.swift:81`). It is called from exactly two places — both moments when the controls overlay is visible, i.e. the user is deliberately looking at a bright screen:
+`maybeRequestReview()` (private) checks the gate and, if it passes, **defers** the prompt: it schedules a one-shot `reviewPromptTimer` (`LightViewModel.reviewPromptDelay`, currently 4 s) rather than raising `shouldRequestReview` immediately. When the timer fires, `raiseReviewPromptIfEligible()` re-checks the pure rule `shouldRaiseReviewPrompt(controlsVisible:useCount:hasRequestedReview:)` and only then raises `shouldRequestReview = true`. The deferral was added because raising the flag synchronously on controls-open put the StoreKit card on top of the panel the instant it opened, blocking the controls the user had just reached for (dogfood, TestFlight 30). Hiding the controls (the `controlsVisible` setter's `!newValue` branch) and `didRequestReview()` both invalidate the pending timer, so the prompt can never fire once the controls are gone — it never surfaces over the dim light. It is armed from exactly two places — both moments when the controls overlay is visible, i.e. the user is deliberately looking at a bright screen:
 
 - **`toggleControls()`** (`LightViewModel.swift:224-229`) — only on the hidden → visible transition (the `if controlsVisible` guard at line 226), i.e. after the double-tap that opens the controls.
 - **`wakeUp()`** (`LightViewModel.swift:214-221`) — when the user taps the black auto-off sleep screen; it shows the controls first (line 219), then checks the gate (line 220).
@@ -69,8 +69,8 @@ It is deliberately `static` and side-effect-free — no `UserDefaults`, no UI �
 - **Persisted `UserDefaults` keys are permanent API** ([`specs/patterns.md`](../../patterns.md) §4) — never rename:
   - `appUseCount` (Int) — launch counter, incremented in `init()` (`LightViewModel.swift:115-116`).
   - `hasRequestedReview` (Bool) — latched true after the single ask (`LightViewModel.swift:256`).
-- **When it can fire:** second-or-later launch, never asked before, and only at the instant controls become visible (double-tap toggle, or the tap that wakes the screen after auto-off).
-- **When it cannot fire:** first launch ever; while controls are hidden; over the dim light; over the black sleep screen; and never again after the first request.
+- **When it can fire:** second-or-later launch, never asked before, and only after the controls have been open for `reviewPromptDelay` (4 s) and are *still* open — so it never lands on the panel the moment it opens.
+- **When it cannot fire:** first launch ever; while controls are hidden; if the controls are hidden again before the deferral elapses; over the dim light; over the black sleep screen; and never again after the first request.
 - **One ask per install, counted at request time:** `didRequestReview()` latches `hasRequestedReview` immediately after calling `requestReview()`, regardless of whether StoreKit actually presented a dialog (the OS throttles it). The app's single permitted ask can therefore be consumed without the user seeing anything — accepted behaviour today, not a bug.
 - **The gating function stays static and pure** ([`specs/patterns.md`](../../patterns.md) §5) so `ReviewPromptTests` keep exercising it without touching `UserDefaults`.
 

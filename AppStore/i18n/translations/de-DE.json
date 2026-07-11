@@ -57,7 +57,14 @@
     "ax_elapsed_time": "Verstrichene Zeit",
     "ax_light_bg": "Hintergrundfarbe des Lichts: %@",
     "ax_timer_brightness": "Helligkeit der verstrichenen Zeit",
-    "color_warm_white": "Warmweiß"
+    "color_warm_white": "Warmweiß",
+    "deep_sleep_tip": "TIEFSCHLAF-TIPP",
+    "sleep_tip_toggle": "Leuchten, wenn das Baby tief schlafen könnte",
+    "birthday": "Geburtstag des Babys",
+    "glow_offset": "Früher oder später leuchten",
+    "sleep_tip_hint": "Ein sanftes Leuchten zeigt einen guten Moment zum Ablegen.",
+    "sleep_tip_gestures": "Zum Ausblenden aufs Leuchten tippen • Zum Neustarten gedrückt halten",
+    "sleep_tip_window": "Leuchtet ca. %lld Min., nachdem du die App geöffnet hast — die typische Zeit bis zum Tiefschlaf in diesem Alter."
   },
   "watch_captions": [
     "Ein Nachtlicht am Handgelenk",

@@ -30,7 +30,7 @@ Apple frameworks only — **zero third-party dependencies** is a hard rule (`mis
 - **TipKit** — the two-step first-run tutorial ([Tips.swift](../Baby%20Light/Tips.swift)).
 - **StoreKit** — `requestReview` rating prompt only; no purchases.
 - **AVKit (watch only)** — the invisible `VideoPlayer` that hides the watchOS corner clock ([WatchContentView.swift](../Baby%20Light%20Watch%20App/WatchContentView.swift)).
-- **UserDefaults** — the entire persistence layer.
+- **UserDefaults** — the persistence layer for all settings. The one sanctioned file on disk is the deep-sleep tip's session log, a capped JSON ring buffer in Application Support ([SleepTip/SessionLog.swift](../Baby%20Light/SleepTip/SessionLog.swift), `specs/2026-07-10-deep-sleep-tip`).
 
 ## Dependency management
 
