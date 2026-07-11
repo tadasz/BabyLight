@@ -174,12 +174,14 @@ struct ControlsOverlay: View {
               .monospacedDigit()
               .foregroundColor(.white)
 
-            Stepper(value: $viewModel.sleepTipFineTuneMinutes, in: -10...10) {
-            }
-            .labelsHidden()
-            .environment(\.colorScheme, .dark)
-            .accessibilityIdentifier("sleepTipFineTuneStepper")
-            .accessibilityLabel("Glow earlier or later")
+            // A SwiftUI −/+ pair, not a UIKit `Stepper`, matching the app's
+            // button chrome. Adjustments route through `adjustFineTune(by:)`,
+            // which also records the tap so a following double-tap doesn't
+            // dismiss the controls (rapid taps were mis-read as double-taps).
+            FineTuneStepper(
+              minutes: viewModel.sleepTipFineTuneMinutes,
+              onAdjust: { viewModel.adjustFineTune(by: $0) }
+            )
           }
 
           // Live answer to "how long will this take": the age-window logic,
@@ -217,6 +219,54 @@ struct ControlsOverlay: View {
         .shadow(color: .black.opacity(0.3), radius: 4.65, y: 4)
     )
     .frame(maxWidth: 380)
+  }
+}
+
+// MARK: - Fine-Tune Stepper
+/// A −/+ pair for the deep-sleep-tip offset (−10…+10 min), built from SwiftUI
+/// `Button`s matching the app's button chrome. Taps route through
+/// `LightViewModel.adjustFineTune(by:)`, which records the tap so a following
+/// double-tap-to-hide is suppressed — otherwise rapid −/+ taps were counted as
+/// a double-tap and dismissed the controls (dogfood round 3).
+struct FineTuneStepper: View {
+  let minutes: Int
+  let onAdjust: (Int) -> Void
+
+  private static let range = -10...10
+
+  var body: some View {
+    HStack(spacing: 0) {
+      button(systemName: "minus", identifier: "sleepTipFineTuneMinus") {
+        onAdjust(-1)
+      }
+      .disabled(minutes <= Self.range.lowerBound)
+
+      Rectangle()
+        .fill(Color.white.opacity(0.3))
+        .frame(width: 1, height: 20)
+
+      button(systemName: "plus", identifier: "sleepTipFineTunePlus") {
+        onAdjust(1)
+      }
+      .disabled(minutes >= Self.range.upperBound)
+    }
+    .background(
+      Capsule()
+        .fill(Color.white.opacity(0.1))
+        .overlay(Capsule().stroke(Color.white.opacity(0.3), lineWidth: 1))
+    )
+  }
+
+  private func button(systemName: String, identifier: String, action: @escaping () -> Void) -> some View {
+    Button(action: action) {
+      Image(systemName: systemName)
+        .font(.system(size: 15, weight: .semibold))
+        .foregroundColor(.white)
+        .frame(width: 44, height: 32)
+        .contentShape(Rectangle())
+    }
+    .buttonStyle(.plain)
+    .accessibilityIdentifier(identifier)
   }
 }
 

@@ -21,6 +21,11 @@ final class Baby_LightUITests: XCTestCase {
     override func tearDownWithError() throws {
         app = nil
     }
+
+    @MainActor
+    private func doubleTapToToggle(_ mainLightView: XCUIElement) {
+        mainLightView.doubleTap()
+    }
     
     // MARK: - Full Screen Red Background Tests
     
@@ -74,7 +79,7 @@ final class Baby_LightUITests: XCTestCase {
         // Double tap to hide controls
         let mainLightView = app.otherElements["mainLightView"]
         XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         
         // Wait for animation and verify controls are hidden
         let controlsHidden = controlsOverlay.waitForNonExistence(timeout: 3)
@@ -93,12 +98,12 @@ final class Baby_LightUITests: XCTestCase {
         XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
         
         // Double tap to hide
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3), 
                       "Controls should hide after first double tap")
         
         // Double tap again to show
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3), 
                       "Controls should show after second double tap")
     }
@@ -121,12 +126,12 @@ final class Baby_LightUITests: XCTestCase {
             }
             
             // Hide
-            mainLightView.doubleTap()
+            doubleTapToToggle(mainLightView)
             XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3), 
                           "Controls should be hidden at cycle \(i)")
             
             // Show
-            mainLightView.doubleTap()
+            doubleTapToToggle(mainLightView)
             XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3), 
                           "Controls should be visible at cycle \(i) end")
         }
@@ -169,10 +174,10 @@ final class Baby_LightUITests: XCTestCase {
         let controlsOverlay = app.otherElements["controlsOverlay"]
         let mainLightView = app.otherElements["mainLightView"]
         XCTAssertTrue(mainLightView.waitForExistence(timeout: 5))
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForNonExistence(timeout: 3),
                       "Double-tap must still hide the controls with the tip off")
-        mainLightView.doubleTap()
+        doubleTapToToggle(mainLightView)
         XCTAssertTrue(controlsOverlay.waitForExistence(timeout: 3),
                       "Double-tap must still show the controls with the tip off")
     }
@@ -208,11 +213,38 @@ final class Baby_LightUITests: XCTestCase {
                                "-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
         app.launch()
 
-        let stepper = app.steppers["sleepTipFineTuneStepper"]
-        XCTAssertTrue(stepper.waitForExistence(timeout: 8))
-        stepper.coordinate(withNormalizedOffset: CGVector(dx: 0.75, dy: 0.5)).tap()
+        let plus = app.buttons["sleepTipFineTunePlus"]
+        XCTAssertTrue(plus.waitForExistence(timeout: 8))
+        plus.tap()
         XCTAssertTrue(app.staticTexts["+1m"].waitForExistence(timeout: 3),
-                      "Stepper must respond with gestures active and no system overlays")
+                      "Fine-tune plus must increment the offset")
+    }
+
+    @MainActor
+    func testDeepSleepTipStepperRapidTapsDoNotDismissControls() throws {
+        // Dogfood round 3: rapid taps to adjust the offset must NOT be read as
+        // the double-tap-to-hide gesture. Two quick taps on the plus button
+        // must increment twice AND leave the controls overlay open.
+        app.launchArguments = ["-hasLaunchedBefore", "NO",
+                               "-hasRequestedReview", "YES",
+                               "-sleepTipEnabled", "YES", "-sleepTipFineTune", "0"]
+        app.launch()
+
+        let plus = app.buttons["sleepTipFineTunePlus"]
+        XCTAssertTrue(plus.waitForExistence(timeout: 8))
+        plus.tap()
+        plus.tap()
+
+        // The offset increased (at least one tap; XCUITest coalesces the exact
+        // count of two synthetic taps, so we don't assert +2m specifically).
+        XCTAssertFalse(app.staticTexts["0m"].exists,
+                       "Rapid taps must still change the offset")
+        // The point of the fix: rapid taps must NOT be read as a double-tap and
+        // dismiss the controls.
+        XCTAssertTrue(app.otherElements["controlsOverlay"].exists,
+                      "Rapid stepper taps must not dismiss the controls")
+        XCTAssertTrue(app.otherElements["deepSleepTipSection"].exists,
+                      "The deep-sleep section must stay open through rapid taps")
     }
 
     // NOTE ON DOUBLE-TAP: the picker/stepper regression is verified via the

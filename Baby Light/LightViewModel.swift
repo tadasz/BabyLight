@@ -51,6 +51,9 @@ class LightViewModel {
       // Mark that app has launched before (so controls hidden on future launches)
       if !newValue {
         UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+        // Hiding the controls cancels a pending rating prompt so it can never
+        // surface over the dim light (dark is sacred).
+        reviewPromptTimer?.invalidate()
       }
     }
   }
@@ -82,6 +85,14 @@ class LightViewModel {
 
   private var timer: Timer?
   private var elapsedTimer: Timer?
+
+  /// Deferral timer for the rating prompt — see `maybeRequestReview()`.
+  private var reviewPromptTimer: Timer?
+
+  /// How long the controls must stay open before the rating prompt may appear.
+  /// Deferring keeps the StoreKit card from landing on top of the panel the
+  /// instant it opens, which blocked the controls the user just reached for.
+  static let reviewPromptDelay: TimeInterval = 4
 
   /// The screen backing the app's active window scene. Replaces the deprecated
   /// `UIScreen.main` (deprecated in iOS 26) by resolving the screen through the
@@ -190,12 +201,30 @@ class LightViewModel {
   }
 
   /// Parent adjustment on top of the age window, −10…+10 minutes; applies to
-  /// the running session as well as future ones.
+  /// the running session as well as future ones. Adjust it through
+  /// `adjustFineTune(by:)` (not directly) so a double-tap-to-hide that lands
+  /// right after tapping the −/+ buttons is suppressed.
   var sleepTipFineTuneMinutes: Int = 0 {
     didSet {
       UserDefaults.standard.set(sleepTipFineTuneMinutes, forKey: "sleepTipFineTune")
       sleepTipEngine.updateFineTune(minutes: sleepTipFineTuneMinutes)
     }
+  }
+
+  /// When the parent last tapped a fine-tune −/+ button. A double-tap-to-hide
+  /// arriving within `controlToggleSuppressWindow` of this is ignored, so rapid
+  /// taps to change the offset can't be mis-read as the toggle gesture.
+  /// Stamped only by user taps (`adjustFineTune(by:)`), never by the init load.
+  private var lastFineTuneChangeAt: Date?
+
+  /// How long after a fine-tune tap the double-tap toggle is suppressed.
+  static let controlToggleSuppressWindow: TimeInterval = 0.6
+
+  /// Nudge the fine-tune offset by ±1, clamped to −10…+10, and record the tap
+  /// so a following double-tap doesn't toggle the controls.
+  func adjustFineTune(by delta: Int, now: Date = Date()) {
+    sleepTipFineTuneMinutes = max(-10, min(10, sleepTipFineTuneMinutes + delta))
+    lastFineTuneChangeAt = now
   }
 
   /// Monotonic glow counter driving the pulse animation — bumps once per
@@ -447,8 +476,20 @@ class LightViewModel {
     maybeRequestReview()
   }
 
-  /// Toggle controls visibility
-  func toggleControls() {
+  /// Whether a double-tap should toggle the controls, given when the fine-tune
+  /// buttons were last tapped. Static and pure for direct testing.
+  static func shouldToggleControls(now: Date, lastFineTuneChangeAt: Date?) -> Bool {
+    guard let last = lastFineTuneChangeAt else { return true }
+    return now.timeIntervalSince(last) >= controlToggleSuppressWindow
+  }
+
+  /// Toggle controls visibility (driven by the double-tap gesture). Ignored when
+  /// it lands right after a fine-tune −/+ tap, so rapid offset taps can't be
+  /// mis-read as a double-tap-to-hide.
+  func toggleControls(now: Date = Date()) {
+    guard Self.shouldToggleControls(now: now, lastFineTuneChangeAt: lastFineTuneChangeAt) else {
+      return
+    }
     controlsVisible.toggle()
     if controlsVisible {
       maybeRequestReview()
@@ -464,12 +505,34 @@ class LightViewModel {
     !hasRequestedReview && useCount >= 2
   }
 
-  /// Flag the native rating prompt for display if the gating rule is met.
-  /// Called only when the controls overlay becomes visible — an intentional,
-  /// screen-on interaction — so the prompt won't surface over the dim light
-  /// while a baby is being settled.
+  /// Pure rule for whether the *deferred* prompt should actually be raised when
+  /// its timer fires: the base gate must still pass AND the controls must still
+  /// be open, so the card only appears while the user is on the bright panel —
+  /// never over the dim light. Static and side-effect-free for direct testing.
+  static func shouldRaiseReviewPrompt(controlsVisible: Bool, useCount: Int, hasRequestedReview: Bool) -> Bool {
+    controlsVisible && shouldPromptForReview(useCount: useCount, hasRequestedReview: hasRequestedReview)
+  }
+
+  /// Arm the rating prompt when the controls overlay becomes visible — an
+  /// intentional, screen-on interaction. The prompt is *deferred*
+  /// (`reviewPromptDelay`) rather than raised immediately, so the StoreKit card
+  /// never lands on top of the panel the moment it opens; if the user hides the
+  /// controls before it fires, `controlsVisible`'s setter cancels it.
   private func maybeRequestReview() {
     guard Self.shouldPromptForReview(useCount: useCount, hasRequestedReview: hasRequestedReview) else {
+      return
+    }
+    reviewPromptTimer?.invalidate()
+    reviewPromptTimer = Timer.scheduledTimer(withTimeInterval: Self.reviewPromptDelay, repeats: false) { [weak self] _ in
+      self?.raiseReviewPromptIfEligible()
+    }
+  }
+
+  /// The deferred-prompt callback (also unit-testable directly): raise the
+  /// prompt only if the controls are still visible and the gate still passes.
+  func raiseReviewPromptIfEligible() {
+    guard Self.shouldRaiseReviewPrompt(
+      controlsVisible: controlsVisible, useCount: useCount, hasRequestedReview: hasRequestedReview) else {
       return
     }
     shouldRequestReview = true
@@ -478,6 +541,7 @@ class LightViewModel {
   /// Record that the rating prompt has been requested, so it's never shown
   /// again. Called by the view after it presents the StoreKit prompt.
   func didRequestReview() {
+    reviewPromptTimer?.invalidate()
     shouldRequestReview = false
     hasRequestedReview = true
     UserDefaults.standard.set(true, forKey: "hasRequestedReview")

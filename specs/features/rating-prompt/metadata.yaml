@@ -9,4 +9,5 @@ related_features:
   - light-screen
   - controls-overlay
   - auto-off-timer
-specs: []
+specs:
+  - 2026-07-10-deep-sleep-tip

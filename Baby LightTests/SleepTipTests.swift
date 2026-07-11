@@ -186,6 +186,43 @@ struct SettlingSessionLifecycleTests {
     UserDefaults.standard.removeObject(forKey: "sleepTipFineTune")
   }
 
+  @Test func doubleTapSuppressedRightAfterFineTuneTap() async throws {
+    // Reproduction: rapid −/+ taps register as a double-tap on the light
+    // surface and dismiss the controls. The toggle is suppressed within
+    // `controlToggleSuppressWindow` of a fine-tune tap.
+    let t = Date(timeIntervalSinceReferenceDate: 5_000_000)
+    #expect(LightViewModel.shouldToggleControls(now: t, lastFineTuneChangeAt: t) == false)
+    #expect(LightViewModel.shouldToggleControls(
+      now: t.addingTimeInterval(LightViewModel.controlToggleSuppressWindow - 0.01),
+      lastFineTuneChangeAt: t) == false)
+  }
+
+  @Test func doubleTapTogglesAfterWindowOrWithNoFineTune() async throws {
+    let t = Date(timeIntervalSinceReferenceDate: 5_000_000)
+    #expect(LightViewModel.shouldToggleControls(now: t, lastFineTuneChangeAt: nil) == true)
+    #expect(LightViewModel.shouldToggleControls(
+      now: t.addingTimeInterval(LightViewModel.controlToggleSuppressWindow + 0.05),
+      lastFineTuneChangeAt: t) == true)
+  }
+
+  @Test func adjustFineTuneClampsAndStamps() async throws {
+    withSleepTipEnabled { viewModel in
+      viewModel.beginSettlingSession(at: t0)
+      viewModel.adjustFineTune(by: 1, now: t0)
+      #expect(viewModel.sleepTipFineTuneMinutes == 1)
+      // Clamp at +10.
+      for _ in 0..<20 { viewModel.adjustFineTune(by: 1, now: t0) }
+      #expect(viewModel.sleepTipFineTuneMinutes == 10)
+      for _ in 0..<40 { viewModel.adjustFineTune(by: -1, now: t0) }
+      #expect(viewModel.sleepTipFineTuneMinutes == -10)
+      // A double-tap at the same instant is suppressed; controls don't toggle.
+      let before = viewModel.controlsVisible
+      viewModel.toggleControls(now: t0)
+      #expect(viewModel.controlsVisible == before)
+    }
+    UserDefaults.standard.removeObject(forKey: "sleepTipFineTune")
+  }
+
   @Test func fineTuneAppliesToRunningSession() async throws {
     withSleepTipEnabled { viewModel in
       viewModel.beginSettlingSession(at: t0)

@@ -1,1 +1,2 @@
 - 2026-07-10 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-11 rating-prompt fix — deferred the prompt (reviewPromptDelay 4s, still-visible guard) so it no longer lands on the controls panel the instant it opens; cancelled on hide
