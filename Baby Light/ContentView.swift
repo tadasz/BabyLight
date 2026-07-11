@@ -101,7 +101,13 @@ struct ContentView: View {
             .onChanged { value in
               // Only process when controls are hidden
               if !viewModel.controlsVisible {
-                let deltaY = dragStartY - value.location.y
+                // First event of a drag measures from the touch origin
+                // (startLocation) so the 20 pt activation distance counts.
+                // An always-on zero-distance seeder gesture used to capture
+                // this and blocked the overlay's date picker/stepper on
+                // iOS 26.5 — startLocation makes it unnecessary.
+                let referenceY = dragStartY == 0 ? value.startLocation.y : dragStartY
+                let deltaY = referenceY - value.location.y
                 let sensitivity: CGFloat = 0.002
                 viewModel.adjustBrightness(delta: deltaY * sensitivity)
                 dragStartY = value.location.y
@@ -109,14 +115,6 @@ struct ContentView: View {
             }
             .onEnded { _ in
               dragStartY = 0
-            }
-        )
-        .simultaneousGesture(
-          DragGesture(minimumDistance: 0)
-            .onChanged { value in
-              if dragStartY == 0 {
-                dragStartY = value.location.y
-              }
             }
         )
         .simultaneousGesture(

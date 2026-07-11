@@ -56,6 +56,8 @@ Preconditions: Phase-1 (later Phase-2) TestFlight on the nightstand phone; hardw
 
 Dry-run: 2026-07-10 — 2 findings folded into spec (AC5's log-inspection path had no recipe → added to QA-G step 6 + preconditions now name the injected-clock/scripted-events harness recipes from plan tasks 2.1/4.6/5.3; journey step 8's "learned from N nights" observation is Phase-3-only → journey re-scoped to the log record itself, learned caption moved to QA-4).
 
+Dogfood round 2: 2026-07-11 (TestFlight 28/29, iOS 26.5) — birthday picker + fine-tune stepper were dead to taps on 26.5 while every other control worked. Root cause: a zero-distance drag `simultaneousGesture` on the light surface (present since v1.0, to seed the swipe-brightness origin) won touch-down against the two UIKit-backed controls on 26.5. Fix: removed the seeder; the brightness drag reads its origin from `value.startLocation`. Verified by real single-tap UI tests on an erased 26.5 simulator + full suite on 26.2. (The double-tap-to-open XCUITest path is separately flaky on the 26.5 simulator — a harness quirk, not an app bug; the pre-existing `testDoubleTapHidesControlsOverlay` fails there too.)
+
 Dogfood: 2026-07-11 (TestFlight 28) — picker/stepper taps swallowed by the ancestor long-press → gestures now masked while controls are open (regression UI test added); birth month → birthday; "Fine-tune timing" relabeled + live "glows about N min" caption added so the logic explains itself.
 
 Port review: 2026-07-10 (BabyLight PR #21) — tap/long-press steps retargeted from "the timer" to the light surface: the timer text has `allowsHitTesting(false)` (`ContentView.swift:61`), so gestures land on the light, not the text.

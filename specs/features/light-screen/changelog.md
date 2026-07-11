@@ -2,3 +2,4 @@
 - 2026-07-10 NO-SPEC — fourth palette preset renamed "Wheat" → "Warm White" (id `dim-white` → `warm-white`), unified with the watch and the App Store description; direct owner instruction
 - 2026-07-10 2026-07-10-deep-sleep-tip — glow-pulse cue on the light surface (GlowPulse.swift) + tap-acknowledge and long-press-reset gestures joined the gesture stack via simultaneousGesture
 - 2026-07-11 2026-07-10-deep-sleep-tip — settling-time gestures masked to .subviews while controls are open (fixes overlay picker/stepper taps; prevents accidental resets)
+- 2026-07-11 2026-07-10-deep-sleep-tip — dogfood round 2 (iOS 26.5): removed the v1.0 zero-distance drag seeder that swallowed touch-down from the overlay date-picker/stepper; brightness drag now derives its origin from startLocation. Picker/stepper verified via real single-tap UI tests on 26.5.
