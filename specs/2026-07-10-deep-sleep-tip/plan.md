@@ -43,15 +43,15 @@ Dogfood round 1 (TestFlight 28, 2026-07-11): settling-time gestures masked `.sub
 
 Purpose: swap the fuzzy app-open anchor for cry-cessation when the mic can prove it.
 
-4.1 `Baby Light/SleepTip/CryDetector.swift` — `SNClassifySoundRequest(classifierIdentifier: .version1)` on an `AVAudioEngine` mic tap via `SNAudioStreamAnalyzer`; runs only while a session is active and the toggle is on.
-4.2 Verify exact labels via `knownClassifications` at integration time (`baby_crying`; treat `crying_sobbing` as a match if present).
-4.3 Tunable constants in a single config struct: window 1.5 s, 50 % overlap, confidence ≥ 0.6; bout confirmed = ≥ 3 positive windows in 10 s; bout ended = 120 s without one.
-4.4 Anchor switching in the engine: bout end re-anchors; new bout clears pending/shown tip and re-arms; cry events append to the session log.
-4.5 Permission flow: localized `NSMicrophoneUsageDescription` ("listens locally for crying to time the sleep tip; nothing is recorded or leaves the device"); denied → `appOpen` fallback; orange-dot disclosure in settings copy.
-4.6 Unit tests: bout confirm/end debounce with scripted classifier events (grunts never confirm); anchor override; denial fallback.
-4.7 Same-PR docs: update `specs/tech-stack.md` frameworks (SoundAnalysis, AVFoundation) and `specs/patterns.md` §8 (off-main audio callbacks); check whether `PrivacyInfo.xcprivacy` becomes required (none exists today); changelog entries for touched feature folders (controls-overlay: mic toggle).
+✅ 4.1 `Baby Light/SleepTip/CryDetector.swift` — `SNClassifySoundRequest(classifierIdentifier: .version1)` on an `AVAudioEngine` mic tap via `SNAudioStreamAnalyzer`; runs only while a session is active and the toggle is on.
+4.2 Verify exact labels via `knownClassifications` at integration time (`baby_crying`; treat `crying_sobbing` as a match if present). — labels wired as `CryDetector.cryLabels = {baby_crying, crying_sobbing}`; **`knownClassifications` verification is an on-device step, still pending** (can't run in the simulator).
+✅ 4.3 Tunable constants in a single config struct: window 1.5 s, 50 % overlap, confidence ≥ 0.6; bout confirmed = ≥ 3 positive windows in 10 s; bout ended = 120 s without one. — `CryBoutTracker.Config` (debounce) + the request's `windowDuration`/`overlapFactor`.
+✅ 4.4 Anchor switching in the engine: bout end re-anchors; new bout clears pending/shown tip and re-arms; cry events append to the session log. — engine path pre-existed (dormant); wired detector → engine, and session record now logs real `cryBouts`.
+✅ 4.5 Permission flow: localized `NSMicrophoneUsageDescription` ("listens locally for crying to time the sleep tip; nothing is recorded or leaves the device"); denied → `appOpen` fallback; orange-dot disclosure in settings copy. — usage string + fallback + disclosure copy done; **26-locale fill complete** — 2 UI strings in `Localizable.xcstrings` + `NSMicrophoneUsageDescription` in new `InfoPlist.xcstrings`, verified compiled into the built bundle (per-locale `.lproj`).
+✅ 4.6 Unit tests: bout confirm/end debounce with scripted classifier events (grunts never confirm); anchor override; denial fallback. — `CryBoutTrackerTests` (6) + existing engine anchor tests; denial fallback is by-design (start-completion ignored, anchor stays `appOpen`) — not directly unit-tested (needs the permission API).
+✅ 4.7 Same-PR docs: update `specs/tech-stack.md` frameworks (SoundAnalysis, AVFoundation) and `specs/patterns.md` §8 (off-main audio callbacks); check whether `PrivacyInfo.xcprivacy` becomes required (none exists today); changelog entries for touched feature folders (controls-overlay: mic toggle). — feature-folder README + changelog updated; **constitution edits applied with owner approval 2026-07-12** (tech-stack frameworks + patterns §8); `PrivacyInfo.xcprivacy` assessed **not newly required** (mic covered by usage string; no data collection / third-party SDKs) — re-confirm at ASC submission.
 
-Exit criteria: AC6–AC8 pass; tech-stack/patterns drift closed; Phase-2 PR + TestFlight.
+Exit criteria: AC6–AC8 pass (AC6/AC7 verified via tests; AC8 code-complete, device-pending QA-3); tech-stack/patterns drift closed; localization complete; Phase-2 PR + TestFlight (device verification of live mic + label review remain before merge).
 
 ## 5. Calibration — delivers US-3 (Phase 3)
 

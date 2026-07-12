@@ -473,3 +473,77 @@ struct SessionOutcomeTests {
     #expect(LightViewModel.sessionOutcome(glowCount: 1, endReason: .autoOff) == .unknown)
   }
 }
+
+// MARK: - CryBoutTracker: cry debounce (Phase 2)
+
+struct CryBoutTrackerTests {
+
+  let t0 = Date(timeIntervalSinceReferenceDate: 4_000_000)
+  private let cry = 0.8    // above the 0.6 confidence gate
+  private let quiet = 0.0
+
+  @Test func threePositiveWindowsConfirmABout() async throws {
+    var tracker = CryBoutTracker()
+    #expect(tracker.observe(confidence: cry, at: t0) == nil)
+    #expect(tracker.observe(confidence: cry, at: t0.addingTimeInterval(0.75)) == nil)
+    #expect(tracker.observe(confidence: cry, at: t0.addingTimeInterval(1.5)) == .boutConfirmed)
+    #expect(tracker.inBout)
+  }
+
+  @Test func isolatedGruntsNeverConfirm() async throws {
+    var tracker = CryBoutTracker()
+    // Two positives then quiet — below the 3-in-10s threshold (AC6).
+    _ = tracker.observe(confidence: cry, at: t0)
+    _ = tracker.observe(confidence: cry, at: t0.addingTimeInterval(1))
+    for i in 1...20 {
+      #expect(tracker.observe(confidence: quiet, at: t0.addingTimeInterval(Double(i))) == nil)
+    }
+    #expect(!tracker.inBout)
+  }
+
+  @Test func positivesSpacedBeyondWindowNeverAccumulate() async throws {
+    var tracker = CryBoutTracker()
+    // Each positive lands > 10 s after the previous, so the window only ever
+    // holds one — three spread-out squawks are not a bout.
+    #expect(tracker.observe(confidence: cry, at: t0) == nil)
+    #expect(tracker.observe(confidence: cry, at: t0.addingTimeInterval(11)) == nil)
+    #expect(tracker.observe(confidence: cry, at: t0.addingTimeInterval(22)) == nil)
+    #expect(!tracker.inBout)
+  }
+
+  @Test func boutEndsAfterTwoMinutesQuiet() async throws {
+    var tracker = confirmedTracker()
+    let lastPositive = t0.addingTimeInterval(1.5)
+    #expect(tracker.observe(confidence: quiet, at: lastPositive.addingTimeInterval(119)) == nil)
+    #expect(tracker.inBout)
+    #expect(tracker.observe(confidence: quiet, at: lastPositive.addingTimeInterval(120)) == .boutEnded)
+    #expect(!tracker.inBout)
+  }
+
+  @Test func continuedCryingPostponesBoutEnd() async throws {
+    var tracker = confirmedTracker()
+    // A positive window mid-bout refreshes the silence clock, so the 2-minute
+    // countdown to bout-end runs from the *last* cry, not the first.
+    let refresh = t0.addingTimeInterval(60)
+    #expect(tracker.observe(confidence: cry, at: refresh) == nil)   // already in bout, no event
+    #expect(tracker.observe(confidence: quiet, at: refresh.addingTimeInterval(119)) == nil)
+    #expect(tracker.observe(confidence: quiet, at: refresh.addingTimeInterval(120)) == .boutEnded)
+  }
+
+  @Test func subThresholdConfidenceIsNeverPositive() async throws {
+    var tracker = CryBoutTracker()
+    for i in 0...10 {
+      #expect(tracker.observe(confidence: 0.59, at: t0.addingTimeInterval(Double(i))) == nil)
+    }
+    #expect(!tracker.inBout)
+  }
+
+  /// A tracker already in a confirmed bout, last positive at t0 + 1.5 s.
+  private func confirmedTracker() -> CryBoutTracker {
+    var tracker = CryBoutTracker()
+    _ = tracker.observe(confidence: cry, at: t0)
+    _ = tracker.observe(confidence: cry, at: t0.addingTimeInterval(0.75))
+    _ = tracker.observe(confidence: cry, at: t0.addingTimeInterval(1.5))
+    return tracker
+  }
+}

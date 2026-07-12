@@ -1,0 +1,2 @@
+- 2026-07-11 NO-SPEC — feature folder seeded by /spec-reverse-engineer from existing code
+- 2026-07-12 2026-07-10-deep-sleep-tip — Phase 2 (plan group 4): CryDetector (mic cry detection) wired to the engine's cry-anchor path; `sleepTipMicEnabled` setting; bouts logged to `SessionRecord.cryBouts`. On-device verification, 26-locale strings, and constitution edits still owed.

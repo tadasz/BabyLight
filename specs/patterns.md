@@ -65,6 +65,7 @@ Decision rules that would otherwise touch `UserDefaults` or UI are extracted as 
 - The app is main-thread only. `Timer.scheduledTimer(withTimeInterval:repeats:)` with `[weak self]` closures drives countdowns ([LightViewModel.swift](../Baby%20Light/LightViewModel.swift)); the watch uses `Timer.publish().autoconnect()` + `.onReceive` ([WatchContentView.swift](../Baby%20Light%20Watch%20App/WatchContentView.swift), needs `import Combine`).
 - Always `invalidate()` the old timer before scheduling a replacement (`startElapsedTimer()`, `setTimer(_:)`).
 - No `async/await` surface exists yet; introduce it only when an API demands it — don't refactor timers to actors/streams for style points.
+- **The one exception to main-thread-only is cry detection.** `SoundAnalysis` delivers classification results on a background queue; the detector confines its pure `CryBoutTracker` to a private serial analysis queue and marshals bout events to the main thread before touching the view model or engine ([SleepTip/CryDetector.swift](../Baby%20Light/SleepTip/CryDetector.swift)). Keep any future audio/analysis callback on its own queue and hop to main at the boundary — never touch view-model state off the main thread.
 
 ## 9. Testing
 
