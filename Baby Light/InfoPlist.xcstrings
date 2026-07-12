@@ -1,0 +1,173 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSMicrophoneUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light listens on your device for crying to time the sleep tip. Nothing is recorded and nothing leaves your phone."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستمع Baby Light على جهازك إلى البكاء لضبط توقيت تلميح النوم. لا يُسجَّل أي شيء ولا يغادر أي شيء هاتفك."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light lytter efter gråd på din enhed for at time søvntippet. Intet optages, og intet forlader din telefon."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light hört auf deinem Gerät auf Weinen, um den Schlafhinweis zu timen. Nichts wird aufgezeichnet und nichts verlässt dein Telefon."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Baby Light ακούει για κλάματα στη συσκευή σου για να χρονίσει την υπόδειξη ύπνου. Τίποτα δεν καταγράφεται και τίποτα δεν φεύγει από το τηλέφωνό σου."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light escucha el llanto en tu dispositivo para calcular el aviso de sueño. No se graba nada y nada sale de tu teléfono."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light escucha el llanto en tu dispositivo para calcular el aviso de sueño. No se graba nada y nada sale de tu teléfono."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light kuuntelee itkua laitteellasi ajoittaakseen univihjeen. Mitään ei tallenneta eikä mikään poistu puhelimestasi."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light écoute les pleurs sur votre appareil pour synchroniser le signal de sommeil. Rien n'est enregistré et rien ne quitte votre téléphone."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light नींद के संकेत का समय तय करने के लिए आपके डिवाइस पर रोना सुनता है। कुछ भी रिकॉर्ड नहीं होता और कुछ भी आपके फ़ोन से बाहर नहीं जाता।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light mendengarkan tangisan di perangkat Anda untuk mengatur waktu petunjuk tidur. Tidak ada yang direkam dan tidak ada yang keluar dari ponsel Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light ascolta il pianto sul tuo dispositivo per calcolare il segnale del sonno. Nulla viene registrato e nulla lascia il tuo telefono."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light は端末上で泣き声を聞き取り、眠りのタイミングをお知らせします。録音は行われず、データが端末外に出ることはありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light는 기기에서 울음소리를 감지해 수면 신호 시점을 맞춥니다. 아무것도 녹음되지 않으며 어떤 데이터도 휴대폰을 벗어나지 않습니다."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Baby Light“ klausosi verksmo jūsų įrenginyje, kad parinktų miego patarimo laiką. Niekas neįrašoma ir niekas neišeina iš jūsų telefono."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light lytter etter gråt på enheten din for å tidsbestemme søvntipset. Ingenting tas opp, og ingenting forlater telefonen din."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light luistert op je apparaat naar huilen om de slaaptip te timen. Er wordt niets opgenomen en er verlaat niets je telefoon."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light nasłuchuje płaczu na Twoim urządzeniu, aby wyznaczyć czas wskazówki dotyczącej snu. Nic nie jest nagrywane i nic nie opuszcza Twojego telefonu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Baby Light ouve o choro no seu dispositivo para cronometrar a dica de sono. Nada é gravado e nada sai do seu telefone."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light слушает плач на вашем устройстве, чтобы подобрать время подсказки для сна. Ничего не записывается и ничего не покидает ваш телефон."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light lyssnar efter gråt på din enhet för att tajma sömntipset. Inget spelas in och inget lämnar din telefon."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light ฟังเสียงร้องไห้บนอุปกรณ์ของคุณเพื่อจับเวลาการแจ้งเตือนการนอน ไม่มีการบันทึกและไม่มีข้อมูลใดออกจากโทรศัพท์ของคุณ"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light, uyku ipucunu zamanlamak için cihazınızda ağlamayı dinler. Hiçbir şey kaydedilmez ve hiçbir şey telefonunuzdan çıkmaz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light слухає плач на вашому пристрої, щоб визначити час підказки для сну. Нічого не записується й нічого не залишає ваш телефон."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light lắng nghe tiếng khóc trên thiết bị của bạn để căn thời điểm gợi ý giấc ngủ. Không có gì được ghi lại và không có gì rời khỏi điện thoại của bạn."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light 在你的设备上聆听哭声，以确定睡眠提示的时机。不会录制任何内容，也不会有任何数据离开你的手机。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby Light 在你的裝置上聆聽哭聲，以決定睡眠提示的時機。不會錄製任何內容，也不會有任何資料離開你的手機。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

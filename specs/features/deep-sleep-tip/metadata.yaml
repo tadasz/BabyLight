@@ -1,0 +1,20 @@
+name: Deep-sleep tip
+status: active          # active | deprecated | experimental
+owner: tadas
+files:                  # source files this feature owns or is wired into
+  - Baby Light/SleepTip/BabyProfile.swift
+  - Baby Light/SleepTip/SleepTipEngine.swift
+  - Baby Light/SleepTip/SessionLog.swift
+  - Baby Light/SleepTip/CryDetector.swift
+  - Baby Light/GlowPulse.swift
+  - Baby Light/LightViewModel.swift
+  - Baby Light/ContentView.swift
+  - Baby Light/ControlsOverlay.swift
+targets: [Baby Night Light]
+related_features:
+  - light-screen
+  - controls-overlay
+  - auto-off-timer
+  - feed-timer
+specs:                  # spec folders that shipped meaningful changes
+  - 2026-07-10-deep-sleep-tip

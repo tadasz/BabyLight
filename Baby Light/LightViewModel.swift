@@ -124,6 +124,12 @@ class LightViewModel {
       sleepTipFineTuneMinutes = UserDefaults.standard.integer(forKey: "sleepTipFineTune")
     }
     sleepTipBirthMonth = BabyProfile.loadBirthMonth()
+    // Load the mic toggle before `sleepTipEnabled`: enabling the feature can
+    // start a session in the same init, and that session must see the correct
+    // mic preference when it decides whether to begin cry detection.
+    if UserDefaults.standard.object(forKey: "sleepTipMicEnabled") != nil {
+      sleepTipMicEnabled = UserDefaults.standard.bool(forKey: "sleepTipMicEnabled")
+    }
     if UserDefaults.standard.object(forKey: "sleepTipEnabled") != nil {
       sleepTipEnabled = UserDefaults.standard.bool(forKey: "sleepTipEnabled")
     }
@@ -187,6 +193,23 @@ class LightViewModel {
         if sessionStart == nil {
           beginSettlingSession()
         }
+      }
+    }
+  }
+
+  /// Opt-in on-device cry listening (Phase 2). When on, a running session
+  /// starts the microphone cry detector so the tip can re-anchor to the end of
+  /// a crying bout; when off (or permission denied), the session runs on the
+  /// app-open anchor exactly as in Phase 1 (AC8). Gated under `sleepTipEnabled`
+  /// in the UI, but harmless on its own — nothing starts without a session.
+  var sleepTipMicEnabled: Bool = false {
+    didSet {
+      UserDefaults.standard.set(sleepTipMicEnabled, forKey: "sleepTipMicEnabled")
+      guard sessionStart != nil else { return }
+      if sleepTipMicEnabled {
+        startCryDetection()
+      } else {
+        stopCryDetection()
       }
     }
   }
@@ -259,6 +282,18 @@ class LightViewModel {
   /// at a temporary file instead of the app container.
   var sessionLog = SessionLog()
 
+  /// The microphone cry detector, created on first use so a launch with the
+  /// feature off never touches `AVAudioEngine`. Only real while a session runs
+  /// with the mic toggle on. `@ObservationIgnored` because it is plumbing, not
+  /// observed UI state — and `@Observable` forbids `lazy` on tracked properties.
+  @ObservationIgnored private lazy var cryDetector = CryDetector()
+
+  /// Cry bouts observed during the current session, written into its log
+  /// record at session end (Phase 1 always logged `[]` here).
+  private var sessionCryBouts: [SessionRecord.CryBout] = []
+  /// Start of an in-progress bout, held until its end so the pair can be logged.
+  private var pendingBoutStart: Date?
+
   /// When the app last left the foreground with a session running — the
   /// timestamp the interruption rule measures against.
   private var sessionResignedAt: Date?
@@ -288,9 +323,14 @@ class LightViewModel {
   func beginSettlingSession(at now: Date = Date()) {
     sessionStart = now
     sessionResignedAt = nil
+    sessionCryBouts = []
+    pendingBoutStart = nil
     sleepTipEngine.sessionStarted(at: now, bucket: ageBucket(at: now),
                                   fineTuneMinutes: sleepTipFineTuneMinutes)
     startElapsedTimer()
+    if sleepTipMicEnabled {
+      startCryDetection()
+    }
   }
 
   /// End the current session (auto-off firing, long interruption, manual
@@ -306,15 +346,46 @@ class LightViewModel {
         anchorKind: sleepTipEngine.anchorKind,
         anchorTime: sleepTipEngine.anchorTime ?? start,
         glowTimes: sleepTipEngine.glowTimes,
-        cryBouts: [],
+        cryBouts: sessionCryBouts,
         acknowledgeTime: sleepTipEngine.acknowledgeTime,
         outcome: Self.sessionOutcome(glowCount: sleepTipEngine.glowTimes.count, endReason: reason),
         endReason: reason)
       sessionLog.append(record)
     }
+    stopCryDetection()
     sessionStart = nil
     sessionResignedAt = nil
+    sessionCryBouts = []
+    pendingBoutStart = nil
     sleepTipEngine.sessionEnded()
+  }
+
+  // MARK: - Cry detection (Phase 2)
+
+  /// Wire the detector's bout callbacks into the engine and start listening.
+  /// Permission is requested here; denial is a silent fall-through to the
+  /// app-open anchor (AC8), so there is nothing to handle on failure.
+  private func startCryDetection() {
+    cryDetector.onBoutConfirmed = { [weak self] at in
+      guard let self, self.sessionStart != nil else { return }
+      self.sleepTipEngine.cryBoutConfirmed(at: at)
+      self.pendingBoutStart = at
+    }
+    cryDetector.onBoutEnded = { [weak self] at in
+      guard let self, self.sessionStart != nil else { return }
+      self.sleepTipEngine.cryBoutEnded(at: at)
+      if let start = self.pendingBoutStart {
+        self.sessionCryBouts.append(SessionRecord.CryBout(start: start, end: at))
+        self.pendingBoutStart = nil
+      }
+    }
+    cryDetector.start { _ in }
+  }
+
+  private func stopCryDetection() {
+    cryDetector.stop()
+    cryDetector.onBoutConfirmed = nil
+    cryDetector.onBoutEnded = nil
   }
 
   /// Manual reset (long-press on the light): ends the running session and
@@ -364,6 +435,11 @@ class LightViewModel {
       if let start = sessionStart {
         elapsedSeconds = Int(now.timeIntervalSince(start))
       }
+      // The mic tap was torn down at resign-active (iOS suspends the audio
+      // engine in the background anyway); bring it back for the resumed session.
+      if sleepTipMicEnabled {
+        startCryDetection()
+      }
     case .start:
       beginSettlingSession(at: now)
     case .restart:
@@ -409,6 +485,9 @@ class LightViewModel {
     if sessionStart != nil {
       sessionResignedAt = now
       sleepTipEngine.wentInactive(at: now)
+      // Release the mic while backgrounded; `.resume` reinstalls the tap.
+      // Tearing down here also avoids a double `installTap` on the next start.
+      stopCryDetection()
     }
   }
 

@@ -14,11 +14,11 @@ Merge gate per phase PR: every box relevant to the phase ticked = ready for `mai
 - [x] AC3 (US-1, P1) session survives < 3 min interruptions — verify by: session unit tests + QA-1 — ✅ 2026-07-10 `SettlingSession*Tests`
 - [x] AC4 (US-1, P1) feature-off parity — verify by: UI test (XCTest) feature-off behavior parity — ✅ 2026-07-10 `testDeepSleepTipOffByDefaultAndGesturesUnchanged` + full pre-existing suite green
 - [x] AC5 (US-1, P1) one log record per session — verify by: SessionLog unit tests (shape + ring cap) + QA-G step 6 — ✅ 2026-07-10 (endReason asserted for background/autoOff/manualReset paths)
-- [ ] AC6 (US-2, P2) cry-cessation re-anchor; grunts never move anchor — verify by: bout-debounce unit tests (scripted classifier events) + QA-2
-- [ ] AC7 (US-2, P2) new bout clears tip, re-arms — verify by: engine unit tests + QA-2
-- [ ] AC8 (US-2, P2) mic-denied fallback + orange-dot disclosure — verify by: unit test (permission state) + QA-3
+- [x] AC6 (US-2, P2) cry-cessation re-anchor; grunts never move anchor — verify by: bout-debounce unit tests (scripted classifier events) + QA-2 — ✅ 2026-07-12 `CryBoutTrackerTests` (3-in-10s confirms, isolated grunts/spaced squawks never confirm, 120s-quiet ends) + engine `cryBoutOverridesAnchor`; QA-2 (device) still owed
+- [x] AC7 (US-2, P2) new bout clears tip, re-arms — verify by: engine unit tests + QA-2 — ✅ 2026-07-12 `SleepTipEngineTests.newBoutClearsShownTipAndReArms` (green against the now-wired detector path)
+- [ ] AC8 (US-2, P2) mic-denied fallback + orange-dot disclosure — verify by: unit test (permission state) + QA-3 — orange-dot disclosure copy + denied→appOpen fallback are **code-complete**; permission state can't be unit-tested (AVAudioApplication) and QA-3 is device — **device-pending**
 - [ ] AC9 (US-3, P3) calibration shift, ±10 clamp, ≥ 5 gate, reset control — verify by: calibration unit tests + QA-4
-- [x] AC10 (US-1, P1) strings localized, privacy label unchanged — verify by: xcstrings diff covers all new keys (26 locales); App Store Connect privacy section review — ✅ 2026-07-10: 6 keys × 26 locales via the i18n pipeline (regen-stable); Phase 1 adds no data collection, label untouched
+- [x] AC10 (US-1, P1) strings localized, privacy label unchanged — verify by: xcstrings diff covers all new keys (26 locales); App Store Connect privacy section review — ✅ 2026-07-10: 6 keys × 26 locales via the i18n pipeline (regen-stable); Phase 1 adds no data collection, label untouched. ✅ 2026-07-12 Phase 2: 2 UI strings × 26 locales in `Localizable.xcstrings` + `NSMicrophoneUsageDescription` × 26 (+en) in new `InfoPlist.xcstrings` — **verified compiled into the built bundle** (base plist + per-locale `InfoPlist.strings`/`Localizable.strings` inspected). Privacy label "Data Not Collected" unchanged (mic audio classified in-memory, never stored/sent); ASC label review still owed at submission
 
 ## UI coverage
 
@@ -53,8 +53,8 @@ XCTest UI tests: settings section appears (plan task 3.5); feature-off parity (A
 ## Touched feature folders
 
 - [x] README + changelog updated in the same PR as the behaviour change (requirements → Touches features): feed-timer, light-screen, controls-overlay, auto-off-timer, first-run-tutorial (per phase, as touched) — ✅ 2026-07-10 Phase 1 (first-run-tutorial behaviour unchanged → no update owed)
-- [ ] Constitution amendments landed with the code that motivates them: `specs/patterns.md` §4 SessionLog file exception (Phase 1) — ✅ 2026-07-10 owner-instructed, applied together with the tech-stack.md persistence line; `specs/tech-stack.md` frameworks + patterns §8 concurrency (Phase 2) — pending Phase 2
-- [ ] `specs/features/deep-sleep-tip/` seeded after Phase-1 ship (README + metadata + changelog from this folder)
+- [x] Constitution amendments landed with the code that motivates them: `specs/patterns.md` §4 SessionLog file exception (Phase 1) — ✅ 2026-07-10 owner-instructed, applied together with the tech-stack.md persistence line; `specs/tech-stack.md` frameworks (SoundAnalysis/AVFoundation) + `specs/patterns.md` §8 off-main audio-callback note (Phase 2) — ✅ 2026-07-12 owner-approved and applied with the CryDetector code
+- [x] `specs/features/deep-sleep-tip/` seeded after Phase-1 ship (README + metadata + changelog from this folder) — ✅ 2026-07-11 via `/spec-reverse-engineer`; updated for Phase 2 (CryDetector, `sleepTipMicEnabled`)
 
 ## Field dogfood
 

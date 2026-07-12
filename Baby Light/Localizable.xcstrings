@@ -1,6 +1,328 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Listen for crying to time the tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستماع إلى البكاء لضبط توقيت التلميح"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lyt efter gråd for at time tippet"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf Weinen hören, um den Hinweis zu timen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ακρόαση για κλάματα ώστε να χρονιστεί η υπόδειξη"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escuchar el llanto para calcular el aviso"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escuchar el llanto para calcular el aviso"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuuntele itkua vihjeen ajoitusta varten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écouter les pleurs pour synchroniser le signal"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संकेत का समय तय करने के लिए रोना सुनें"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengarkan tangisan untuk mengatur waktu petunjuk"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ascolta il pianto per calcolare il segnale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "泣き声を聞いてタイミングを計る"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "울음소리를 감지해 신호 시점 맞추기"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klausytis verksmo, kad būtų parinktas patarimo laikas"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lytt etter gråt for å tidsbestemme tipset"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luister naar huilen om de tip te timen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nasłuchuj płaczu, aby wyznaczyć czas wskazówki"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvir o choro para cronometrar a dica"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слушать плач, чтобы подобрать время подсказки"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lyssna efter gråt för att tajma tipset"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ฟังเสียงร้องไห้เพื่อจับเวลาการแจ้งเตือน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İpucunu zamanlamak için ağlamayı dinle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слухати плач, щоб визначити час підказки"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nghe tiếng khóc để căn thời điểm gợi ý"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "聆听哭声以确定提示时机"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "聆聽哭聲以決定提示時機"
+          }
+        }
+      }
+    },
+    "Listens on your device for crying to anchor the tip more accurately. An orange dot appears while it listens. Nothing is recorded and nothing leaves your phone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستمع على جهازك إلى البكاء لتحديد توقيت التلميح بدقة أكبر. تظهر نقطة برتقالية أثناء الاستماع. لا يُسجَّل أي شيء ولا يغادر أي شيء هاتفك."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lytter efter gråd på din enhed for at tidsbestemme tippet mere præcist. En orange prik vises, mens der lyttes. Intet optages, og intet forlader din telefon."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hört auf deinem Gerät auf Weinen, um den Hinweis genauer zu timen. Während des Zuhörens erscheint ein oranger Punkt. Nichts wird aufgezeichnet und nichts verlässt dein Telefon."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ακούει για κλάματα στη συσκευή σου για πιο ακριβή χρονισμό της υπόδειξης. Μια πορτοκαλί κουκκίδα εμφανίζεται όσο ακούει. Τίποτα δεν καταγράφεται και τίποτα δεν φεύγει από το τηλέφωνό σου."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escucha el llanto en tu dispositivo para calcular el aviso con más precisión. Aparece un punto naranja mientras escucha. No se graba nada y nada sale de tu teléfono."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escucha el llanto en tu dispositivo para calcular el aviso con más precisión. Aparece un punto naranja mientras escucha. No se graba nada y nada sale de tu teléfono."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuuntelee itkua laitteellasi ajoittaakseen vihjeen tarkemmin. Kuuntelun aikana näkyy oranssi piste. Mitään ei tallenneta eikä mikään poistu puhelimestasi."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écoute les pleurs sur votre appareil pour mieux synchroniser le signal. Un point orange apparaît pendant l'écoute. Rien n'est enregistré et rien ne quitte votre téléphone."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संकेत का समय अधिक सटीक बनाने के लिए आपके डिवाइस पर रोना सुनता है। सुनते समय एक नारंगी बिंदु दिखता है। कुछ भी रिकॉर्ड नहीं होता और कुछ भी आपके फ़ोन से बाहर नहीं जाता।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mendengarkan tangisan di perangkat Anda untuk menentukan waktu petunjuk lebih akurat. Titik oranye muncul saat mendengarkan. Tidak ada yang direkam dan tidak ada yang keluar dari ponsel Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ascolta il pianto sul tuo dispositivo per calcolare il segnale con più precisione. Un puntino arancione appare durante l'ascolto. Nulla viene registrato e nulla lascia il tuo telefono."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "泣き声を端末上で聞き取り、タイミングをより正確に合わせます。聞き取り中はオレンジ色の点が表示されます。録音は行われず、データが端末外に出ることはありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "울음소리를 기기에서 감지해 신호 시점을 더 정확히 맞춥니다. 감지 중에는 주황색 점이 표시됩니다. 아무것도 녹음되지 않으며 어떤 데이터도 휴대폰을 벗어나지 않습니다."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klausosi verksmo jūsų įrenginyje, kad tiksliau parinktų patarimo laiką. Klausantis rodomas oranžinis taškas. Niekas neįrašoma ir niekas neišeina iš jūsų telefono."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lytter etter gråt på enheten din for å tidsbestemme tipset mer nøyaktig. En oransje prikk vises mens den lytter. Ingenting tas opp, og ingenting forlater telefonen din."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luistert op je apparaat naar huilen om de tip nauwkeuriger te timen. Er verschijnt een oranje stip tijdens het luisteren. Er wordt niets opgenomen en er verlaat niets je telefoon."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nasłuchuje płaczu na Twoim urządzeniu, aby dokładniej wyznaczyć czas wskazówki. Podczas nasłuchiwania pojawia się pomarańczowa kropka. Nic nie jest nagrywane i nic nie opuszcza Twojego telefonu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouve o choro no seu dispositivo para cronometrar a dica com mais precisão. Um ponto laranja aparece enquanto ouve. Nada é gravado e nada sai do seu telefone."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слушает плач на вашем устройстве, чтобы точнее подобрать время подсказки. Во время прослушивания появляется оранжевая точка. Ничего не записывается и ничего не покидает ваш телефон."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lyssnar efter gråt på din enhet för att tajma tipset mer exakt. En orange prick visas medan den lyssnar. Inget spelas in och inget lämnar din telefon."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ฟังเสียงร้องไห้บนอุปกรณ์ของคุณเพื่อจับเวลาการแจ้งเตือนได้แม่นยำขึ้น จะมีจุดสีส้มปรากฏขณะฟัง ไม่มีการบันทึกและไม่มีข้อมูลใดออกจากโทรศัพท์ของคุณ"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İpucunu daha isabetli zamanlamak için cihazınızda ağlamayı dinler. Dinlerken turuncu bir nokta görünür. Hiçbir şey kaydedilmez ve hiçbir şey telefonunuzdan çıkmaz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слухає плач на вашому пристрої, щоб точніше визначити час підказки. Під час прослуховування з’являється оранжева крапка. Нічого не записується й нічого не залишає ваш телефон."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lắng nghe tiếng khóc trên thiết bị của bạn để căn thời điểm gợi ý chính xác hơn. Một chấm cam xuất hiện khi đang nghe. Không có gì được ghi lại và không có gì rời khỏi điện thoại của bạn."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在你的设备上聆听哭声，以更准确地确定提示时机。聆听时会出现一个橙色圆点。不会录制任何内容，也不会有任何数据离开你的手机。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在你的裝置上聆聽哭聲，以更準確地決定提示時機。聆聽時會出現一個橘色圓點。不會錄製任何內容，也不會有任何資料離開你的手機。"
+          }
+        }
+      }
+    },
     "LIGHT COLOR": {
       "extractionState": "manual",
       "localizations": {

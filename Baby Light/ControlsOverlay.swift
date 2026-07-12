@@ -194,6 +194,25 @@ struct ControlsOverlay: View {
               .frame(maxWidth: .infinity, alignment: .leading)
           }
 
+          Toggle(isOn: $viewModel.sleepTipMicEnabled) {
+            Text("Listen for crying to time the tip")
+              .font(.system(size: 15))
+              .foregroundColor(.white)
+              .fixedSize(horizontal: false, vertical: true)
+          }
+          .tint(.white)
+          .accessibilityIdentifier("sleepTipMicToggle")
+
+          // Orange-dot disclosure (AC8): the copy names the iOS mic-in-use
+          // indicator and the on-device, nothing-recorded guarantee.
+          if viewModel.sleepTipMicEnabled {
+            Text("Listens on your device for crying to anchor the tip more accurately. An orange dot appears while it listens. Nothing is recorded and nothing leaves your phone.")
+              .font(.system(size: 13))
+              .foregroundColor(Color(white: 0.5))
+              .fixedSize(horizontal: false, vertical: true)
+              .frame(maxWidth: .infinity, alignment: .leading)
+          }
+
           Text("Tap the glow to dismiss • Hold the light to restart timing")
             .font(.system(size: 13))
             .foregroundColor(Color(white: 0.5))
