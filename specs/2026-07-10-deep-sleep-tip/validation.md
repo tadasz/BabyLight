@@ -17,7 +17,7 @@ Merge gate per phase PR: every box relevant to the phase ticked = ready for `mai
 - [x] AC6 (US-2, P2) cry-cessation re-anchor; grunts never move anchor — verify by: bout-debounce unit tests (scripted classifier events) + QA-2 — ✅ 2026-07-12 `CryBoutTrackerTests` (3-in-10s confirms, isolated grunts/spaced squawks never confirm, 120s-quiet ends) + engine `cryBoutOverridesAnchor`; QA-2 (device) still owed
 - [x] AC7 (US-2, P2) new bout clears tip, re-arms — verify by: engine unit tests + QA-2 — ✅ 2026-07-12 `SleepTipEngineTests.newBoutClearsShownTipAndReArms` (green against the now-wired detector path)
 - [ ] AC8 (US-2, P2) mic-denied fallback + orange-dot disclosure — verify by: unit test (permission state) + QA-3 — orange-dot disclosure copy + denied→appOpen fallback are **code-complete**; permission state can't be unit-tested (AVAudioApplication) and QA-3 is device — **device-pending**
-- [ ] AC9 (US-3, P3) calibration shift, ±10 clamp, ≥ 5 gate, reset control — verify by: calibration unit tests + QA-4
+- [x] AC9 (US-3, P3) calibration shift, ±10 clamp, ≥ 5 gate, reset control — verify by: calibration unit tests + QA-4 — ✅ 2026-07-12 `CalibrationTests` (gate, ±10 clamp, EMA shift, window aging-out, age-relative drift, reset via `sleepTipLearningResetDate`); learned caption + Reset button wired (id `sleepTipResetLearning`). Constants un-tuned against real nursery data — QA-4 caption-in-context still owed
 - [x] AC10 (US-1, P1) strings localized, privacy label unchanged — verify by: xcstrings diff covers all new keys (26 locales); App Store Connect privacy section review — ✅ 2026-07-10: 6 keys × 26 locales via the i18n pipeline (regen-stable); Phase 1 adds no data collection, label untouched. ✅ 2026-07-12 Phase 2: 2 UI strings × 26 locales in `Localizable.xcstrings` + `NSMicrophoneUsageDescription` × 26 (+en) in new `InfoPlist.xcstrings` — **verified compiled into the built bundle** (base plist + per-locale `InfoPlist.strings`/`Localizable.strings` inspected). Privacy label "Data Not Collected" unchanged (mic audio classified in-memory, never stored/sent); ASC label review still owed at submission
 
 ## UI coverage
@@ -27,7 +27,7 @@ XCTest UI tests: settings section appears (plan task 3.5); feature-off parity (A
 ## Data model — schema verification
 
 - [x] Log record matches the pinned field table — verify by: SessionLog encode/decode round-trip test — ✅ 2026-07-10 `SessionLogTests.recordRoundTripsThroughDisk`
-- [ ] Invariants hold (relative offset, ±10 clamp, ≥ 5 gate, ~20 window, on-device only) — verify by: calibration unit tests; no networking code in `SleepTip/`
+- [x] Invariants hold (relative offset, ±10 clamp, ≥ 5 gate, ~20 window, on-device only) — verify by: calibration unit tests; no networking code in `SleepTip/` — ✅ 2026-07-12 `CalibrationTests` assert each; `Calibration.swift` reads the log only, no networking
 
 ## Automated checks
 
@@ -41,7 +41,7 @@ XCTest UI tests: settings section appears (plan task 3.5); feature-off parity (A
 - [x] QA-1 (sim) — interruption semantics — ✅ 2026-07-10 simulated-clock lifecycle tests incl. logged endReason
 - [ ] QA-2 (sim) — cry anchor + debounce (scripted events)
 - [ ] QA-3 (device) — mic-permission denial fallback
-- [ ] QA-4 (sim) — calibration math + reset
+- [x] QA-4 (sim) — calibration math + reset — ✅ 2026-07-12 math covered by `CalibrationTests` (simulated logs); reset non-destructive via `sleepTipLearningResetDate`. The in-app caption only renders behind ≥5 real logged nights, so its live appearance is verified in field use, not the sim
 - [ ] QA-5 (nursery) — real settling session: glow visible at near-zero hardware brightness, white-noise machine running, orange dot acknowledged
 
 ## Non-regression

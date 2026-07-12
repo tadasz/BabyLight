@@ -130,6 +130,7 @@ class LightViewModel {
     if UserDefaults.standard.object(forKey: "sleepTipMicEnabled") != nil {
       sleepTipMicEnabled = UserDefaults.standard.bool(forKey: "sleepTipMicEnabled")
     }
+    sleepTipLearningResetDate = UserDefaults.standard.object(forKey: Self.learningResetKey) as? Date
     if UserDefaults.standard.object(forKey: "sleepTipEnabled") != nil {
       sleepTipEnabled = UserDefaults.standard.bool(forKey: "sleepTipEnabled")
     }
@@ -325,8 +326,11 @@ class LightViewModel {
     sessionResignedAt = nil
     sessionCryBouts = []
     pendingBoutStart = nil
+    let learned = learnedOffsetMinutes(napOrNight: SessionRecord.napOrNight(for: now),
+                                       anchor: .appOpen) ?? 0
     sleepTipEngine.sessionStarted(at: now, bucket: ageBucket(at: now),
-                                  fineTuneMinutes: sleepTipFineTuneMinutes)
+                                  fineTuneMinutes: sleepTipFineTuneMinutes,
+                                  learnedOffsetMinutes: learned)
     startElapsedTimer()
     if sleepTipMicEnabled {
       startCryDetection()
@@ -374,6 +378,11 @@ class LightViewModel {
     cryDetector.onBoutEnded = { [weak self] at in
       guard let self, self.sessionStart != nil else { return }
       self.sleepTipEngine.cryBoutEnded(at: at)
+      // The anchor just became cry-cessation, which has its own learned bucket
+      // (Phase 3) — swap the engine's offset to match before the next glow.
+      let learned = self.learnedOffsetMinutes(napOrNight: SessionRecord.napOrNight(for: at),
+                                              anchor: .cryCessation) ?? 0
+      self.sleepTipEngine.updateLearnedOffset(minutes: learned)
       if let start = self.pendingBoutStart {
         self.sessionCryBouts.append(SessionRecord.CryBout(start: start, end: at))
         self.pendingBoutStart = nil
@@ -386,6 +395,65 @@ class LightViewModel {
     cryDetector.stop()
     cryDetector.onBoutConfirmed = nil
     cryDetector.onBoutEnded = nil
+  }
+
+  // MARK: - Calibration (Phase 3)
+
+  static let learningResetKey = "sleepTipLearningResetDate"
+
+  /// When the parent last reset learning. Calibration ignores sessions logged
+  /// before this, but the raw log is left intact so the success measurement
+  /// keeps its full history (a deliberate non-destructive reset).
+  var sleepTipLearningResetDate: Date? {
+    didSet {
+      if let date = sleepTipLearningResetDate {
+        UserDefaults.standard.set(date, forKey: Self.learningResetKey)
+      } else {
+        UserDefaults.standard.removeObject(forKey: Self.learningResetKey)
+      }
+    }
+  }
+
+  /// Session records eligible for calibration — the whole log, minus anything
+  /// before the last learning reset.
+  private func calibrationRecords() -> [SessionRecord] {
+    let all = sessionLog.load()
+    guard let reset = sleepTipLearningResetDate else { return all }
+    return all.filter { $0.date >= reset }
+  }
+
+  /// The learned calibration offset for a given anchor bucket, or nil below the
+  /// ≥5-outcome gate. Bucketed by nap/night so day and night learn separately.
+  private func learnedOffsetMinutes(napOrNight: SessionRecord.NapOrNight,
+                                    anchor: BabyProfile.AnchorKind) -> Int? {
+    Calibration.learnedOffsetMinutes(
+      for: Calibration.BucketKey(napOrNight: napOrNight, anchorKind: anchor),
+      in: calibrationRecords())
+  }
+
+  /// Reset per-baby learning: the next ≥5 labelled sessions rebuild the offset.
+  /// The raw log is untouched (measurement keeps its history).
+  func resetSleepTipLearning(at now: Date = Date()) {
+    sleepTipLearningResetDate = now
+  }
+
+  /// How many labelled nights the night/app-open learning currently rests on —
+  /// drives the settings caption; 0 until the gate is met.
+  var sleepTipLearnedNightsCount: Int {
+    Calibration.qualifyingCount(
+      for: Calibration.BucketKey(napOrNight: .night, anchorKind: .appOpen),
+      in: calibrationRecords())
+  }
+
+  /// The glow estimate with learning applied for the current age, or nil until
+  /// the night/app-open bucket clears the gate — the settings caption only
+  /// appears once there is something learned to show.
+  var sleepTipLearnedGlowMinutes: Int? {
+    guard let birthday = sleepTipBirthMonth,
+          let learned = learnedOffsetMinutes(napOrNight: .night, anchor: .appOpen) else { return nil }
+    let bucket = BabyProfile.bucket(
+      forAgeMonths: BabyProfile.ageInMonths(birthMonth: birthday, now: Date()))
+    return BabyProfile.windowMinutes(for: bucket, anchor: .appOpen) + learned + sleepTipFineTuneMinutes
   }
 
   /// Manual reset (long-press on the light): ends the running session and
