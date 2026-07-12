@@ -10,10 +10,10 @@ the glow; holding the light restarts the timing if the put-down failed. Nothing 
 buzzes, and the glow returns the screen to the exact previous darkness.
 
 Phase 1 (the app-open timing, the glow cue, the settings, and an on-device session log) is shipped.
-Phase 2 (mic-driven cry detection that re-anchors the timing to the end of a crying bout) is now
-**built and unit-tested but not yet released** — it awaits on-device verification, the 26-locale
-string fill, and owner sign-off on its constitution edits. Per-baby calibration (Phase 3) remains
-scaffolded but dormant — see [Open debts](#open-debts).
+Phase 2 (mic-driven cry detection that re-anchors the timing to the end of a crying bout) and
+Phase 3 (per-baby calibration that nudges the glow toward the times that actually worked) are both
+**built and unit-tested**. Phase 2 awaits on-device verification; Phase 3's constants await tuning
+against real nursery data. See [Open debts](#open-debts).
 
 ## Where it lives
 
@@ -29,6 +29,9 @@ Own files (this feature only):
   `SessionRecord` value type and its ring-buffer JSON persistence.
 - [`Baby Light/SleepTip/CryDetector.swift`](../../../Baby%20Light/SleepTip/CryDetector.swift) — the
   pure `CryBoutTracker` debounce core plus the `AVAudioEngine`/`SoundAnalysis` mic wrapper (Phase 2).
+- [`Baby Light/SleepTip/Calibration.swift`](../../../Baby%20Light/SleepTip/Calibration.swift) — the
+  pure per-baby learned-offset math: outcome labelling from cry timing, bucketed EMA, clamp/gate/window
+  (Phase 3).
 - [`Baby Light/GlowPulse.swift`](../../../Baby%20Light/GlowPulse.swift) — the visual cue: a
   `ViewModifier` that plays three ease-in-out pulses of the current color lightened toward white.
 
@@ -71,6 +74,7 @@ Persisted `UserDefaults` keys (all permanent API — never rename, `specs/patter
 | `sleepTipMicEnabled` | Bool | Cry-listening on/off (Phase 2, default off) |
 | `sleepTipFineTune` | Int | Parent's −10…+10 minute offset |
 | `sleepTipBirthMonth` | Date | Baby's birth month (via `BabyProfile`, [BabyProfile.swift:70](../../../Baby%20Light/SleepTip/BabyProfile.swift)) |
+| `sleepTipLearningResetDate` | Date | Calibration cutoff — sessions before it are ignored (Phase 3, unset by default) |
 
 One file on disk — an **owner-approved deviation** from the app's no-files rule
 (`specs/patterns.md` §4, `specs/tech-stack.md` → UserDefaults):
@@ -150,9 +154,16 @@ buffer (`SessionLogTests`), and outcome labeling (`SessionOutcomeTests`). The cr
   of the live mic (exact `knownClassifications` labels, gesture/audio coexistence, permission-denied
   fallback — QA-3), and re-confirming the "Data Not Collected" privacy label at ASC submission
   (`PrivacyInfo.xcprivacy` assessed as not newly required).
-- **Phase 3 — calibration (dormant).** `learnedOffsetMinutes` is wired through the engine but stays
-  0 until a calibrator reads the session log
-  ([SleepTipEngine.swift:48](../../../Baby%20Light/SleepTip/SleepTipEngine.swift)).
+- **Phase 3 — calibration (built; constants un-tuned).**
+  [`Calibration.swift`](../../../Baby%20Light/SleepTip/Calibration.swift) reads the session log and
+  produces a per-baby learned offset (bucketed by nap/night × anchorKind, EMA α=0.2 relative to the
+  age default, ±10 clamp, ≥5-outcome gate, ~20 rolling window). The view model applies it at session
+  start (app-open bucket) and swaps to the cry-cessation bucket when the anchor switches; the settings
+  section shows a "learned from N nights" caption with a non-destructive **Reset**
+  (`sleepTipLearningResetDate` — the raw log is kept for the success measurement). **Still open:** the
+  constants (α, gate, window, the too-early nudge) and the outcome-labelling thresholds are set from
+  the research doc and want tuning against real nursery data before they can be trusted; the
+  learned-value caption's live appearance is gated behind ≥5 real logged nights.
 - **`sessionOutcome(...)` is a mic-less projection**: a glow then a calm background end reads as
   `success`, a glow then a manual reset as `tooEarly`, everything else honest `unknown` — a
   placeholder for the Phase-3 calibration signal

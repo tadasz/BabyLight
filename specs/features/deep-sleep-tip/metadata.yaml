@@ -6,6 +6,7 @@ files:                  # source files this feature owns or is wired into
   - Baby Light/SleepTip/SleepTipEngine.swift
   - Baby Light/SleepTip/SessionLog.swift
   - Baby Light/SleepTip/CryDetector.swift
+  - Baby Light/SleepTip/Calibration.swift
   - Baby Light/GlowPulse.swift
   - Baby Light/LightViewModel.swift
   - Baby Light/ContentView.swift

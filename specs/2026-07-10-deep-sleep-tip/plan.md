@@ -57,11 +57,16 @@ Exit criteria: AC6–AC8 pass (AC6/AC7 verified via tests; AC8 code-complete, de
 
 Purpose: per-baby accuracy without any new interaction.
 
-5.1 `Baby Light/SleepTip/Calibration.swift` — outcome labels from the log (cry ≤ 5 min after glow → `tooEarly`; calm session end after glow → `success`); buckets nap/night × anchorKind; EMA α = 0.2 on the offset *relative to the age default*, clamp ±10 min, apply only after ≥ 5 outcomes, rolling window ~20.
-5.2 Settings: learned-value caption ("~16 min after quiet · learned from 12 nights") + reset-learning button; controls-overlay + deep-sleep-tip feature-folder changelog entries.
-5.3 Unit tests: cold start (offset 0), clamp, ≥ 5 gate, aging-out, relative-to-default drift as the baby ages.
+✅ 5.1 `Baby Light/SleepTip/Calibration.swift` — outcome labels from the log (cry ≤ 5 min after glow → `tooEarly`; calm session end after glow → `success`); buckets nap/night × anchorKind; EMA α = 0.2 on the offset *relative to the age default*, clamp ±10 min, apply only after ≥ 5 outcomes, rolling window ~20. Wired into `beginSettlingSession` (app-open bucket) + `updateLearnedOffset` on the cry-cessation anchor switch.
+✅ 5.2 Settings: learned-value caption ("~16 min after quiet · learned from 12 nights") + reset-learning button; controls-overlay + deep-sleep-tip feature-folder changelog entries. — caption "Learned from your last N nights — glows about M min…" + **Reset** button (id `sleepTipResetLearning`); localized ×26; feature folders updated.
+✅ 5.3 Unit tests: cold start (offset 0), clamp, ≥ 5 gate, aging-out, relative-to-default drift as the baby ages. — `CalibrationTests` (10): gate, reinforce, ±clamp, too-early nudge, window aging-out, age-relative consistency, unknown-exclusion, bucket scoping, cry-timing outcome.
 
-Exit criteria: AC9 passes; Phase-3 PR + TestFlight.
+**Group-5 Decisions (owner delegated 2026-07-12; confirm against real data):**
+- Per-record EMA target: a `success` reinforces the offset that produced it; a `tooEarly` rousing argues for +`tooEarlyNudgeMinutes` (default 5). EMA seeded with the first target so consistent outcomes converge instead of lagging from 0.
+- Reset-learning is **non-destructive** — a `sleepTipLearningResetDate` marker filters the log; the raw records stay for the success measurement (rather than deleting the log).
+- Caption reflects the **night × app-open** bucket (the representative case); nap/cry-cessation buckets calibrate independently but aren't separately surfaced in the caption.
+
+Exit criteria: AC9 passes at logic level (device/nursery tuning outstanding); Phase-3 PR + TestFlight.
 
 ## Non-goals for this plan
 

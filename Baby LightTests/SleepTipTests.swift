@@ -547,3 +547,112 @@ struct CryBoutTrackerTests {
     return tracker
   }
 }
+
+// MARK: - Calibration: per-baby learned offset (Phase 3)
+
+struct CalibrationTests {
+
+  let t0 = Date(timeIntervalSinceReferenceDate: 5_000_000)
+
+  enum Kind { case success, tooEarly, unknownNoGlow }
+
+  /// One synthetic record whose first glow lands `rel` minutes off the age
+  /// default for its bucket, labelled by cry timing / end reason.
+  private func mk(_ kind: Kind, rel: Double, age: Int = 8,
+                  nn: SessionRecord.NapOrNight = .night,
+                  anchor: BabyProfile.AnchorKind = .appOpen,
+                  at date: Date) -> SessionRecord {
+    let window = BabyProfile.windowMinutes(for: BabyProfile.bucket(forAgeMonths: age), anchor: anchor)
+    let glow = date.addingTimeInterval((Double(window) + rel) * 60)
+    var glows = [glow]
+    var cries: [SessionRecord.CryBout] = []
+    var endReason: SessionRecord.EndReason = .background
+    switch kind {
+    case .success: break
+    case .tooEarly:
+      cries = [SessionRecord.CryBout(start: glow.addingTimeInterval(180),
+                                     end: glow.addingTimeInterval(300))]
+      endReason = .manualReset
+    case .unknownNoGlow:
+      glows = []
+      endReason = .autoOff
+    }
+    return SessionRecord(date: date, ageMonths: age, napOrNight: nn, anchorKind: anchor,
+                         anchorTime: date, glowTimes: glows, cryBouts: cries,
+                         acknowledgeTime: nil, outcome: .unknown, endReason: endReason)
+  }
+
+  private func series(_ kind: Kind, rel: Double, count: Int, age: Int = 8,
+                      nn: SessionRecord.NapOrNight = .night,
+                      anchor: BabyProfile.AnchorKind = .appOpen,
+                      from index: Int = 0) -> [SessionRecord] {
+    (0..<count).map { mk(kind, rel: rel, age: age, nn: nn, anchor: anchor,
+                         at: t0.addingTimeInterval(Double(index + $0) * 3600)) }
+  }
+
+  private let night = Calibration.BucketKey(napOrNight: .night, anchorKind: .appOpen)
+
+  @Test func belowGateReturnsNil() async throws {
+    let records = series(.success, rel: 3, count: 4)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: records) == nil)
+  }
+
+  @Test func atGateReinforcesConsistentOffset() async throws {
+    let records = series(.success, rel: 3, count: 5)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: records) == 3)
+  }
+
+  @Test func clampsToPlusTen() async throws {
+    let records = series(.success, rel: 30, count: 8)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: records) == 10)
+  }
+
+  @Test func clampsToMinusTen() async throws {
+    let records = series(.success, rel: -30, count: 8)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: records) == -10)
+  }
+
+  @Test func tooEarlyNudgesLater() async throws {
+    // Glow at the default (rel 0) but the baby roused → aim +5 later.
+    let records = series(.tooEarly, rel: 0, count: 6)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: records) == 5)
+  }
+
+  @Test func oldRegressionsAgeOutViaWindow() async throws {
+    // 20 early-leaning nights, then 20 that settled +8 later. Window is 20, so
+    // only the recent batch survives.
+    let old = series(.success, rel: -8, count: 20, from: 0)
+    let recent = series(.success, rel: 8, count: 20, from: 20)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: old + recent) == 8)
+  }
+
+  @Test func offsetIsRelativeToAgeDefaultAcrossAges() async throws {
+    // Same +3-relative offset at 2 mo (default 35) and 7 mo (default 25) in the
+    // same bucket → one consistent learned value, not skewed by the age change.
+    let young = series(.success, rel: 3, count: 3, age: 2, from: 0)
+    let older = series(.success, rel: 3, count: 2, age: 7, from: 3)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: young + older) == 3)
+  }
+
+  @Test func unknownRecordsDoNotCountTowardGate() async throws {
+    // 3 successes + 3 unknowns = 3 qualifying < 5 gate → nil.
+    let mixed = series(.success, rel: 3, count: 3, from: 0)
+                + series(.unknownNoGlow, rel: 3, count: 3, from: 3)
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: mixed) == nil)
+  }
+
+  @Test func bucketsAreScopedSeparately() async throws {
+    let nightRecs = series(.success, rel: 3, count: 5, nn: .night, from: 0)
+    let napRecs = series(.success, rel: 7, count: 5, nn: .nap, from: 5)
+    let all = nightRecs + napRecs
+    #expect(Calibration.learnedOffsetMinutes(for: night, in: all) == 3)
+    let nap = Calibration.BucketKey(napOrNight: .nap, anchorKind: .appOpen)
+    #expect(Calibration.learnedOffsetMinutes(for: nap, in: all) == 7)
+  }
+
+  @Test func outcomeIsDerivedFromCryTiming() async throws {
+    #expect(Calibration.outcome(for: mk(.success, rel: 0, at: t0)) == .success)
+    #expect(Calibration.outcome(for: mk(.tooEarly, rel: 0, at: t0)) == .tooEarly)
+    #expect(Calibration.outcome(for: mk(.unknownNoGlow, rel: 0, at: t0)) == .unknown)
+  }
+}

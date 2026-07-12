@@ -3,3 +3,4 @@
 - 2026-07-11 2026-07-10-deep-sleep-tip — dogfood round 1: birthday picker + "Glow earlier or later" stepper + live window caption (labels/copy); picker/stepper tap-blocking fixed via gesture masks
 - 2026-07-11 2026-07-10-deep-sleep-tip — dogfood round 3: UIKit Stepper → SwiftUI FineTuneStepper (−/+ buttons, ids sleepTipFineTuneMinus/Plus) routing through LightViewModel.adjustFineTune(by:), which suppresses a double-tap-to-hide for 0.6s after a −/+ tap so rapid offset taps are not mis-read as the toggle
 - 2026-07-12 2026-07-10-deep-sleep-tip — Phase 2: cry-listening toggle "Listen for crying to time the tip" (id sleepTipMicToggle, key sleepTipMicEnabled) + orange-dot disclosure caption shown while on
+- 2026-07-12 2026-07-10-deep-sleep-tip — Phase 3: "learned from N nights" caption + Reset button (id sleepTipResetLearning, key sleepTipLearningResetDate), shown once the night/app-open bucket clears the ≥5-night gate

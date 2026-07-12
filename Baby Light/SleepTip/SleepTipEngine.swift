@@ -157,6 +157,13 @@ struct SleepTipEngine {
     fineTuneMinutes = minutes
   }
 
+  /// Phase-3 calibration can revise the learned offset mid-session — the anchor
+  /// switch to cry-cessation has its own learned bucket, so the view model
+  /// swaps the offset when it re-anchors.
+  mutating func updateLearnedOffset(minutes: Int) {
+    learnedOffsetMinutes = minutes
+  }
+
   /// Birth-month edits mid-session re-bucket the running session.
   mutating func updateBucket(_ newBucket: BabyProfile.AgeBucket?) {
     bucket = newBucket

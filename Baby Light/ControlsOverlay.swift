@@ -213,6 +213,28 @@ struct ControlsOverlay: View {
               .frame(maxWidth: .infinity, alignment: .leading)
           }
 
+          // Learned value + reset (AC9): shown only once the night/app-open
+          // bucket clears the ≥5-night gate, so there is a real learned value
+          // to display and reset.
+          if let learnedMinutes = viewModel.sleepTipLearnedGlowMinutes {
+            HStack(alignment: .top, spacing: 12) {
+              Text("Learned from your last \(viewModel.sleepTipLearnedNightsCount) nights — glows about \(learnedMinutes) min after you open the app.")
+                .font(.system(size: 13))
+                .foregroundColor(Color(white: 0.5))
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+              Button {
+                viewModel.resetSleepTipLearning()
+              } label: {
+                Text("Reset")
+                  .font(.system(size: 13, weight: .semibold))
+                  .foregroundColor(.white)
+              }
+              .accessibilityIdentifier("sleepTipResetLearning")
+            }
+          }
+
           Text("Tap the glow to dismiss • Hold the light to restart timing")
             .font(.system(size: 13))
             .foregroundColor(Color(white: 0.5))
