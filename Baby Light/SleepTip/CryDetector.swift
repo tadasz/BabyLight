@@ -100,6 +100,9 @@ final class CryDetector: NSObject, SNResultsObserving {
 
   private let audioEngine = AVAudioEngine()
   private var analyzer: SNAudioStreamAnalyzer?
+  /// Held between `beginCapture()` and the first buffer, when the analyzer is
+  /// created from that buffer's real format and the request is attached.
+  private var pendingRequest: SNClassifySoundRequest?
   private let analysisQueue = DispatchQueue(label: "com.tadas.Baby-Light.cry-analysis")
   private var tracker: CryBoutTracker
 
@@ -121,48 +124,83 @@ final class CryDetector: NSObject, SNResultsObserving {
   }
 
   func stop() {
+    // Remove the tap unconditionally — a tap can be installed even when the
+    // engine never started (e.g. a failed `start()`), and removing a missing
+    // tap is a safe no-op.
+    audioEngine.inputNode.removeTap(onBus: 0)
     if audioEngine.isRunning {
-      audioEngine.inputNode.removeTap(onBus: 0)
       audioEngine.stop()
     }
     analyzer?.removeAllRequests()
     analyzer = nil
+    pendingRequest = nil
     try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
   }
 
   private func beginCapture() -> Bool {
-    let input = audioEngine.inputNode
-    let format = input.outputFormat(forBus: 0)
-    guard format.sampleRate > 0 else { return false }
-
-    let analyzer = SNAudioStreamAnalyzer(format: format)
-    do {
-      let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
-      request.windowDuration = CMTime(seconds: 1.5, preferredTimescale: 1000)
-      request.overlapFactor = 0.5
-      try analyzer.add(request, withObserver: self)
-    } catch {
-      return false
-    }
-    self.analyzer = analyzer
-
-    input.installTap(onBus: 0, bufferSize: 4096, format: format) { [weak self] buffer, when in
-      self?.analysisQueue.async {
-        self?.analyzer?.analyze(buffer, atAudioFramePosition: when.sampleTime)
-      }
-    }
+    // A redundant start would install a second tap on the bus (which throws),
+    // so tear any running capture down first.
+    if audioEngine.isRunning { stop() }
 
     do {
       let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.record, mode: .measurement, options: [])
+      try session.setCategory(.record, mode: .default, options: [])
       try session.setActive(true, options: [])
-      audioEngine.prepare()
+    } catch {
+      return false
+    }
+
+    // Build the classification request now; the analyzer is created later, from
+    // the first buffer's real format. We deliberately do NOT override
+    // `windowDuration` — its valid range varies by classifier/OS and setting an
+    // out-of-range value throws. The bout debounce is wall-clock based, so it
+    // works with the classifier's default window cadence.
+    do {
+      let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
+      request.overlapFactor = 0.5
+      pendingRequest = request
+    } catch {
+      try? AVAudioSession.sharedInstance().setActive(false)
+      return false
+    }
+
+    // Install the tap with `format: nil` so `AVAudioEngine` uses the input
+    // bus's own live format. Passing an explicit format that doesn't *exactly*
+    // match the current hardware format makes `installTap` raise an Obj-C
+    // exception that Swift cannot catch — the crash this fixes. The analyzer is
+    // then built from the first delivered buffer, so its format always agrees
+    // with the audio it receives.
+    audioEngine.inputNode.installTap(onBus: 0, bufferSize: 4096, format: nil) { [weak self] buffer, when in
+      self?.analysisQueue.async {
+        self?.analyze(buffer, at: when)
+      }
+    }
+
+    audioEngine.prepare()
+    do {
       try audioEngine.start()
       return true
     } catch {
       stop()
       return false
     }
+  }
+
+  /// Feed one captured buffer to the classifier, creating the analyzer lazily
+  /// from the buffer's own format on the first call so the analyzer and the
+  /// audio always agree. Runs on `analysisQueue`.
+  private func analyze(_ buffer: AVAudioPCMBuffer, at when: AVAudioTime) {
+    if analyzer == nil {
+      guard let request = pendingRequest else { return }
+      let created = SNAudioStreamAnalyzer(format: buffer.format)
+      do {
+        try created.add(request, withObserver: self)
+      } catch {
+        return
+      }
+      analyzer = created
+    }
+    analyzer?.analyze(buffer, atAudioFramePosition: when.sampleTime)
   }
 
   // MARK: - SNResultsObserving
