@@ -131,9 +131,30 @@ final class CryDetector: NSObject, SNResultsObserving {
   }
 
   private func beginCapture() -> Bool {
+    // Never install a second tap on the same bus — that throws an (uncatchable)
+    // exception. A redundant start tears the old capture down first.
+    if audioEngine.isRunning { stop() }
+
+    // Activate the record session BEFORE touching the input node. The input
+    // format is only valid — and only matches the hardware the tap and engine
+    // will actually run against — once the `.record` session is active. Reading
+    // it first (as the original code did) yields a mismatched format, and
+    // `AVAudioEngine` then raises an Objective-C exception at `start()` that
+    // Swift `do/catch` cannot intercept — an outright crash on enable.
+    do {
+      let session = AVAudioSession.sharedInstance()
+      try session.setCategory(.record, mode: .measurement, options: [])
+      try session.setActive(true, options: [])
+    } catch {
+      return false
+    }
+
     let input = audioEngine.inputNode
     let format = input.outputFormat(forBus: 0)
-    guard format.sampleRate > 0 else { return false }
+    guard format.sampleRate > 0, format.channelCount > 0 else {
+      try? AVAudioSession.sharedInstance().setActive(false)
+      return false
+    }
 
     let analyzer = SNAudioStreamAnalyzer(format: format)
     do {
@@ -142,6 +163,7 @@ final class CryDetector: NSObject, SNResultsObserving {
       request.overlapFactor = 0.5
       try analyzer.add(request, withObserver: self)
     } catch {
+      try? AVAudioSession.sharedInstance().setActive(false)
       return false
     }
     self.analyzer = analyzer
@@ -152,11 +174,8 @@ final class CryDetector: NSObject, SNResultsObserving {
       }
     }
 
+    audioEngine.prepare()
     do {
-      let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.record, mode: .measurement, options: [])
-      try session.setActive(true, options: [])
-      audioEngine.prepare()
       try audioEngine.start()
       return true
     } catch {
